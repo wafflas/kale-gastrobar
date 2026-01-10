@@ -11,7 +11,7 @@ export default function Logo({
 }: LogoProps) {
   if (useImage) {
     return (
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none animate-fadeInScale mt-20">
+      <div className="inset-0 z-10 flex items-center justify-center pointer-events-none animate-fadeInScale">
         <Image
           src={imageSrc}
           alt="Kàlè Gastrobar Logo"

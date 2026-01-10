@@ -16,21 +16,19 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "font-ubuntu font-medium tracking-widest uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed leading-none";
+    "font-ubuntu font-medium tracking-widest px-6 py-3 uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed leading-none";
 
   const variantStyles = {
-    primary:
-      "bg-darkbrown text-cream hover:bg-lightbrown hover:scale-105 drop-shadow-2xl",
-    secondary:
-      "bg-cream text-darkbrown hover:bg-opacity-90 hover:scale-105 drop-shadow-2xl",
+    primary: "bg-darkbrown text-cream hover:bg-lightbrown hover:scale-105",
+    secondary: "bg-cream text-darkbrown hover:bg-opacity-90 hover:scale-105",
     outline:
-      "bg-transparent border-2 border-cream text-cream hover:bg-cream hover:text-darkbrown hover:scale-105 drop-shadow-2xl",
+      "bg-transparent border-2 border-cream text-cream hover:bg-cream hover:text-darkbrown hover:scale-105",
   };
 
   const sizeStyles = {
-    sm: "px-6 py-2 text-xs md:text-sm rounded-full",
-    md: "px-8 py-3 text-sm md:text-base rounded-full",
-    lg: "px-10 py-4 text-base md:text-lg rounded-full",
+    sm: "text-xs md:text-sm rounded-full",
+    md: "text-sm md:text-base rounded-full",
+    lg: "w-[95vw] lg:w-[70vw] text-lg rounded-full",
   };
 
   const widthStyle = fullWidth ? "w-full" : "";
