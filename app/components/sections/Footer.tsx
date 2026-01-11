@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="w-full mx-auto px-1 h-full flex flex-col justify-center space-y-10">
         <div className="flex flex-col items-center justify-center space-y-8 ">
           <Logo useImage={true} imageSrc="/logo.png" />
-          <p className="text-center text-3xl md:text-5xl font-vollkorn max-w-2xl leading-tight">
+          <p className="text-center text-[25px] md:text-[40px] lg:text-[50px] font-vollkorn  leading-tight">
             Great stories begin at our table.
           </p>
           <Button variant="secondary" size="lg" aria-label="Make a reservation">
