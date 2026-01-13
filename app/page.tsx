@@ -5,7 +5,7 @@ import ReviewsSection from "./components/sections/ReviewsSection";
 
 export default function Home() {
   return (
-    <main className="relative w-full min-h-screen bg-cream">
+    <main className="relative w-full min-h-screen bg-cream overflow-hidden">
       <div className="flex flex-col min-h-screen">
         <LandingPage />
         <HorizontalDecoration
