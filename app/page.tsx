@@ -1,7 +1,7 @@
-import HeroTypography from "./components/HeroTypography";
 import Footer from "./components/sections/Footer";
 import LandingPage from "./components/sections/LandingPage";
 import ReviewsSection from "./components/sections/ReviewsSection";
+
 export default function Home() {
   return (
     <main className="relative w-full min-h-screen bg-cream">

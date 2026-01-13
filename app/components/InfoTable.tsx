@@ -32,28 +32,28 @@ export default function InfoTable() {
         {/* Socials */}
         <div className="py-3 flex items-center justify-center px-1 md:px-3 gap-6">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/kale.gastrobar.ier/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
+            aria-label="Instagram Kale Gastrobar"
             className="hover:scale-110 transition-transform"
           >
             <FaInstagram size={20} />
           </a>
           <a
-            href="https://tripadvisor.com"
+            href="https://www.tripadvisor.com/Restaurant_Review-g189418-d33035265-Reviews-Kale_Gastrobar-Ierapetra_Lasithi_Prefecture_Crete.html?m=69573"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="TripAdvisor"
+            aria-label="TripAdvisor Kale Gastrobar"
             className="hover:scale-110 transition-transform"
           >
             <SiTripadvisor size={22} />
           </a>
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/profile.php?id=61573999105493"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Facebook"
+            aria-label="Facebook Kale Gastrobar"
             className="hover:scale-110 transition-transform"
           >
             <FaFacebook size={20} />

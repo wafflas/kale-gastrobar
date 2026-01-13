@@ -26,7 +26,6 @@ export default function VideoBackground({
     };
 
     checkScreenSize();
-
     window.addEventListener("resize", checkScreenSize);
 
     return () => window.removeEventListener("resize", checkScreenSize);

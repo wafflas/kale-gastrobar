@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import Button from "./Button";
+import { useMenu } from "../context/MenuContext";
 
 export default function Header() {
   const [language, setLanguage] = useState<"el" | "en">("el");
+  const { openMenu } = useMenu();
 
   return (
-    <header className="absolute top-0 left-0 w-full z-20 px-6 py-6 md:px-12 md:py-8 animate-fadeIn">
+    <header className="absolute top-0 left-0 w-full z-20 px-6 py-8 md:px-12 md:py-8 animate-fadeIn">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 font-ubuntu text-cream text-shadow-lg">
           <button
@@ -23,12 +25,10 @@ export default function Header() {
           <button
             onClick={() => setLanguage("en")}
             className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 ${
-              language === "en"
-                ? "opacity-100 underline underline-offset-4"
-                : "opacity-50"
+              language === "en" ? "opacity-100" : "opacity-50"
             }`}
             aria-label="Switch to English"
-          > 
+          >
             ENG
           </button>
         </div>
@@ -37,6 +37,7 @@ export default function Header() {
           <button
             className="group transition-all duration-300 hover:scale-110"
             aria-label="Open menu"
+            onClick={openMenu}
           >
             <svg
               width="36"

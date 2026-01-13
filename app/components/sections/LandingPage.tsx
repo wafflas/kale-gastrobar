@@ -13,7 +13,7 @@ export default function LandingPage() {
         overlayColor="bg-darkbrown"
         overlayOpacity="opacity-33"
       />
-      <Logo useImage={true} imageSrc="/logo.png" />
+      <Logo useImage={true} imageSrc="/logo.png" size="md" />
     </section>
   );
 }

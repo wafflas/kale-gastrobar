@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Ubuntu, Vollkorn } from "next/font/google";
 import "./globals.css";
+import { MenuProvider } from "./context/MenuContext";
+import NavBar from "./components/sections/NavBar";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
@@ -9,7 +11,7 @@ const ubuntu = Ubuntu({
 });
 
 const vollkorn = Vollkorn({
-  variable: "--font-vollkorn", 
+  variable: "--font-vollkorn",
   subsets: ["latin", "greek"],
   weight: ["400", "500", "600", "700", "800", "900"],
 });
@@ -32,7 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ubuntu.variable} ${vollkorn.variable} antialiased`}>
-        {children}
+        <MenuProvider>
+          <NavBar />
+          {children}
+        </MenuProvider>
       </body>
     </html>
   );
