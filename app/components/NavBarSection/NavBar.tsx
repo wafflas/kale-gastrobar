@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import Logo from "../Logo";
-import Button from "../Button";
+import Logo from "../shared/Logo";
+import Button from "../shared/Button";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaInstagram, FaFacebook } from "react-icons/fa";

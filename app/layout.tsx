@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Ubuntu, Vollkorn } from "next/font/google";
 import "./globals.css";
 import { MenuProvider } from "./context/MenuContext";
-import NavBar from "./components/sections/NavBar";
+import NavBar from "./components/NavBarSection/NavBar";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",

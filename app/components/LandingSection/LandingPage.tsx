@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../Header";
-import Logo from "../Logo";
-import VideoBackground from "../VideoBackground";
+import Header from "./components/Header";
+import Logo from "../shared/Logo";
+import VideoBackground from "./components/VideoBackground";
 
 export default function LandingPage() {
   return (

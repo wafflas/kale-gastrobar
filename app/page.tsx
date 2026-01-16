@@ -1,7 +1,7 @@
-import HorizontalDecoration from "./components/HorizontalDecoration";
-import Footer from "./components/sections/Footer";
-import LandingPage from "./components/sections/LandingPage";
-import ReviewsSection from "./components/sections/ReviewsSection";
+import HorizontalDecoration from "./components/shared/HorizontalDecoration";
+import Footer from "./components/FooterSection/Footer";
+import LandingPage from "./components/LandingSection/LandingPage";
+import ReviewsSection from "./components/ReviewsSection/ReviewsSection";
 
 export default function Home() {
   return (

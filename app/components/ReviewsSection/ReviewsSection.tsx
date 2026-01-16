@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ReviewBox from "../ReviewBox";
-import HeroTypography from "../HeroTypography";
+import ReviewBox from "./components/ReviewBox";
+import HeroTypography from "../shared/HeroTypography";
 
 const REVIEWS = [
   {

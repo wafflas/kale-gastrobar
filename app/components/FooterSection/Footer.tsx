@@ -1,6 +1,6 @@
-import Logo from "../Logo";
-import Button from "../Button";
-import InfoTable from "../InfoTable";
+import Logo from "../shared/Logo";
+import Button from "../shared/Button";
+import InfoTable from "./components/InfoTable";
 
 export default function Footer() {
   return (

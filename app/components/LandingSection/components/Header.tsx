@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "./Button";
-import { useMenu } from "../context/MenuContext";
+import Button from "../../shared/Button";
+import { useMenu } from "../../../context/MenuContext";
 
 export default function Header() {
   const [language, setLanguage] = useState<"el" | "en">("el");
