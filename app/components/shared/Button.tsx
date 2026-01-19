@@ -16,7 +16,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "font-ubuntu font-medium tracking-widest px-6 py-3 uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed leading-none";
+    "font-ubuntu font-medium tracking-widest px-6 py-3 uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed leading-none cursor-pointer";
 
   const variantStyles = {
     primary: "bg-darkbrown text-cream hover:bg-lightbrown hover:scale-105",

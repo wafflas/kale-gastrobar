@@ -14,7 +14,7 @@ export default function Header() {
         <div className="flex items-center gap-2 font-ubuntu text-cream text-shadow-lg">
           <button
             onClick={() => setLanguage("el")}
-            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 ${
+            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
               language === "el" ? "opacity-100" : "opacity-50"
             }`}
             aria-label="Switch to Greek"
@@ -24,7 +24,7 @@ export default function Header() {
           <span className="text-cream opacity-50">|</span>
           <button
             onClick={() => setLanguage("en")}
-            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 ${
+            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
               language === "en" ? "opacity-100" : "opacity-50"
             }`}
             aria-label="Switch to English"
@@ -35,7 +35,7 @@ export default function Header() {
 
         <div className="flex items-center gap-4 md:gap-6">
           <button
-            className="group transition-all duration-300 hover:scale-110"
+            className="group transition-all duration-300 hover:scale-110 cursor-pointer"
             aria-label="Open menu"
             onClick={openMenu}
           >

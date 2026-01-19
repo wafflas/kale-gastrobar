@@ -52,7 +52,7 @@ export default function ReviewsSection() {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 50,
+              duration: 30,
               ease: "linear",
             },
           }}
@@ -68,6 +68,20 @@ export default function ReviewsSection() {
             </div>
           ))}
         </motion.div>
+      </div>
+
+      <div className="mt-16 flex flex-col items-center text-center px-6">
+        <p className="font-ubuntu text-[17px] md:text-[20px] lg:text-[24px] text-darkbrown/60 max-w-md leading-snug">
+          Have you already visited our restaurant and left with great memories?
+        </p>
+        <a
+          href="https://www.tripadvisor.com/Restaurant_Review-g189418-d33035265-Reviews-Kale_Gastrobar-Ierapetra_Lasithi_Prefecture_Crete.html?m=69573"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-vollkorn text-[14px] md:text-[17px] lg:text-[20px] text-darkbrown mt-4 border-b border-darkbrown hover:opacity-70 transition-opacity"
+        >
+          Be sure to leave us a review!
+        </a>
       </div>
     </section>
   );

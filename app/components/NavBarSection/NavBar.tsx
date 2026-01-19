@@ -30,7 +30,7 @@ export default function NavBar() {
 
         <div className="flex-1 flex justify-end items-center gap-1">
           <button
-            className="p-2 hover:scale-110 transition-transform"
+            className="p-1 hover:scale-110 transition-transform cursor-pointer"
             aria-label="Close menu"
             onClick={closeMenu}
           >
@@ -46,17 +46,19 @@ export default function NavBar() {
         <div className="flex justify-center items-center gap-6 font-ubuntu mt-6">
           <button
             onClick={() => setLanguage("en")}
-            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 ${
+            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
               language === "en" ? "opacity-100" : "opacity-50"
             }`}
+            aria-label="Switch to English"
           >
             English
           </button>
           <button
             onClick={() => setLanguage("el")}
-            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 ${
+            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
               language === "el" ? "opacity-100" : "opacity-50"
             }`}
+            aria-label="Switch to Greek"
           >
             Ελληνικά
           </button>

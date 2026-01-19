@@ -2,6 +2,8 @@ import HorizontalDecoration from "./components/shared/HorizontalDecoration";
 import Footer from "./components/FooterSection/Footer";
 import LandingPage from "./components/LandingSection/LandingPage";
 import ReviewsSection from "./components/ReviewsSection/ReviewsSection";
+import IntroSection from "./components/IntroSection/IntroSection";
+import PlaceSection from "./components/PlaceSection/PlaceSection";
 
 export default function Home() {
   return (
@@ -18,6 +20,8 @@ export default function Home() {
           direction="right"
           size={70}
         />
+        <IntroSection />
+        <PlaceSection />
         <div className="flex flex-col min-h-screen">
           <ReviewsSection />
         </div>
