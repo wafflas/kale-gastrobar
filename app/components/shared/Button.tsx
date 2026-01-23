@@ -7,6 +7,22 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
+const BASE_STYLES =
+  "font-ubuntu font-medium tracking-widest px-6 py-3 uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed leading-none cursor-pointer";
+
+const VARIANT_STYLES = {
+  primary: "bg-darkbrown text-cream hover:bg-lightbrown hover:scale-105",
+  secondary: "bg-cream text-darkbrown hover:bg-opacity-90 hover:scale-105",
+  outline:
+    "bg-transparent border-2 border-cream text-cream hover:bg-cream hover:text-darkbrown hover:scale-105",
+} as const;
+
+const SIZE_STYLES = {
+  sm: "text-xs md:text-sm rounded-full",
+  md: "text-sm md:text-base rounded-full",
+  lg: "w-[95vw] lg:w-[70vw] text-lg rounded-full",
+} as const;
+
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -19,28 +35,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseStyles =
-      "font-ubuntu font-medium tracking-widest px-6 py-3 uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed leading-none cursor-pointer";
-
-    const variantStyles = {
-      primary: "bg-darkbrown text-cream hover:bg-lightbrown hover:scale-105",
-      secondary: "bg-cream text-darkbrown hover:bg-opacity-90 hover:scale-105",
-      outline:
-        "bg-transparent border-2 border-cream text-cream hover:bg-cream hover:text-darkbrown hover:scale-105",
-    };
-
-    const sizeStyles = {
-      sm: "text-xs md:text-sm rounded-full",
-      md: "text-sm md:text-base rounded-full",
-      lg: "w-[95vw] lg:w-[70vw] text-lg rounded-full",
-    };
 
     const widthStyle = fullWidth ? "w-full" : "";
 
     const combinedClassName = [
-      baseStyles,
-      variantStyles[variant],
-      sizeStyles[size],
+      BASE_STYLES,
+      VARIANT_STYLES[variant],
+      SIZE_STYLES[size],
       widthStyle,
       className,
     ]

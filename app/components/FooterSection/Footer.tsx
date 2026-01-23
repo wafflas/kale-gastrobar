@@ -2,6 +2,8 @@ import Logo from "../shared/Logo";
 import Button from "../shared/Button";
 import InfoTable from "./components/InfoTable";
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer() {
   return (
     <footer className="bg-darkbrown text-cream py-12 flex items-center justify-center w-full h-[90%] rounded-t-[70px] relative">
@@ -16,7 +18,7 @@ export default function Footer() {
           </Button>
           <InfoTable />
           <p className="text-center text-sm lg:text-md tracking-wider">
-            &copy; {new Date().getFullYear()} Kalè Gastrobar. All rights
+            &copy; {CURRENT_YEAR} Kalè Gastrobar. All rights
             reserved.
           </p>
           <p className="text-center text-xs lg:text-md tracking-wider opacity-30 text-cream">

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Logo from "../shared/Logo";
 import Button from "../shared/Button";
 import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 
 // Animation constants
 const SPRING_CONFIG = {
@@ -118,31 +118,39 @@ interface FloatingImageProps {
 }
 
 function FloatingImage({ imageConfig, yTransform }: FloatingImageProps) {
-  const desktopClasses = [
-    "hidden lg:block absolute",
-    imageConfig.desktop.top,
-    imageConfig.desktop.left,
-    imageConfig.desktop.right,
-    imageConfig.desktop.bottom,
-    imageConfig.desktop.width,
-    imageConfig.desktop.aspectRatio,
-    "z-0",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const desktopClasses = useMemo(
+    () =>
+      [
+        "hidden lg:block absolute",
+        imageConfig.desktop.top,
+        imageConfig.desktop.left,
+        imageConfig.desktop.right,
+        imageConfig.desktop.bottom,
+        imageConfig.desktop.width,
+        imageConfig.desktop.aspectRatio,
+        "z-0",
+      ]
+        .filter(Boolean)
+        .join(" "),
+    [imageConfig.desktop]
+  );
 
-  const mobileClasses = [
-    "lg:hidden absolute",
-    imageConfig.mobile.top,
-    imageConfig.mobile.left,
-    imageConfig.mobile.right,
-    imageConfig.mobile.bottom,
-    imageConfig.mobile.width,
-    imageConfig.mobile.aspectRatio,
-    "z-0",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const mobileClasses = useMemo(
+    () =>
+      [
+        "lg:hidden absolute",
+        imageConfig.mobile.top,
+        imageConfig.mobile.left,
+        imageConfig.mobile.right,
+        imageConfig.mobile.bottom,
+        imageConfig.mobile.width,
+        imageConfig.mobile.aspectRatio,
+        "z-0",
+      ]
+        .filter(Boolean)
+        .join(" "),
+    [imageConfig.mobile]
+  );
 
   return (
     <>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import ReviewBox from "./components/ReviewBox";
 import HeroTypography from "../shared/HeroTypography";
@@ -33,17 +34,21 @@ const REVIEWS = [
       "I had some of the best Indian food around… Tandoori Chicken, Rogan Josh and samosa chaat — everything was incredible.",
     authorName: "Rahul S.",
   },
-];
+] as const;
 
 const REVIEW_LOOP_COUNT = 3;
 
 export default function ReviewsSection() {
-  const loopedReviews = Array.from({ length: REVIEW_LOOP_COUNT }, (_, loopIndex) =>
-    REVIEWS.map((review) => ({
-      ...review,
-      id: `${review.id}-loop-${loopIndex}`,
-    }))
-  ).flat();
+  const loopedReviews = useMemo(
+    () =>
+      Array.from({ length: REVIEW_LOOP_COUNT }, (_, loopIndex) =>
+        REVIEWS.map((review) => ({
+          ...review,
+          id: `${review.id}-loop-${loopIndex}`,
+        }))
+      ).flat(),
+    []
+  );
 
   return (
     <section className="py-10 bg-cream overflow-hidden">
