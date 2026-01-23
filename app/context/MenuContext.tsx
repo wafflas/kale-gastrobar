@@ -5,6 +5,7 @@ import {
   useState,
   ReactNode,
   useEffect,
+  useCallback,
 } from "react";
 
 interface MenuContextType {
@@ -19,9 +20,9 @@ const MenuContext = createContext<MenuContextType | undefined>(undefined);
 export function MenuProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openMenu = () => setIsOpen(true);
-  const closeMenu = () => setIsOpen(false);
-  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const openMenu = useCallback(() => setIsOpen(true), []);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
+  const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
 
   //prevent scrolling when menu is open
   useEffect(() => {

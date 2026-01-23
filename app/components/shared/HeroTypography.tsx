@@ -1,5 +1,3 @@
-import React from "react";
-
 interface HeroTypographyProps {
   children: React.ReactNode;
   size?: 70 | 100 | 150 | 180;

@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "./components/Header";
 import Logo from "../shared/Logo";
 import VideoBackground from "./components/VideoBackground";

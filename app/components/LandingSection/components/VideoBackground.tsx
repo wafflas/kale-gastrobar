@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 interface VideoBackgroundProps {
   mobileVideoSrc?: string;
@@ -9,6 +9,8 @@ interface VideoBackgroundProps {
   overlayOpacity?: string;
 }
 
+const MOBILE_BREAKPOINT = 768; // Tailwind md breakpoint
+
 export default function VideoBackground({
   mobileVideoSrc = "/video/introvideo_mobile.mp4",
   desktopVideoSrc = "/video/introvideo_desktop.mp4",
@@ -16,20 +18,23 @@ export default function VideoBackground({
   overlayOpacity = "opacity-33",
 }: VideoBackgroundProps) {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
-  const [videoSrc, setVideoSrc] = useState("");
+
+  const videoSrc = useMemo(
+    () => (isMobile ? mobileVideoSrc : desktopVideoSrc),
+    [isMobile, mobileVideoSrc, desktopVideoSrc]
+  );
 
   useEffect(() => {
     const checkScreenSize = () => {
-      const mobile = window.innerWidth < 768; // Tailwind md breakpoint
+      const mobile = window.innerWidth < MOBILE_BREAKPOINT;
       setIsMobile(mobile);
-      setVideoSrc(mobile ? mobileVideoSrc : desktopVideoSrc);
     };
 
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
 
     return () => window.removeEventListener("resize", checkScreenSize);
-  }, [mobileVideoSrc, desktopVideoSrc]);
+  }, []);
 
   if (isMobile === null) {
     return (

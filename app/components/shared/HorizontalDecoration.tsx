@@ -26,11 +26,13 @@ export default function HorizontalDecoration({
     restDelta: 0.001,
   });
 
+  const REPEAT_COUNT = 6;
+
   return (
     <div className="w-full whitespace-nowrap">
       <motion.div style={{ x: smoothX }} className="flex gap-10 w-fit">
-        {[...Array(6)].map((_, i) => (
-          <HeroTypography key={i} size={size}>
+        {Array.from({ length: REPEAT_COUNT }, (_, i) => (
+          <HeroTypography key={`decoration-${i}`} size={size}>
             {text}
           </HeroTypography>
         ))}

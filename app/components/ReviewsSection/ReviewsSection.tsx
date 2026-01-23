@@ -6,24 +6,28 @@ import HeroTypography from "../shared/HeroTypography";
 
 const REVIEWS = [
   {
+    id: "review-1",
     reviewSite: "Trip Advisor",
     reviewText:
       "Inassumong on the outside, GORGEOUS on the inside. I was dining alone and it was just stellar.",
     authorName: "Marie R.",
   },
   {
+    id: "review-2",
     reviewSite: "Google",
     reviewText:
       "Inassumong on the outside, GORGEOUS on the inside. I was dining alone and it was just stellar.",
     authorName: "Marie R.",
   },
   {
+    id: "review-3",
     reviewSite: "Yelp",
     reviewText:
       "The restaurant is very clean, food is amazing and servers very attentive. You will not regret eating here.",
     authorName: "Elizabeth M.",
   },
   {
+    id: "review-4",
     reviewSite: "Reddit",
     reviewText:
       "I had some of the best Indian food around… Tandoori Chicken, Rogan Josh and samosa chaat — everything was incredible.",
@@ -31,8 +35,15 @@ const REVIEWS = [
   },
 ];
 
+const REVIEW_LOOP_COUNT = 3;
+
 export default function ReviewsSection() {
-  const loopedReviews = [...REVIEWS, ...REVIEWS, ...REVIEWS];
+  const loopedReviews = Array.from({ length: REVIEW_LOOP_COUNT }, (_, loopIndex) =>
+    REVIEWS.map((review) => ({
+      ...review,
+      id: `${review.id}-loop-${loopIndex}`,
+    }))
+  ).flat();
 
   return (
     <section className="py-10 bg-cream overflow-hidden">
@@ -58,8 +69,8 @@ export default function ReviewsSection() {
           }}
           style={{ width: "fit-content" }}
         >
-          {loopedReviews.map((review, index) => (
-            <div key={index} className="shrink-0">
+          {loopedReviews.map((review) => (
+            <div key={review.id} className="shrink-0">
               <ReviewBox
                 reviewSite={review.reviewSite}
                 reviewText={review.reviewText}
