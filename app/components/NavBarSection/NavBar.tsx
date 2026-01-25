@@ -7,11 +7,13 @@ import { IoClose } from "react-icons/io5";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { SiTripadvisor } from "react-icons/si";
 import { useMenu } from "../../context/MenuContext";
+import { useReservation } from "../../context/ReservationContext";
 import { motion } from "framer-motion";
 
 export default function NavBar() {
   const [language, setLanguage] = useState<"el" | "en">("el");
   const { isOpen, closeMenu } = useMenu();
+  const { openReservation } = useReservation();
 
   if (!isOpen) return null;
 
@@ -36,7 +38,14 @@ export default function NavBar() {
           >
             <IoClose size={30} className="text-cream" />
           </button>
-          <Button variant="secondary" size="sm">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              closeMenu();
+              openReservation();
+            }}
+          >
             RESERVE
           </Button>
         </div>

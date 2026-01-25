@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Button from "../../shared/Button";
 import { useMenu } from "../../../context/MenuContext";
+import { useReservation } from "../../../context/ReservationContext";
 
 export default function Header() {
   const [language, setLanguage] = useState<"el" | "en">("el");
   const { openMenu } = useMenu();
+  const { openReservation } = useReservation();
 
   return (
     <header className="absolute top-0 left-0 w-full z-20 px-6 py-8 md:px-12 md:py-8 animate-fadeIn">
@@ -65,7 +67,12 @@ export default function Header() {
             </svg>
           </button>
 
-          <Button variant="primary" size="md" aria-label="Make a reservation">
+          <Button
+            variant="primary"
+            size="md"
+            aria-label="Make a reservation"
+            onClick={openReservation}
+          >
             RESERVE
           </Button>
         </div>

@@ -1,10 +1,15 @@
+"use client";
+
 import Logo from "../shared/Logo";
 import Button from "../shared/Button";
 import InfoTable from "./components/InfoTable";
+import { useReservation } from "../../context/ReservationContext";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer() {
+  const { openReservation } = useReservation();
+
   return (
     <footer className="bg-darkbrown text-cream py-12 flex items-center justify-center w-full h-[90%] rounded-t-[70px] relative">
       <div className="w-full mx-auto px-1 h-full flex flex-col justify-center space-y-10">
@@ -13,7 +18,12 @@ export default function Footer() {
           <p className="text-center text-[25px] md:text-[40px] lg:text-[50px] font-vollkorn  leading-tight">
             Great stories begin at our table.
           </p>
-          <Button variant="secondary" size="lg" aria-label="Make a reservation">
+          <Button
+            variant="secondary"
+            size="lg"
+            aria-label="Make a reservation"
+            onClick={openReservation}
+          >
             RESERVE
           </Button>
           <InfoTable />

@@ -5,6 +5,7 @@ import Logo from "../shared/Logo";
 import Button from "../shared/Button";
 import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 import { useRef, useMemo } from "react";
+import { useReservation } from "../../context/ReservationContext";
 
 // Animation constants
 const SPRING_CONFIG = {
@@ -176,6 +177,7 @@ function FloatingImage({ imageConfig, yTransform }: FloatingImageProps) {
 
 export default function IntroSection() {
   const containerRef = useRef<HTMLElement>(null);
+  const { openReservation } = useReservation();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -231,7 +233,12 @@ export default function IntroSection() {
         </div>
 
         <div className="pt-2 md:pt-4">
-          <Button variant="primary" size="md" className="bg-darkbrown! text-cream! rounded-full px-8 md:px-10">
+          <Button
+            variant="primary"
+            size="md"
+            className="bg-darkbrown! text-cream! rounded-full px-8 md:px-10"
+            onClick={openReservation}
+          >
             RESERVE NOW
           </Button>
         </div>

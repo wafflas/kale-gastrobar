@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Ubuntu, Vollkorn } from "next/font/google";
 import "./globals.css";
 import { MenuProvider } from "./context/MenuContext";
+import { ReservationProvider } from "./context/ReservationContext";
 import NavBar from "./components/NavBarSection/NavBar";
 
 const ubuntu = Ubuntu({
@@ -21,7 +22,11 @@ export const metadata: Metadata = {
   description: "Experience fine dining at Kalè Gastrobar",
   manifest: "/site.webmanifest",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon_ioKale/favicon.ico", sizes: "any" },
+      { url: "/favicon_ioKale/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon_ioKale/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
     apple: "/favicon_ioKale/apple-touch-icon.png",
   },
 };
@@ -34,10 +39,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ubuntu.variable} ${vollkorn.variable} antialiased`}>
-        <MenuProvider>
-          <NavBar />
-          {children}
-        </MenuProvider>
+        <ReservationProvider>
+          <MenuProvider>
+            <NavBar />
+            {children}
+          </MenuProvider>
+        </ReservationProvider>
       </body>
     </html>
   );
