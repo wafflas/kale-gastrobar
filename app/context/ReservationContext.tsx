@@ -6,7 +6,6 @@ import {
   ReactNode,
   useCallback,
   useEffect,
-  useRef,
 } from "react";
 
 interface ReservationContextType {
@@ -24,54 +23,9 @@ const RESERVATION_URL =
 
 export function ReservationProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const scrollPositionRef = useRef(0);
 
-  const openReservation = useCallback(() => {
-    // Save current scroll position before opening
-    scrollPositionRef.current = window.scrollY;
-    setIsOpen(true);
-  }, []);
-
-  const closeReservation = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
-  // Prevent scrolling and layout shift when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      const scrollY = scrollPositionRef.current;
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      
-      // Lock the body in place at the current scroll position
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.left = "0";
-      document.body.style.right = "0";
-      document.body.style.overflow = "hidden";
-      // Prevent layout shift from scrollbar disappearing
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    } else {
-      // Restore body styles
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      
-      // Restore scroll position
-      window.scrollTo(0, scrollPositionRef.current);
-    }
-
-    return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    };
-  }, [isOpen]);
+  const openReservation = useCallback(() => setIsOpen(true), []);
+  const closeReservation = useCallback(() => setIsOpen(false), []);
 
   // Close modal on escape key
   useEffect(() => {
