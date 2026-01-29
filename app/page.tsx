@@ -4,7 +4,7 @@ import LandingPage from "./components/LandingSection/LandingPage";
 import ReviewsSection from "./components/ReviewsSection/ReviewsSection";
 import IntroSection from "./components/IntroSection/IntroSection";
 import PlaceSection from "./components/PlaceSection/PlaceSection";
-
+import MenuSection from "./components/MenuSection/MenuSection";
 export default function Home() {
   return (
     <main className="relative w-full min-h-screen bg-cream overflow-hidden">
@@ -22,6 +22,7 @@ export default function Home() {
         />
         <IntroSection />
         <PlaceSection />
+        <MenuSection />
         <div className="flex flex-col min-h-screen">
           <ReviewsSection />
         </div>

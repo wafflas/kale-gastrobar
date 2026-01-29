@@ -3,8 +3,14 @@
 import Image from "next/image";
 import Logo from "../shared/Logo";
 import Button from "../shared/Button";
-import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
-import { useRef, useMemo } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  MotionValue,
+} from "framer-motion";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { useReservation } from "../../context/ReservationContext";
 
 // Animation constants
@@ -16,7 +22,7 @@ const SPRING_CONFIG = {
 
 const SCROLL_OFFSET = ["start end", "end start"];
 
-// Transform ranges for parallax effect
+// Transform ranges for parallax effect (desktop)
 const TRANSFORM_RANGES = {
   y1: [-50, 50] as const, // Moves up
   y2: [50, -50] as const, // Moves down
@@ -24,154 +30,111 @@ const TRANSFORM_RANGES = {
   y4: [-40, 40] as const, // Moves down slower
 } as const;
 
+// Transform ranges for mobile (reduced movement - 60% less)
+const MOBILE_TRANSFORM_RANGES = {
+  y1: [-20, 20] as const, // Moves up (reduced)
+  y2: [20, -20] as const, // Moves down (reduced)
+  y3: [30, -30] as const, // Moves up faster (reduced)
+  y4: [-16, 16] as const, // Moves down slower (reduced)
+} as const;
+
 // Image configuration
 interface ImageConfig {
   src: string;
   alt: string;
-  desktop: {
-    top?: string;
-    left?: string;
-    right?: string;
-    bottom?: string;
-    width: string;
-    aspectRatio: string;
-  };
-  mobile: {
-    top?: string;
-    left?: string;
-    right?: string;
-    bottom?: string;
-    width: string;
-    aspectRatio: string;
-  };
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  width: string;
+  aspectRatio: string;
 }
 
 const IMAGE_CONFIGS: ImageConfig[] = [
   {
     src: "/images/IntroSection/intro1.png",
     alt: "Kale Gastrobar interior view",
-    desktop: {
-      top: "top-[-10%]",
-      left: "left-[-1%]",
-      width: "w-[22%] xl:w-[28%]",
-      aspectRatio: "aspect-4/5",
-    },
-    mobile: {
-      top: "top-[5%]",
-      left: "left-[-5%]",
-      width: "w-[42%]",
-      aspectRatio: "aspect-4/5",
-    },
+    top: "top-[3%] xl:top-[-10%]",
+    left: "left-[-5%] lg:left-[-1%]",
+    width: "w-[42%] md:w-[30%] lg:w-[35%] xl:w-[28%]",
+    aspectRatio: "aspect-4/5",
   },
   {
     src: "/images/IntroSection/intro2.png",
     alt: "Kale Gastrobar dining experience",
-    desktop: {
-      top: "top-[8%]",
-      right: "right-[-2%]",
-      width: "w-[20%] xl:w-[25%]",
-      aspectRatio: "aspect-3/5",
-    },
-    mobile: {
-      top: "top-[14%]",
-      right: "right-[-8%]",
-      width: "w-[35%]",
-      aspectRatio: "aspect-3/5",
-    },
+    top: "top-[6%] xl:top-[8%]",
+    right: "right-[-8%] lg:right-[-2%]",
+    width: "w-[35%] md:w-[25%] lg:w-[23%] xl:w-[25%]",
+    aspectRatio: "aspect-3/5",
   },
   {
     src: "/images/IntroSection/intro3.png",
     alt: "Kale Gastrobar atmosphere",
-    desktop: {
-      bottom: "bottom-[10%]",
-      left: "left-[3%]",
-      width: "w-[18%] xl:w-[22%]",
-      aspectRatio: "aspect-4/5",
-    },
-    mobile: {
-      bottom: "bottom-[10%]",
-      left: "left-[-4%]",
-      width: "w-[35%]",
-      aspectRatio: "aspect-4/5",
-    },
+    bottom: "bottom-[5%] xl:bottom-[10%]",
+    left: "left-[-4%] lg:left-[3%]",
+    width: "w-[35%] md:w-[25%] lg:w-[30%] xl:w-[22%]",
+    aspectRatio: "aspect-4/5",
   },
   {
     src: "/images/IntroSection/intro4.png",
     alt: "Kale Gastrobar culinary presentation",
-    desktop: {
-      bottom: "bottom-[5%]",
-      right: "right-[8%]",
-      width: "w-[22%] xl:w-[26%]",
-      aspectRatio: "aspect-4/3",
-    },
-    mobile: {
-      bottom: "bottom-[4%]",
-      right: "right-[-10%]",
-      width: "w-[50%]",
-      aspectRatio: "aspect-4/3",
-    },
+    bottom: "bottom-[4%] xl:bottom-[5%]",
+    right: "right-[-10%] md:right-[-8%] lg:right-[8%]",
+    width: "w-[50%] md:w-[35%] lg:w-[30%] xl:w-[26%]",
+    aspectRatio: "aspect-4/3",
   },
 ];
 
 interface FloatingImageProps {
   imageConfig: ImageConfig;
   yTransform: MotionValue<number>;
+  yTransformMobile: MotionValue<number>;
 }
 
-function FloatingImage({ imageConfig, yTransform }: FloatingImageProps) {
-  const desktopClasses = useMemo(
-    () =>
-      [
-        "hidden lg:block absolute",
-        imageConfig.desktop.top,
-        imageConfig.desktop.left,
-        imageConfig.desktop.right,
-        imageConfig.desktop.bottom,
-        imageConfig.desktop.width,
-        imageConfig.desktop.aspectRatio,
-        "z-0",
-      ]
-        .filter(Boolean)
-        .join(" "),
-    [imageConfig.desktop]
-  );
+function FloatingImage({
+  imageConfig,
+  yTransform,
+  yTransformMobile,
+}: FloatingImageProps) {
+  // Use mobile transforms for screens < lg, desktop transforms for lg+
+  const [isMobile, setIsMobile] = useState(false);
 
-  const mobileClasses = useMemo(
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const classes = useMemo(
     () =>
       [
-        "lg:hidden absolute",
-        imageConfig.mobile.top,
-        imageConfig.mobile.left,
-        imageConfig.mobile.right,
-        imageConfig.mobile.bottom,
-        imageConfig.mobile.width,
-        imageConfig.mobile.aspectRatio,
+        "absolute",
+        imageConfig.top,
+        imageConfig.left,
+        imageConfig.right,
+        imageConfig.bottom,
+        imageConfig.width,
+        imageConfig.aspectRatio,
         "z-0",
       ]
         .filter(Boolean)
         .join(" "),
-    [imageConfig.mobile]
+    [imageConfig],
   );
 
   return (
-    <>
-      <motion.div style={{ y: yTransform }} className={desktopClasses}>
-        <Image
-          src={imageConfig.src}
-          alt={imageConfig.alt}
-          fill
-          className="object-cover"
-        />
-      </motion.div>
-      <motion.div style={{ y: yTransform }} className={mobileClasses}>
-        <Image
-          src={imageConfig.src}
-          alt={imageConfig.alt}
-          fill
-          className="object-cover"
-        />
-      </motion.div>
-    </>
+    <motion.div
+      style={{ y: isMobile ? yTransformMobile : yTransform }}
+      className={classes}
+    >
+      <Image
+        src={imageConfig.src}
+        alt={imageConfig.alt}
+        fill
+        className="object-cover"
+      />
+    </motion.div>
   );
 }
 
@@ -186,12 +149,52 @@ export default function IntroSection() {
 
   const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
 
-  const y1 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y1 as [number, number]);
-  const y2 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y2 as [number, number]);
-  const y3 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y3 as [number, number]);
-  const y4 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y4 as [number, number]);
+  // Desktop transforms (full parallax effect)
+  const y1 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y1 as [number, number],
+  );
+  const y2 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y2 as [number, number],
+  );
+  const y3 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y3 as [number, number],
+  );
+  const y4 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y4 as [number, number],
+  );
+
+  // Mobile transforms (reduced parallax effect)
+  const y1Mobile = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y1 as [number, number],
+  );
+  const y2Mobile = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y2 as [number, number],
+  );
+  const y3Mobile = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y3 as [number, number],
+  );
+  const y4Mobile = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y4 as [number, number],
+  );
 
   const yTransforms = [y1, y2, y3, y4];
+  const yTransformsMobile = [y1Mobile, y2Mobile, y3Mobile, y4Mobile];
 
   return (
     <section
@@ -204,11 +207,12 @@ export default function IntroSection() {
           key={imageConfig.src}
           imageConfig={imageConfig}
           yTransform={yTransforms[index]}
+          yTransformMobile={yTransformsMobile[index]}
         />
       ))}
 
       {/* --- CENTER CONTENT --- */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -218,7 +222,7 @@ export default function IntroSection() {
         <div className="mb-2">
           <Logo useImage={true} imageSrc="/logo2.png" size="xs" />
         </div>
-        
+
         <h2 className="font-vollkorn text-[34px] md:text-[80px] lg:text-[100px] text-darkbrown leading-[1.1] font-medium">
           A place to find <br className="hidden md:block" /> again.
         </h2>
@@ -228,7 +232,9 @@ export default function IntroSection() {
             We are hosts out of conviction.
           </p>
           <p className="font-ubuntu text-[13px] md:text-[18px] lg:text-[22px] text-darkbrown/80 leading-relaxed font-normal max-w-lg mx-auto">
-            People who believe in good food and what it can trigger. We serve attentively, personally and with an open eye for the essentials: <span className="font-bold text-darkbrown">you.</span>
+            People who believe in good food and what it can trigger. We serve
+            attentively, personally and with an open eye for the essentials:{" "}
+            <span className="font-bold text-darkbrown">you.</span>
           </p>
         </div>
 
