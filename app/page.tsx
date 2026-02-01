@@ -9,6 +9,8 @@ import IntroSection from "./components/IntroSection/IntroSection";
 import PlaceSection from "./components/PlaceSection/PlaceSection";
 import MenuSection from "./components/MenuSection/MenuSection";
 import EatSipSection from "./components/EatSipSection/EatSipSection";
+import ScrollOpacityText from "./components/shared/ScrollOpacityText";
+
 export default function Home() {
   return (
     <ReactLenis root>
@@ -27,6 +29,16 @@ export default function Home() {
           />
           <IntroSection />
           <PlaceSection />
+          <div className="w-full h-[1500px]">
+            <ScrollOpacityText
+              text="The food on the plate is the coming together of what is at its best in the present with the creative consequence of what was not used in the past."
+              start="top top"
+              end="+=1000"
+              extendedHold={true}
+              className="w-full h-screen flex items-center justify-center "
+            />
+          </div>
+
           <MenuSection />
           <HorizontalDecoration
             text="The feeling of being in the right place. • The feeling of being in the right place. "

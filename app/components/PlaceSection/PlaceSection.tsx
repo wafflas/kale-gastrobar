@@ -5,10 +5,8 @@ import FortressScroll from "./components/FortressScroll";
 
 export default function PlaceSection() {
   return (
-    <section className="relative min-h-screen lg:min-h-[150vh] w-full bg-cream flex items-center overflow-visible">
-      {/* Single container for both text and image with overflow-visible */}
+    <section className="relative min-h-screen lg:min-h-[140vh] w-full bg-cream flex items-center overflow-visible">
       <div className="relative w-full max-w-7xl aspect-4/3">
-        {/* Image */}
         <Image
           src="/images/PlaceSection/fortress.png"
           alt="Kale Gastrobar by the fortress"
