@@ -11,8 +11,10 @@ const BASE_STYLES =
   "font-ubuntu font-medium tracking-widest px-6 py-3 uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed leading-none cursor-pointer";
 
 const VARIANT_STYLES = {
-  primary: "bg-darkbrown text-cream hover:bg-lightbrown hover:scale-105",
-  secondary: "bg-cream text-darkbrown hover:bg-opacity-90 hover:scale-105",
+  primary:
+    "bg-darkbrown text-cream border-2 border-transparent hover:bg-lightbrown hover:scale-105",
+  secondary:
+    "bg-cream text-darkbrown border-2 border-transparent hover:bg-opacity-90 hover:scale-105",
   outline:
     "bg-transparent border-2 border-cream text-cream hover:bg-cream hover:text-darkbrown hover:scale-105",
 } as const;
@@ -33,9 +35,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className = "",
       ...props
     },
-    ref
+    ref,
   ) => {
-
     const widthStyle = fullWidth ? "w-full" : "";
 
     const combinedClassName = [
@@ -53,7 +54,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

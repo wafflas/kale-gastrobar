@@ -22,7 +22,7 @@ const SPRING_CONFIG = {
 
 const SCROLL_OFFSET = ["start end", "end start"];
 
-// Transform ranges for parallax effect (desktop)
+// Transform ranges for desktop
 const TRANSFORM_RANGES = {
   y1: [-50, 50] as const, // Moves up
   y2: [50, -50] as const, // Moves down
@@ -30,7 +30,7 @@ const TRANSFORM_RANGES = {
   y4: [-40, 40] as const, // Moves down slower
 } as const;
 
-// Transform ranges for mobile (reduced movement - 60% less)
+// Transform ranges for mobile
 const MOBILE_TRANSFORM_RANGES = {
   y1: [-20, 20] as const, // Moves up (reduced)
   y2: [20, -20] as const, // Moves down (reduced)
@@ -201,7 +201,6 @@ export default function IntroSection() {
       ref={containerRef}
       className="relative min-h-[95vh] lg:min-h-[160vh] w-full bg-cream overflow-hidden flex flex-col items-center justify-center py-12 px-4 md:py-32 md:px-6 lg:py-72 my-10"
     >
-      {/* Floating Images */}
       {IMAGE_CONFIGS.map((imageConfig, index) => (
         <FloatingImage
           key={imageConfig.src}
@@ -211,7 +210,6 @@ export default function IntroSection() {
         />
       ))}
 
-      {/* --- CENTER CONTENT --- */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
