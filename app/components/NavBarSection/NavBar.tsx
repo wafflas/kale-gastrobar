@@ -114,7 +114,7 @@ export default function NavBar() {
     >
       <div
         ref={slideRef}
-        className="absolute bottom-0 left-0 right-0 w-full bg-darkbrown text-cream flex flex-col px-8 py-12 md:px-12 md:py-6 overflow-y-auto pointer-events-auto min-h-0"
+        className="absolute bottom-0 left-0 right-0 w-full bg-darkbrown text-cream flex flex-col px-8 py-15 md:px-12 md:py-6 overflow-y-auto pointer-events-auto min-h-0"
         style={{ height: 0 }}
       >
         <div className="flex items-center justify-between w-full px-2 md:px-12">
