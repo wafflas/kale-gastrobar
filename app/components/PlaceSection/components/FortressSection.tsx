@@ -22,7 +22,7 @@ export default function FortressSection() {
         sectionRef.current?.querySelectorAll<HTMLElement>(".fortress-line");
       if (!lines?.length) return;
 
-      gsap.set(contentRef.current, { y: "100%" });
+      gsap.set(contentRef.current, { y: "50%" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -72,7 +72,11 @@ export default function FortressSection() {
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 pointer-events-none flex items-center">
+        <div
+          className="absolute inset-0 bg-darkbrown/40 pointer-events-none z-1"
+          aria-hidden
+        />
+        <div className="absolute inset-0 pointer-events-none flex items-center z-2">
           <FortressScroll />
         </div>
       </div>

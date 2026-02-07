@@ -30,7 +30,7 @@ export default function PolaroidImage({
           alt={alt}
           width={width}
           height={height}
-          className="object-cover"
+          className="object-cover object-center"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+F9PQAI8wNPvd7POQAAAABJRU5ErkJggg=="
         />

@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PolaroidImage from "./PolaroidImage";
 
-// Register GSAP plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -163,26 +162,28 @@ export default function StackingCards() {
   return (
     <div
       ref={cardsContainerRef}
-      className="relative flex justify-center items-center h-[33vh] md:h-[73vh] mb-24 -mt-10"
+      className="relative flex justify-center items-center h-[28vh] md:h-[58vh] mb-24 -mt-10"
     >
       {cards.map((card, index) => (
         <div
           key={index}
           ref={cardRefs[index]}
-          className="absolute w-[80%] h-[33vh] md:h-[73vh] flex justify-center items-center "
+          className="absolute w-[62%] md:w-[58%] h-[28vh] md:h-[58vh] flex justify-center items-center"
           style={{
-            top: `${index * 30}px`,
+            top: `${index * 16}px`,
             zIndex: index + 2,
           }}
         >
-          <PolaroidImage
-            src={card.src}
-            alt={card.title}
-            width={500}
-            height={600}
-            rotation={card.rotation}
-            className="shadow-xl select-none pointer-events-none"
-          />
+          <div className="origin-center scale-100 lg:scale-[1.32]">
+            <PolaroidImage
+              src={card.src}
+              alt={card.title}
+              width={320}
+              height={368}
+              rotation={card.rotation}
+              className="shadow-xl select-none pointer-events-none"
+            />
+          </div>
         </div>
       ))}
     </div>

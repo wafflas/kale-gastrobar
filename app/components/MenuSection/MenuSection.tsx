@@ -64,7 +64,7 @@ function MenuSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[120vh] lg:h-screen bg-darkbrown overflow-hidden px-10 lg:px-40 py-10 lg:py-20 "
+      className="relative w-full min-h-[110vh] lg:h-screen bg-darkbrown overflow-hidden px-10 lg:px-40 py-10 lg:py-20 "
     >
       <div className="flex flex-col lg:flex-row w-full items-start gap-10">
         <div className="flex flex-col items-start justify-center w-full lg:w-1/2 h-full space-y-10 md:space-y-20 pt-0 md:pt-20">
@@ -100,7 +100,7 @@ function MenuSection() {
             </Button>
           </div>
         </div>
-        <div className="w-full mt-15 lg:w-1/2">
+        <div className="w-full mt-16 lg:w-1/2">
           <StackingCards />
         </div>
       </div>

@@ -3,34 +3,30 @@
 import HeroTypography from "../../shared/HeroTypography";
 
 const TEXT_SIZE_CLASS =
-  "!text-[2rem]  lg:!text-[4rem] xl:!text-[5rem] 2xl:!text-[clamp(3rem,7vw,6rem)]";
+  "!text-[3rem]  lg:!text-[5rem] xl:!text-[6rem] 2xl:!text-[clamp(3rem,7vw,6rem)]";
 
 const TEXT_CLASS = `fortress-line font-vollkorn text-cream text-shadow-lg font-medium leading-relaxed ${TEXT_SIZE_CLASS} [text-shadow:0_4px_12px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.35)]`;
 
 export default function FortressScroll() {
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none">
-      {/* Top left */}
-      <HeroTypography className={`absolute top-8 left-8 md:top-12 md:left-12 ${TEXT_CLASS}`}>
-        Elevated
-      </HeroTypography>
-      {/* Top right */}
-      <HeroTypography className={`absolute top-8 right-8 md:top-12 md:right-12 ${TEXT_CLASS}`}>
-        evenings
-      </HeroTypography>
-      {/* Center: by above the */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 md:gap-3">
-        <HeroTypography className={TEXT_CLASS}>by</HeroTypography>
-        <HeroTypography className={TEXT_CLASS}>the</HeroTypography>
+    <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center">
+      <div className="w-full max-w-[90vw] md:max-w-[85vw] px-6 md:px-12 lg:px-16">
+        <div className="flex flex-col gap-1 md:gap-2 lg:gap-3">
+          <HeroTypography className={`${TEXT_CLASS} pl-0`}>Elevated</HeroTypography>
+          <HeroTypography className={`${TEXT_CLASS} pl-4 md:pl-8 lg:pl-12`}>
+            evenings
+          </HeroTypography>
+          <HeroTypography className={`${TEXT_CLASS} pl-8 md:pl-16 lg:pl-24`}>
+            by the
+          </HeroTypography>
+          <HeroTypography className={`${TEXT_CLASS} pl-12 md:pl-24 lg:pl-36`}>
+            fortress
+          </HeroTypography>
+          <HeroTypography className={`${TEXT_CLASS} pl-18 md:pl-36 lg:pl-54`}>
+            walls
+          </HeroTypography>
+        </div>
       </div>
-      {/* Bottom left */}
-      <HeroTypography className={`absolute bottom-8 left-8 md:bottom-12 md:left-12 ${TEXT_CLASS}`}>
-        fortress
-        </HeroTypography>
-      {/* Bottom right */}
-      <HeroTypography className={`absolute bottom-8 right-8 md:bottom-12 md:right-12 ${TEXT_CLASS}`}>
-        walls
-      </HeroTypography>
     </div>
   );
 }
