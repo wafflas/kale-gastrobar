@@ -22,45 +22,37 @@ export default function FortressSection() {
         sectionRef.current?.querySelectorAll<HTMLElement>(".fortress-line");
       if (!lines?.length) return;
 
-      const mm = gsap.matchMedia();
+      gsap.set(contentRef.current, { y: "100%" });
 
-      mm.add("(min-width: 769px)", () => {
-        gsap.set(contentRef.current, { y: "100%" });
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "+=1200",
-            pin: true,
-            pinSpacing: true,
-            scrub: 1,
-          },
-        });
-        tl.to(contentRef.current, {
-          y: "0%",
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=1200",
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
+        },
+      });
+
+      tl.to(contentRef.current, {
+        y: "0%",
+        duration: 0.5,
+        ease: "power3.out",
+      });
+      tl.fromTo(
+        lines,
+        { opacity: 0, x: -56, filter: "blur(20px)" },
+        {
+          opacity: 1,
+          x: 0,
+          filter: "blur(0px)",
           duration: 0.5,
-          ease: "power3.out",
-        });
-        tl.fromTo(
-          lines,
-          { opacity: 0, x: -56, filter: "blur(20px)" },
-          {
-            opacity: 1,
-            x: 0,
-            filter: "blur(0px)",
-            duration: 0.5,
-            stagger: 0.12,
-            ease: "power2.out",
-          },
-          "-=0.25"
-        );
-        return tl;
-      });
-
-      mm.add("(max-width: 768px)", () => {
-        gsap.set(contentRef.current, { y: "0%" });
-        gsap.set(lines, { opacity: 1, x: 0, filter: "blur(0px)" });
-      });
+          stagger: 0.12,
+          ease: "power2.out",
+        },
+        "-=0.25"
+      );
     }, sectionRef);
 
     return () => ctx.revert();
