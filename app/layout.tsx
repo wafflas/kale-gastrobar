@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Ubuntu, Vollkorn } from "next/font/google";
 import "./globals.css";
 import { MenuProvider } from "./context/MenuContext";
 import { ReservationProvider } from "./context/ReservationContext";
 import NavBarWrapper from "./components/NavBarSection/NavBarWrapper";
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
+};
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
