@@ -34,6 +34,15 @@ const ASSET_IMAGE_URLS = [
   "/images/MenuSection/menu5.png",
 ];
 
+/** On mobile, preload only first-screen assets to reduce work and network. */
+const ASSET_IMAGE_URLS_MOBILE = [
+  "/logo.png",
+  "/logo2.png",
+  "/images/PlaceSection/fortress2.png",
+];
+
+const MAX_WAIT_MS_MOBILE = 4000;
+
 interface LoadingScreenProps {
   onComplete: () => void;
   minDurationMs?: number;
@@ -57,6 +66,10 @@ export default function LoadingScreen({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    const imageUrls = isMobile ? ASSET_IMAGE_URLS_MOBILE : ASSET_IMAGE_URLS;
+    const effectiveMaxWait = isMobile ? MAX_WAIT_MS_MOBILE : maxWaitMs;
+
     const tryComplete = () => {
       if (completedRef.current) return;
       if (!minReachedRef.current || !videoReadyRef.current || !imagesReadyRef.current)
@@ -66,7 +79,6 @@ export default function LoadingScreen({
     };
 
     // Preload landing video (same as VideoBackground)
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
     const videoSrc = isMobile ? videoSrcs.mobile : videoSrcs.desktop;
     const video = document.createElement("video");
     video.muted = true;
@@ -84,9 +96,9 @@ export default function LoadingScreen({
     video.addEventListener("error", onVideoReady, { once: true });
     video.load();
 
-    // Preload key site images
+    // Preload key site images (fewer on mobile for performance)
     let imagesLoaded = 0;
-    const totalImages = ASSET_IMAGE_URLS.length;
+    const totalImages = imageUrls.length;
     const checkImagesReady = () => {
       imagesLoaded += 1;
       if (imagesLoaded >= totalImages) {
@@ -94,7 +106,7 @@ export default function LoadingScreen({
         tryComplete();
       }
     };
-    ASSET_IMAGE_URLS.forEach((url) => {
+    imageUrls.forEach((url) => {
       const img = new Image();
       img.onload = checkImagesReady;
       img.onerror = checkImagesReady;
@@ -110,7 +122,7 @@ export default function LoadingScreen({
       videoReadyRef.current = true;
       imagesReadyRef.current = true;
       tryComplete();
-    }, maxWaitMs);
+    }, effectiveMaxWait);
 
     return () => {
       clearTimeout(minTimer);

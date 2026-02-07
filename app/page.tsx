@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReactLenis } from "lenis/react";
 import HorizontalDecoration from "./components/shared/HorizontalDecoration";
 import Footer from "./components/FooterSection/Footer";
@@ -13,16 +13,22 @@ import EatSipSection from "./components/EatSipSection/EatSipSection";
 import ScrollOpacityText from "./components/shared/ScrollOpacityText";
 import LoadingScreen from "./components/shared/LoadingScreen";
 
+const DESKTOP_BREAKPOINT = "(min-width: 769px)";
+
 export default function Home() {
   const [showLoading, setShowLoading] = useState(true);
+  const [useLenis, setUseLenis] = useState(false);
 
-  return (
-    <>
-      {showLoading && (
-        <LoadingScreen onComplete={() => setShowLoading(false)} />
-      )}
-      <ReactLenis root>
-      <main className="relative w-full min-h-screen bg-cream overflow-hidden">
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_BREAKPOINT);
+    setUseLenis(mq.matches);
+    const listener = () => setUseLenis(mq.matches);
+    mq.addEventListener("change", listener);
+    return () => mq.removeEventListener("change", listener);
+  }, []);
+
+  const mainContent = (
+    <main className="relative w-full min-h-screen bg-cream overflow-hidden">
         <div className="flex flex-col min-h-screen">
           <LandingPage />
           <div className="mt-5">
@@ -70,7 +76,18 @@ export default function Home() {
           <Footer />
         </div>
       </main>
-    </ReactLenis>
+  );
+
+  return (
+    <>
+      {showLoading && (
+        <LoadingScreen onComplete={() => setShowLoading(false)} />
+      )}
+      {useLenis ? (
+        <ReactLenis root>{mainContent}</ReactLenis>
+      ) : (
+        mainContent
+      )}
     </>
   );
 }
