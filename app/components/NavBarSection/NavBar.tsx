@@ -21,6 +21,7 @@ const EASE_CLOSE = "power3.in";
 
 export default function NavBar() {
   const slideRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const isClosingRef = useRef(false);
   const [language, setLanguage] = useState<"el" | "en">("el");
   const { closeMenu } = useMenu();
@@ -32,7 +33,7 @@ export default function NavBar() {
       if (!slideRef.current || isClosingRef.current) return;
       isClosingRef.current = true;
       const reveals =
-        slideRef.current?.querySelectorAll<HTMLElement>(".nav-reveal");
+        containerRef.current?.querySelectorAll<HTMLElement>(".nav-reveal");
       const tl = gsap.timeline({
         onComplete: () => {
           closeMenu();
@@ -71,9 +72,10 @@ export default function NavBar() {
   );
 
   useEffect(() => {
-    if (!slideRef.current) return;
+    if (!slideRef.current || !containerRef.current) return;
     const slide = slideRef.current;
-    const reveals = slide.querySelectorAll<HTMLElement>(".nav-reveal");
+    const reveals =
+      containerRef.current.querySelectorAll<HTMLElement>(".nav-reveal");
 
     gsap.set(slide, { height: 0, overflow: "hidden" });
     gsap.set(reveals, { filter: "blur(12px)", opacity: 0 });
@@ -106,12 +108,13 @@ export default function NavBar() {
 
   return (
     <div
+      ref={containerRef}
       className="fixed inset-0 z-100 w-full overflow-hidden pointer-events-none"
       aria-hidden="false"
     >
       <div
         ref={slideRef}
-        className="absolute bottom-0 left-0 right-0 w-full bg-darkbrown text-cream flex flex-col px-8 pt-[max(1rem,env(safe-area-inset-top))] pb-15 md:px-12 md:pt-6 md:pb-6 overflow-y-auto pointer-events-auto min-h-0"
+        className="absolute bottom-0 left-0 right-0 w-full bg-darkbrown text-cream flex flex-col px-8 py-20 md:px-12 md:py-6 overflow-y-auto pointer-events-auto min-h-0"
         style={{ height: 0 }}
       >
         <div className="flex items-center justify-between w-full px-2 md:px-12">
