@@ -70,7 +70,7 @@ function MenuSection() {
         <div className="flex flex-col items-start justify-center w-full lg:w-1/2 h-full space-y-10 md:space-y-20 pt-0 md:pt-20">
           <HeroTypography
             className="text-white text-start"
-            size={130}
+            size={100}
             color="var(--color-darkbrown)"
             stroke="var(--color-cream)"
           >

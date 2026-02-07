@@ -10,7 +10,7 @@ if (typeof window !== "undefined") {
 }
 
 interface ScrollOpacityTextProps {
-  text: string;
+  text: string; // The text to animate
   className?: string; // Container styles
   textClassName?: string; // Text element styles
   start?: string;
@@ -23,7 +23,7 @@ export default function ScrollOpacityText({
   className = "",
   textClassName = "",
   start = "top top",
-  end = "+=150%",
+  end = "+=1500%",
   extendedHold = false,
 }: ScrollOpacityTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,7 +55,7 @@ export default function ScrollOpacityText({
         tl.fromTo(
           charElements,
           {
-            opacity: 0.1,
+            opacity: 0.25,
           },
           {
             opacity: 1,

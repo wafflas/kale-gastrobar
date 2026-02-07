@@ -23,7 +23,7 @@ export default function HorizontalDecoration({
 
   const xRange = useMemo(
     () => (direction === "left" ? [0, -speed] : [-speed, 0]),
-    [direction, speed]
+    [direction, speed],
   );
   const x = useTransform(scrollYProgress, [0, 1], xRange);
 
@@ -39,7 +39,7 @@ export default function HorizontalDecoration({
           {text}
         </HeroTypography>
       )),
-    [text, size]
+    [text, size],
   );
 
   return (
