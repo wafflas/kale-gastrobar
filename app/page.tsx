@@ -32,7 +32,7 @@ export default function Home() {
 
           <IntroSection />
           <PlaceSection />
-          <div className="w-full h-[3000px]">
+          <div className="w-full h-[3000px]" data-section="scroll-opacity-text">
             <ScrollOpacityText
               text="The food on the plate is the coming together of what is at its best in the present with the creative consequence of what was not used in the past."
               start="top top"

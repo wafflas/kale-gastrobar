@@ -1,64 +1,36 @@
 "use client";
 
-import { motion } from "framer-motion";
+import HeroTypography from "../../shared/HeroTypography";
+
+const TEXT_SIZE_CLASS =
+  "!text-[2rem]  lg:!text-[4rem] xl:!text-[5rem] 2xl:!text-[clamp(3rem,7vw,6rem)]";
+
+const TEXT_CLASS = `fortress-line font-vollkorn text-cream text-shadow-lg font-medium leading-relaxed ${TEXT_SIZE_CLASS} [text-shadow:0_4px_12px_rgba(0,0,0,0.5),0_2px_6px_rgba(0,0,0,0.35)]`;
 
 export default function FortressScroll() {
   return (
-    <div className="w-full h-full overflow-visible">
-      <motion.svg
-        viewBox="-50 -50 1797 1368"
-        className="w-full h-full overflow-visible"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ overflow: 'visible' }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ amount: 0.3 }}
-      >
-        <defs>
-          <path
-            id="curvedTextPath"
-            d="M0 0.5 H1100 Q1153.38 0.5 1200 20 L1450 105 Q1485.25 118.373 1520 150 L1620 310 Q1646.19 344.431 1665 390 L1690 590 Q1696 630.771 1696 680 V1267.5"
-          />
-          
-          <clipPath id="revealClip">
-            <motion.rect
-              x="0"
-              y="-90"
-              height="1368"
-              variants={{
-                hidden: { width: 0 },
-                visible: { width: 1750 }
-              }}
-              transition={{
-                duration: 1,
-                ease: "easeInOut",
-              }}
-            />
-          </clipPath>
-        </defs>
-
-        <text
-          className="font-vollkorn font-bold uppercase"
-          clipPath="url(#revealClip)"
-          style={{
-            fontSize: "100px",
-            fill: "var(--color-cream)",
-            stroke: "var(--color-darkbrown)",
-            strokeWidth: "3px",
-            paintOrder: "stroke fill",
-            letterSpacing: "0.08em"
-          }}
-        >
-          <textPath
-            href="#curvedTextPath"
-            startOffset="0%"
-            spacing="exact"
-          >
-            Elevated evenings by the fortress walls...
-          </textPath>
-        </text>
-      </motion.svg>
+    <div className="absolute inset-0 w-full h-full pointer-events-none">
+      {/* Top left */}
+      <HeroTypography className={`absolute top-8 left-8 md:top-12 md:left-12 ${TEXT_CLASS}`}>
+        Elevated
+      </HeroTypography>
+      {/* Top right */}
+      <HeroTypography className={`absolute top-8 right-8 md:top-12 md:right-12 ${TEXT_CLASS}`}>
+        evenings
+      </HeroTypography>
+      {/* Center: by above the */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 md:gap-3">
+        <HeroTypography className={TEXT_CLASS}>by</HeroTypography>
+        <HeroTypography className={TEXT_CLASS}>the</HeroTypography>
+      </div>
+      {/* Bottom left */}
+      <HeroTypography className={`absolute bottom-8 left-8 md:bottom-12 md:left-12 ${TEXT_CLASS}`}>
+        fortress
+        </HeroTypography>
+      {/* Bottom right */}
+      <HeroTypography className={`absolute bottom-8 right-8 md:bottom-12 md:right-12 ${TEXT_CLASS}`}>
+        walls
+      </HeroTypography>
     </div>
   );
 }

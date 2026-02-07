@@ -96,7 +96,6 @@ function FloatingImage({
   yTransform,
   yTransformMobile,
 }: FloatingImageProps) {
-  // Use mobile transforms for screens < lg, desktop transforms for lg+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -221,9 +220,15 @@ export default function IntroSection() {
           <Logo useImage={true} imageSrc="/logo2.png" size="xs" />
         </div>
 
-        <h2 className="font-vollkorn text-[34px] md:text-[80px] lg:text-[100px] text-darkbrown leading-[1.1] font-medium">
+        <motion.h2
+          initial={{ filter: "blur(12px)", opacity: 0 }}
+          whileInView={{ filter: "blur(0px)", opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="font-vollkorn text-[34px] md:text-[80px] lg:text-[100px] text-darkbrown leading-[1.1] font-medium"
+        >
           A place to find <br className="hidden md:block" /> again.
-        </h2>
+        </motion.h2>
 
         <div className="space-y-3 md:space-y-8 px-2">
           <p className="font-ubuntu text-[16px] md:text-[30px] lg:text-[35px] text-darkbrown leading-tight font-light">

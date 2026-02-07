@@ -4,7 +4,10 @@ interface HeroTypographyProps {
   className?: string;
   color?: string;
   stroke?: string;
+  strokeWidth?: string;
 }
+
+const DEFAULT_STROKE_WIDTH = "min(3px, 0.05em)";
 
 export default function HeroTypography({
   children,
@@ -12,6 +15,7 @@ export default function HeroTypography({
   className = "",
   color = "var(--color-cream)",
   stroke = "var(--color-darkbrown)",
+  strokeWidth = DEFAULT_STROKE_WIDTH,
 }: HeroTypographyProps) {
   const sizeStyles = {
     70: "text-[30px] md:text-[70px]",
@@ -21,13 +25,21 @@ export default function HeroTypography({
     180: "text-[100px] md:text-[180px]",
   };
 
+  const strokeValue = `${strokeWidth} ${stroke}`;
+
+  const isOutlineOnly = color === "transparent" || color === "rgba(0,0,0,0)";
+
   return (
     <span
       className={`${sizeStyles[size]} font-vollkorn font-bold leading-none ${className}`}
       style={{
         color: color,
-        WebkitTextStroke: `min(3px, 0.05em) ${stroke}`,
+        WebkitTextStroke: strokeValue,
         paintOrder: "stroke fill",
+        ...(isOutlineOnly && {
+          WebkitFontSmoothing: "antialiased" as const,
+          MozOsxFontSmoothing: "grayscale",
+        }),
       }}
     >
       {children}

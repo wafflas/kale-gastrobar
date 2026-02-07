@@ -20,7 +20,6 @@ export default function EatSipSection() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Determine which section is being hovered
     const midpoint = rect.width / 2;
     if (x < midpoint) {
       setHoveredSection("eat");
@@ -43,7 +42,6 @@ export default function EatSipSection() {
     setRevealedMobile((prev) => (prev === "sip" ? null : "sip"));
   };
 
-  // Update CSS variables for clip-path
   useEffect(() => {
     if (sectionRef.current) {
       sectionRef.current.style.setProperty("--mouse-x", `${currentPos.x}px`);
@@ -58,12 +56,9 @@ export default function EatSipSection() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* EAT SECTION */}
       <div className="relative flex-1 min-h-[50vh] md:min-h-screen overflow-hidden">
-        {/* Solid background layer */}
         <div className="absolute inset-0 bg-cream z-0" />
 
-        {/* Media layer with blur mask on right edge */}
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center z-1"
           style={{
