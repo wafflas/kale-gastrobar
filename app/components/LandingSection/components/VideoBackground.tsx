@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 
 interface VideoBackgroundProps {
   mobileVideoSrc?: string;
@@ -18,10 +18,11 @@ export default function VideoBackground({
   overlayOpacity = "opacity-33",
 }: VideoBackgroundProps) {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const videoSrc = useMemo(
     () => (isMobile ? mobileVideoSrc : desktopVideoSrc),
-    [isMobile, mobileVideoSrc, desktopVideoSrc]
+    [isMobile, mobileVideoSrc, desktopVideoSrc],
   );
 
   useEffect(() => {
@@ -36,6 +37,45 @@ export default function VideoBackground({
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
+  // Force video to play on mobile devices
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const attemptPlay = async () => {
+      try {
+        // Set properties again to ensure they're applied
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute("playsinline", "true");
+        video.setAttribute("webkit-playsinline", "true");
+
+        await video.play();
+      } catch (error) {
+        console.warn("Video autoplay failed:", error);
+        // Retry on user interaction
+        const playOnInteraction = async () => {
+          try {
+            await video.play();
+            document.removeEventListener("touchstart", playOnInteraction);
+            document.removeEventListener("click", playOnInteraction);
+          } catch (e) {
+            console.warn("Video play on interaction failed:", e);
+          }
+        };
+        document.addEventListener("touchstart", playOnInteraction, {
+          once: true,
+        });
+        document.addEventListener("click", playOnInteraction, { once: true });
+      }
+    };
+
+    // Small delay to ensure video is loaded
+    const timer = setTimeout(attemptPlay, 100);
+
+    return () => clearTimeout(timer);
+  }, [videoSrc]);
+
   if (isMobile === null) {
     return (
       <>
@@ -49,10 +89,12 @@ export default function VideoBackground({
   return (
     <>
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
         key={videoSrc} // force re-render when source changes
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover"
       >

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { ReactLenis } from "lenis/react";
 import HorizontalDecoration from "./components/shared/HorizontalDecoration";
 import Footer from "./components/FooterSection/Footer";
@@ -10,10 +11,17 @@ import PlaceSection from "./components/PlaceSection/PlaceSection";
 import MenuSection from "./components/MenuSection/MenuSection";
 import EatSipSection from "./components/EatSipSection/EatSipSection";
 import ScrollOpacityText from "./components/shared/ScrollOpacityText";
+import LoadingScreen from "./components/shared/LoadingScreen";
 
 export default function Home() {
+  const [showLoading, setShowLoading] = useState(true);
+
   return (
-    <ReactLenis root>
+    <>
+      {showLoading && (
+        <LoadingScreen onComplete={() => setShowLoading(false)} />
+      )}
+      <ReactLenis root>
       <main className="relative w-full min-h-screen bg-cream overflow-hidden">
         <div className="flex flex-col min-h-screen">
           <LandingPage />
@@ -63,5 +71,6 @@ export default function Home() {
         </div>
       </main>
     </ReactLenis>
+    </>
   );
 }
