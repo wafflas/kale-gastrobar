@@ -82,7 +82,7 @@ export default function NavBar() {
 
     const tl = gsap.timeline();
     tl.to(slide, {
-      height: "100vh",
+      height: "100dvh",
       duration: OPEN_DURATION,
       ease: EASE_OPEN,
       overflow: "hidden",
