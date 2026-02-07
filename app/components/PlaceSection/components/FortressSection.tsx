@@ -12,13 +12,17 @@ if (typeof window !== "undefined") {
 
 export default function FortressSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || !contentRef.current) return;
 
     const ctx = gsap.context(() => {
-      const lines = sectionRef.current?.querySelectorAll<HTMLElement>(".fortress-line");
+      const lines =
+        sectionRef.current?.querySelectorAll<HTMLElement>(".fortress-line");
       if (!lines?.length) return;
+
+      gsap.set(contentRef.current, { y: "60%" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -31,6 +35,11 @@ export default function FortressSection() {
         },
       });
 
+      tl.to(contentRef.current, {
+        y: "0%",
+        duration: 0.5,
+        ease: "power3.out",
+      });
       tl.fromTo(
         lines,
         { opacity: 0, x: -56, filter: "blur(20px)" },
@@ -41,7 +50,8 @@ export default function FortressSection() {
           duration: 0.5,
           stagger: 0.12,
           ease: "power2.out",
-        }
+        },
+        "-=0.25"
       );
     }, sectionRef);
 
@@ -53,7 +63,7 @@ export default function FortressSection() {
       ref={sectionRef}
       className="relative h-screen w-full bg-cream overflow-hidden"
     >
-      <div className="absolute inset-0">
+      <div ref={contentRef} className="absolute inset-0 will-change-transform">
         <Image
           src="/images/PlaceSection/fortress2.png"
           alt="Kale Gastrobar by the fortress"

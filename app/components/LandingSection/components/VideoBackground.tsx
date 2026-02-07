@@ -9,7 +9,7 @@ interface VideoBackgroundProps {
   overlayOpacity?: string;
 }
 
-const MOBILE_BREAKPOINT = 768; // Tailwind md breakpoint
+const MOBILE_BREAKPOINT = 768;
 
 export default function VideoBackground({
   mobileVideoSrc = "/video/introvideo_mobile.mp4",
