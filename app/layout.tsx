@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Ubuntu, Vollkorn } from "next/font/google";
 import "./globals.css";
 import { MenuProvider } from "./context/MenuContext";
@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     ],
     apple: "/favicon_ioKale/apple-touch-icon.png",
   },
+};
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

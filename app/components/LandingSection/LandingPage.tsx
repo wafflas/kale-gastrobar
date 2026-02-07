@@ -4,7 +4,7 @@ import VideoBackground from "./components/VideoBackground";
 
 export default function LandingPage() {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-cream flex items-center justify-center">
+    <section className="relative h-dvh min-h-screen w-full overflow-hidden bg-cream flex items-center justify-center">
       <Header />
       <VideoBackground
         mobileVideoSrc="/video/introvideo_mobile.mp4"
