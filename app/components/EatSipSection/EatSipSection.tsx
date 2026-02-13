@@ -60,13 +60,9 @@ export default function EatSipSection() {
         <div className="absolute inset-0 bg-cream z-0" />
 
         <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center z-1"
+          className="absolute inset-0 w-full h-full bg-cover bg-center z-1 [mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
           style={{
             backgroundImage: `url(/images/IntroSection/intro1.png)`,
-            maskImage:
-              "linear-gradient(to right, black 0%, black 85%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, black 0%, black 85%, transparent 100%)",
           }}
         />
 
@@ -78,7 +74,7 @@ export default function EatSipSection() {
 
         {/* Text overlay */}
         <div
-          className="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer md:cursor-default"
+          className="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer select-none"
           onClick={handleTapEat}
         >
           <HeroTypography size={150}>Eat</HeroTypography>
@@ -103,13 +99,7 @@ export default function EatSipSection() {
           muted
           playsInline
           src="/video/sipvideo.mp4"
-          className="absolute inset-0 w-full h-full object-cover z-1"
-          style={{
-            maskImage:
-              "linear-gradient(to left, black 0%, black 85%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to left, black 0%, black 85%, transparent 100%)",
-          }}
+          className="absolute inset-0 w-full h-full object-cover z-1 [mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)]"
         />
 
         {/* Mobile overlay */}
@@ -120,7 +110,7 @@ export default function EatSipSection() {
 
         {/* Text overlay */}
         <div
-          className="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer md:cursor-default"
+          className="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer select-none"
           onClick={handleTapSip}
         >
           <HeroTypography size={150}>Sip</HeroTypography>
@@ -138,7 +128,7 @@ export default function EatSipSection() {
         className="absolute inset-0 hidden md:block z-20 pointer-events-none"
         style={{
           background: hoveredSection
-            ? `radial-gradient(ellipse 400px 300px at var(--mouse-x) var(--mouse-y), transparent 100%, #fef9e5 100%)`
+            ? `radial-gradient(ellipse 270px 320px at var(--mouse-x) var(--mouse-y), transparent 80%, #fef9e5 100%)`
             : `#fef9e5`,
         }}
       />
