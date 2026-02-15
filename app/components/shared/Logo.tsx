@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LogoSVG from "./LogoSVG";
 
 interface LogoProps {
   useImage?: boolean;
@@ -8,7 +9,7 @@ interface LogoProps {
 
 export default function Logo({
   useImage = false,
-  imageSrc = "/logo.png",
+  imageSrc = "/logos/logo-semi.png",
   size = "xs",
 }: LogoProps) {
   const sizeStyles = {
@@ -20,13 +21,16 @@ export default function Logo({
 
   if (useImage) {
     return (
-      <div className="inset-0 z-10 flex items-center justify-center pointer-events-none animate-fadeInScale">
+      <div className="inset-0 z-10 flex flex-col items-center justify-center pointer-events-none animate-fadeInScale">
+        {imageSrc !== "/logos/logo2.png" && imageSrc !== "/logos/logo.png" && (
+          <LogoSVG />
+        )}
         <Image
           src={imageSrc}
           alt="Kàlè Gastrobar Logo"
           width={400}
           height={500}
-          className={`${sizeStyles[size]} object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500 pointer-events-auto select-none`}
+          className={`${sizeStyles[size]} object-contain drop-shadow-2xl pointer-events-auto select-none`}
           priority
           draggable={false}
         />

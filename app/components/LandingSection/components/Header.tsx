@@ -1,17 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../shared/Button";
 import { useMenu } from "../../../context/MenuContext";
 import { useReservation } from "../../../context/ReservationContext";
 
 export default function Header() {
-  const [language, setLanguage] = useState<"el" | "en">("el");
+  const [language, setLanguage] = useState<"el" | "en">("en");
+  const [isScrolled, setIsScrolled] = useState(false);
   const { openMenu } = useMenu();
   const { openReservation } = useReservation();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="absolute top-0 left-0 w-full z-20 px-6 py-8 md:px-12 md:py-8 animate-fadeIn">
+    <header className="fixed top-0 left-0 w-full z-20 px-6 py-8 md:px-12 md:py-8 animate-fadeIn">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 font-ubuntu text-cream text-shadow-lg">
           <button
@@ -35,9 +45,13 @@ export default function Header() {
           </button>
         </div>
 
-        <div className="flex items-center gap-4 md:gap-6">
+        <div
+          className={`flex items-center gap-4 md:gap-6 transition-all duration-500 ease-in-out  ${
+            isScrolled ? "bg-[#42312A] rounded-full" : "bg-transparent"
+          }`}
+        >
           <button
-            className="group transition-all duration-300 hover:scale-110 cursor-pointer"
+            className={`group transition-all duration-300 hover:scale-110 cursor-pointer ${isScrolled ? "px-3" : ""}`}
             aria-label="Open menu"
             onClick={openMenu}
           >

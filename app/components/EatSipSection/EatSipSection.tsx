@@ -62,7 +62,7 @@ export default function EatSipSection() {
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center z-1 [mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
           style={{
-            backgroundImage: `url(/images/IntroSection/intro1.png)`,
+            backgroundImage: `url(/images/IntroSection/intro1.webp)`,
           }}
         />
 

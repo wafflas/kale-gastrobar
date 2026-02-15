@@ -21,35 +21,35 @@ const cards: CardData[] = [
     title: "Delicious Dish 1",
     description:
       "Our chef's creative inspiration combines flavors that dance on your palate.",
-    src: "/images/MenuSection/menu1.png",
+    src: "/images/MenuSection/menu1.webp",
     rotation: -6,
   },
   {
     title: "Delicious Dish 2",
     description:
       "A story between tradition and innovation, crafted with finest seasonal ingredients.",
-    src: "/images/MenuSection/menu2.png",
+    src: "/images/MenuSection/menu2.webp",
     rotation: 4,
   },
   {
     title: "Delicious Dish 3",
     description:
       "Cooking as storytelling - our dishes are both crisp and ethereal.",
-    src: "/images/MenuSection/menu3.png",
+    src: "/images/MenuSection/menu3.webp",
     rotation: -3,
   },
   {
     title: "Delicious Dish 4",
     description:
       "The coastlines of flavor documented in our latest culinary creation.",
-    src: "/images/MenuSection/menu4.png",
+    src: "/images/MenuSection/menu4.webp",
     rotation: 5,
   },
   {
     title: "Delicious Dish 5",
     description:
       "Our chef shares the first chapter of the latest menu project.",
-    src: "/images/MenuSection/menu5.png",
+    src: "/images/MenuSection/menu5.webp",
     rotation: -2,
   },
 ];

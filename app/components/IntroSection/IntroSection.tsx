@@ -52,7 +52,7 @@ interface ImageConfig {
 
 const IMAGE_CONFIGS: ImageConfig[] = [
   {
-    src: "/images/IntroSection/intro1.png",
+    src: "/images/IntroSection/intro1.webp",
     alt: "Kale Gastrobar interior view",
     top: "top-[3%] xl:top-[-10%]",
     left: "left-[-5%] lg:left-[-1%]",
@@ -60,7 +60,7 @@ const IMAGE_CONFIGS: ImageConfig[] = [
     aspectRatio: "aspect-4/5",
   },
   {
-    src: "/images/IntroSection/intro2.png",
+    src: "/images/IntroSection/intro2.webp",
     alt: "Kale Gastrobar dining experience",
     top: "top-[6%] xl:top-[8%]",
     right: "right-[-8%] lg:right-[-2%]",
@@ -68,7 +68,7 @@ const IMAGE_CONFIGS: ImageConfig[] = [
     aspectRatio: "aspect-3/5",
   },
   {
-    src: "/images/IntroSection/intro3.png",
+    src: "/images/IntroSection/intro3.webp",
     alt: "Kale Gastrobar atmosphere",
     bottom: "bottom-[5%] xl:bottom-[10%]",
     left: "left-[-4%] lg:left-[3%]",
@@ -76,7 +76,7 @@ const IMAGE_CONFIGS: ImageConfig[] = [
     aspectRatio: "aspect-4/5",
   },
   {
-    src: "/images/IntroSection/intro4.png",
+    src: "/images/IntroSection/intro4.webp",
     alt: "Kale Gastrobar culinary presentation",
     bottom: "bottom-[4%] xl:bottom-[5%]",
     right: "right-[-10%] md:right-[-8%] lg:right-[8%]",
@@ -218,7 +218,7 @@ export default function IntroSection() {
         className="relative z-10 flex flex-col items-center text-center max-w-[85%] md:max-w-2xl lg:max-w-3xl space-y-4 md:space-y-10"
       >
         <div className="mb-2">
-          <Logo useImage={true} imageSrc="/logo2.png" size="xs" />
+          <Logo useImage={true} imageSrc="/logos/logo2.png" size="xs" />
         </div>
 
         <motion.h2

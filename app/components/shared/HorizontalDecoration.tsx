@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import HeroTypography from "./HeroTypography";
 
 interface HorizontalDecorationProps {
@@ -17,7 +17,7 @@ export default function HorizontalDecoration({
   text,
   size = 100,
   direction = "left",
-  speed = 500,
+  speed = 3000,
 }: HorizontalDecorationProps) {
   const { scrollYProgress } = useScroll();
 
@@ -26,11 +26,6 @@ export default function HorizontalDecoration({
     [direction, speed],
   );
   const x = useTransform(scrollYProgress, [0, 1], xRange);
-
-  const smoothX = useSpring(x, {
-    damping: 20,
-    restDelta: 0.001,
-  });
 
   const decorationItems = useMemo(
     () =>
@@ -44,7 +39,7 @@ export default function HorizontalDecoration({
 
   return (
     <div className="w-full whitespace-nowrap">
-      <motion.div style={{ x: smoothX }} className="flex gap-10 w-fit">
+      <motion.div style={{ x }} className="flex gap-10 w-fit">
         {decorationItems}
       </motion.div>
     </div>

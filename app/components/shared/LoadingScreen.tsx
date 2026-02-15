@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import Logo from "./Logo";
+import gsap from "gsap";
 
 const MOBILE_BREAKPOINT = 768;
 const MIN_DURATION_MS = 1200;
@@ -15,30 +15,29 @@ const DEFAULT_VIDEO_SRCS = {
 
 /** Key images used across the site; preloaded so they're ready when the loader hides. */
 const ASSET_IMAGE_URLS = [
-  "/logo.png",
-  "/logo2.png",
-  "/images/PlaceSection/fortress2.png",
-  "/images/IntroSection/intro1.png",
-  "/images/IntroSection/intro2.png",
-  "/images/IntroSection/intro3.png",
-  "/images/IntroSection/intro4.png",
-  "/images/PlaceSection/place1.png",
-  "/images/PlaceSection/place2.png",
-  "/images/PlaceSection/place3.png",
-  "/images/PlaceSection/place4.png",
-  "/images/PlaceSection/place5.png",
-  "/images/MenuSection/menu1.png",
-  "/images/MenuSection/menu2.png",
-  "/images/MenuSection/menu3.png",
-  "/images/MenuSection/menu4.png",
-  "/images/MenuSection/menu5.png",
+  "/logos/logo.png",
+  "/logos/logo2.png",
+  "/images/PlaceSection/fortress2.webp",
+  "/images/IntroSection/intro1.webp",
+  "/images/IntroSection/intro2.webp",
+  "/images/IntroSection/intro3.webp",
+  "/images/IntroSection/intro4.webp",
+  "/images/PlaceSection/place1.webp",
+  "/images/PlaceSection/place2.webp",
+  "/images/PlaceSection/place3.webp",
+  "/images/PlaceSection/place4.webp",
+  "/images/PlaceSection/place5.webp",
+  "/images/MenuSection/menu1.webp",
+  "/images/MenuSection/menu2.webp",
+  "/images/MenuSection/menu3.webp",
+  "/images/MenuSection/menu4.webp",
+  "/images/MenuSection/menu5.webp",
 ];
 
-/** On mobile, preload only first-screen assets to reduce work and network. */
 const ASSET_IMAGE_URLS_MOBILE = [
-  "/logo.png",
-  "/logo2.png",
-  "/images/PlaceSection/fortress2.png",
+  "/logos/logo.png",
+  "/logos/logo2.png",
+  "/images/PlaceSection/fortress2.webp",
 ];
 
 const MAX_WAIT_MS_MOBILE = 4000;
@@ -50,6 +49,95 @@ interface LoadingScreenProps {
   videoSrcs?: { mobile: string; desktop: string };
 }
 
+/** Animated Complete Logo Component */
+function AnimatedLogo({ onComplete }: { onComplete?: () => void }) {
+  const pathRef = useRef<SVGPathElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const path = pathRef.current;
+    const image = imageRef.current;
+    if (!path || !image) return;
+
+    // Dynamically calculate the path length
+    const pathLength = path.getTotalLength();
+
+    // Create GSAP timeline
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // Call the onComplete callback when animation finishes
+        if (onComplete) {
+          onComplete();
+        }
+      },
+    });
+
+    gsap.set(path, {
+      strokeDasharray: pathLength,
+      strokeDashoffset: pathLength,
+      fillOpacity: 0,
+    });
+    gsap.set(image, {
+      opacity: 0,
+      filter: "blur(20px)",
+    });
+
+    // Stage 1: Draw the stroke
+    tl.to(path, {
+      strokeDashoffset: 0,
+      duration: 3,
+      ease: "power2.inOut",
+    });
+
+    // Stage 2: Fade in the fill
+    tl.to(path, {
+      fillOpacity: 1,
+      duration: 1,
+      ease: "power2.inOut",
+    });
+
+    // Stage 3: Fade in the image with blur reveal
+    tl.to(image, {
+      opacity: 1,
+      filter: "blur(0px)",
+      duration: 2,
+      ease: "power2.out",
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, [onComplete]);
+
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <svg
+        width="280"
+        height="422"
+        viewBox="0 0 280 422"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-21 h-auto"
+      >
+        <path
+          ref={pathRef}
+          d="M264.752 211.25L265.005 412H139.007H13.01L12.755 211.75C12.615 101.613 12.64 11.161 12.811 10.746C12.983 10.332 69.683 10.107 138.811 10.246L264.5 10.5L264.752 211.25ZM20 159.526V302.051L23.214 300.389C30.071 296.843 37.471 299.014 43.359 306.299C46.372 310.027 46.437 310.344 46.834 323.097L47.239 336.096L52.37 335.798L57.5 335.5L58 322.32C58.43 310.99 58.794 308.744 60.592 306.32C67.92 296.443 81.187 296.443 88.232 306.321C90.229 309.12 90.56 311.054 91 322.5L91.5 335.5L94.888 335.824C96.752 336.002 99.339 335.881 100.638 335.555C102.965 334.971 103 334.775 103.007 322.231C103.014 307.781 103.874 305.443 110.696 301.313C117.942 296.926 129.316 299.605 133.037 306.575C134.364 309.063 134.546 306.963 135 283.908C135.275 269.934 135.36 257.81 135.19 256.966C134.973 255.892 132.676 255.081 127.527 254.262C111.782 251.757 95.981 243.679 84.487 232.261C78.76 226.571 76.196 222.999 72.509 215.571C66.761 203.989 65.866 196.371 68.331 180C69.2 174.225 70.862 162.525 72.025 154C75.653 127.401 81.01 91.845 82.624 83.656C83.474 79.342 83.888 74.692 83.545 73.321C82.493 69.132 83.791 67.227 88.797 65.612C104.741 60.467 162.428 59.554 180.71 64.157C185.583 65.384 187.906 67.494 186.229 69.171C185.448 69.952 185.472 70.783 186.314 72.132C189.132 76.644 183.662 79.312 167 81.55C146.902 84.25 117.183 83.028 96.209 78.639C92.75 77.915 89.69 77.693 89.409 78.147C88.668 79.346 85.602 97.62 82.053 122C74.077 176.775 73.576 180.958 73.539 193C73.501 205.334 73.548 205.601 77.115 213.069C81.431 222.107 90.666 232.442 98.859 237.404C110.957 244.731 132.599 251.801 135.143 249.257C135.799 248.601 135.915 245 135.466 239.256L134.764 230.281L126.132 229.692C106.586 228.36 93.835 220.645 92.303 209.224C90.764 197.746 102.51 191.851 116.495 197.084C127.094 201.049 135.725 210.051 138.146 219.664C138.751 222.067 139.594 224.249 140.02 224.513C140.446 224.776 144.496 224.345 149.019 223.555C166.857 220.441 184.794 208.012 195.28 191.5C199.832 184.332 204 175.726 204 173.495C204 172.808 204.675 171.685 205.5 171C206.702 170.002 207.324 170.024 208.63 171.108C209.98 172.228 210.16 173.77 209.675 180.056C207.898 203.101 199.694 224.21 187.952 235.952C178.694 245.211 162.186 252.951 147.961 254.704L141.5 255.5L140.791 294.5C140.401 315.95 140.285 334.091 140.534 334.814C140.816 335.633 142.213 336.009 144.243 335.814L147.5 335.5L147.764 302.75L148.027 270H172.514H197V283.5V297H206.5H216V283.52V270.041L236.75 269.77L257.5 269.5L257.754 143.25L258.008 17H139.004H20V159.526ZM124.5 66.936C122.286 67.546 123.883 67.794 130.592 67.882C135.592 67.947 145.942 68.254 153.592 68.564C164.884 69.022 167.129 68.895 165.526 67.889C163.19 66.423 129.221 65.633 124.5 66.936ZM103.029 73.862C108.319 77.288 145.127 79.177 163.026 76.942C176.746 75.228 175.007 74 158.861 74C150.865 74 134.687 73.746 122.911 73.436C108.612 73.059 102.008 73.201 103.029 73.862ZM198.292 196.776C186.693 213.854 167.882 225.934 147.5 229.394L140.5 230.582L140.863 240.041C141.062 245.243 141.402 249.69 141.618 249.922C141.834 250.154 145.019 249.79 148.695 249.112C171.125 244.979 186.363 234.04 195.518 215.5C198.734 208.987 203.522 191.968 202.123 192.026C201.78 192.04 200.056 194.177 198.292 196.776ZM100.736 202.139C94.704 207.547 98.004 215.496 108.296 220.355C113.231 222.684 115.27 223.118 127.75 224.491C134.011 225.18 134.318 224.323 130.613 216.5C126.474 207.76 118.007 201.785 107.775 200.383C104.055 199.873 102.959 200.146 100.736 202.139ZM239.279 276.76L223.058 277.049L222.779 290.275L222.5 303.5H206.512H190.524L190.512 290.5L190.5 277.5L172.75 277.227L155 276.954V309.436V341.919L146.792 342.21L138.584 342.5L137.796 346.5C137.363 348.7 136.788 351.451 136.519 352.614C136.061 354.596 136.545 354.769 144.31 355.399C154.723 356.244 170.127 360.017 176.642 363.318C182.593 366.334 188.304 372.361 189.957 377.369C195.454 394.024 163.598 406.624 128.5 401.677C104.255 398.26 88.562 390.516 85.908 380.659C85.045 377.452 85.131 376.441 86.374 375.197C88.35 373.221 90.603 374.914 91.513 379.06C93.609 388.601 118.103 397.199 143.5 397.307C162.558 397.389 176.082 393.445 182.37 385.972C185.431 382.334 185.574 381.012 183.399 376.428C179.574 368.369 161.448 361.694 141.035 360.829L133.571 360.513L131.226 364.006C124.695 373.739 116.246 379.036 106.1 379.759C98.16 380.326 95.277 378.61 94.341 372.761C93.801 369.388 94.124 368.641 97.643 365.122C102.008 360.757 110.279 357.69 122.65 355.85L129.817 354.784L130.908 350.449C132.405 344.505 132.284 342 130.5 342C129.233 342 129 339.656 129 326.9V311.8L125.6 308.4C121.219 304.019 117.296 303.871 112.766 307.916L109.5 310.833L109.16 326.416L108.821 342H96.41H84V326.646C84 311.799 83.92 311.206 81.585 308.686C78.508 305.366 74.778 304.435 70.933 306.028C65.845 308.135 65 311.185 65 327.45V342H52.57H40.141L39.82 326.416L39.5 310.831L36.234 307.916C31.704 303.871 27.781 304.019 23.4 308.4L20 311.8V358.904V406.008L138.75 405.754L257.5 405.5V341.083C257.5 298.871 257.155 276.633 256.5 276.569C255.95 276.515 248.2 276.601 239.279 276.76ZM115.191 362.946C105.501 365.716 101.031 368.028 100.384 370.605C100.069 371.86 100.106 373.362 100.465 373.943C101.522 375.654 108.147 375.115 113 372.925C117.246 371.008 126 363.512 126 361.792C126 360.558 122.081 360.976 115.191 362.946Z"
+          fill="#F3F1E3"
+          stroke="#F3F1E3"
+          strokeWidth="2"
+          style={{ fillOpacity: 0 }}
+        />
+      </svg>
+      <img
+        ref={imageRef}
+        src="/logos/logo-semi.png"
+        alt="Kàlè Gastrobar Logo"
+        className="w-40 h-auto md:w-48 lg:w-56 object-contain drop-shadow-2xl select-none"
+        style={{ opacity: 0, filter: "blur(20px)" }}
+      />
+    </div>
+  );
+}
 
 export default function LoadingScreen({
   onComplete,
@@ -61,7 +149,9 @@ export default function LoadingScreen({
   const minReachedRef = useRef(false);
   const videoReadyRef = useRef(false);
   const imagesReadyRef = useRef(false);
+  const animationReadyRef = useRef(false);
   const completedRef = useRef(false);
+  const tryCompleteRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -72,11 +162,19 @@ export default function LoadingScreen({
 
     const tryComplete = () => {
       if (completedRef.current) return;
-      if (!minReachedRef.current || !videoReadyRef.current || !imagesReadyRef.current)
+      if (
+        !minReachedRef.current ||
+        !videoReadyRef.current ||
+        !imagesReadyRef.current ||
+        !animationReadyRef.current
+      )
         return;
       completedRef.current = true;
       setIsExiting(true);
     };
+
+    // Store tryComplete in ref so it can be accessed by handleAnimationComplete
+    tryCompleteRef.current = tryComplete;
 
     // Preload landing video (same as VideoBackground)
     const videoSrc = isMobile ? videoSrcs.mobile : videoSrcs.desktop;
@@ -139,6 +237,13 @@ export default function LoadingScreen({
     return () => clearTimeout(t);
   }, [isExiting, onComplete]);
 
+  const handleAnimationComplete = () => {
+    animationReadyRef.current = true;
+    if (tryCompleteRef.current) {
+      tryCompleteRef.current();
+    }
+  };
+
   return (
     <div
       className={`fixed inset-0 z-200 flex items-center justify-center bg-darkbrown transition-opacity duration-600 ease-out ${isExiting ? "pointer-events-none" : ""}`}
@@ -146,7 +251,7 @@ export default function LoadingScreen({
       aria-hidden="true"
       aria-busy={!isExiting}
     >
-      <Logo useImage={true} imageSrc="/logo.png" size="md" />
+      <AnimatedLogo onComplete={handleAnimationComplete} />
     </div>
   );
 }

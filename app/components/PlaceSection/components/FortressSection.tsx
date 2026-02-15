@@ -22,13 +22,13 @@ export default function FortressSection() {
         sectionRef.current?.querySelectorAll<HTMLElement>(".fortress-line");
       if (!lines?.length) return;
 
-      gsap.set(contentRef.current, { y: "50%" });
+      gsap.set(contentRef.current, { y: "20%" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=1200",
+          end: "+=1300",
           pin: true,
           pinSpacing: true,
           scrub: 1,
@@ -51,7 +51,7 @@ export default function FortressSection() {
           stagger: 0.12,
           ease: "power2.out",
         },
-        "-=0.25"
+        "-=0.25",
       );
     }, sectionRef);
 
@@ -65,7 +65,7 @@ export default function FortressSection() {
     >
       <div ref={contentRef} className="absolute inset-0 will-change-transform">
         <Image
-          src="/images/PlaceSection/fortress2.png"
+          src="/images/PlaceSection/fortress2.webp"
           alt="Kale Gastrobar by the fortress"
           fill
           className="object-cover object-center"

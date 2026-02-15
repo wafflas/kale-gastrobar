@@ -7,6 +7,7 @@ interface VideoBackgroundProps {
   desktopVideoSrc?: string;
   overlayColor?: string;
   overlayOpacity?: string;
+  shouldPlay?: boolean;
 }
 
 const MOBILE_BREAKPOINT = 768;
@@ -16,6 +17,7 @@ export default function VideoBackground({
   desktopVideoSrc = "/video/introvideo_desktop.mp4",
   overlayColor = "bg-darkbrown",
   overlayOpacity = "opacity-33",
+  shouldPlay = true,
 }: VideoBackgroundProps) {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -37,10 +39,11 @@ export default function VideoBackground({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !shouldPlay) return;
 
     const attemptPlay = async () => {
       try {
+        video.currentTime = 0;
         video.muted = true;
         video.playsInline = true;
         video.setAttribute("playsinline", "true");
@@ -54,12 +57,12 @@ export default function VideoBackground({
     const timer = setTimeout(attemptPlay, 100);
 
     return () => clearTimeout(timer);
-  }, [videoSrc]);
+  }, [videoSrc, shouldPlay]);
 
   useEffect(() => {
     const video = videoRef.current;
     const container = containerRef.current;
-    if (!video || !container) return;
+    if (!video || !container || !shouldPlay) return;
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -71,11 +74,11 @@ export default function VideoBackground({
           video.pause();
         }
       },
-      { threshold: 0.1, rootMargin: "0px" }
+      { threshold: 0.1, rootMargin: "0px" },
     );
     io.observe(container);
     return () => io.disconnect();
-  }, [videoSrc]);
+  }, [videoSrc, shouldPlay]);
 
   if (isMobile === null) {
     return (

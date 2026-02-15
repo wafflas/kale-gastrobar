@@ -33,36 +33,36 @@ const MOBILE_TRANSFORM_RANGES = {
 
 const PLACE_IMAGE_CONFIGS: PlaceImageConfig[] = [
   {
-    src: "/images/PlaceSection/place1.png",
+    src: "/images/PlaceSection/place1.webp",
     alt: "Kale Gastrobar interior",
     top: "top-[1%] lg:top-[2%]",
-    left: "left-[-5%] lg:left-[4%]",
-    width: "w-[42%] md:w-[36%] lg:w-[34%] xl:w-[32%]",
+    left: "left-[-5%] lg:left-[8%]",
+    width: "w-[42%] md:w-[36%] lg:w-[30%] ",
     aspectRatio: "aspect-4/5",
     zIndex: 1,
   },
   {
-    src: "/images/PlaceSection/place2.png",
+    src: "/images/PlaceSection/place2.webp",
     alt: "Kale Gastrobar dining",
     top: "top-[2%] lg:top-[-4%]",
     right: "right-[-6%] lg:right-[16%]",
-    width: "w-[36%] md:w-[30%] lg:w-[28%] xl:w-[26%]",
+    width: "w-[36%] md:w-[30%] lg:w-[28%] ",
     aspectRatio: "aspect-3/5",
     zIndex: 2,
   },
   {
-    src: "/images/PlaceSection/place3.png",
+    src: "/images/PlaceSection/place3.webp",
     alt: "Kale Gastrobar terrace",
-    bottom: "bottom-[19%] lg:bottom-[20%]",
+    bottom: "bottom-[19%] lg:bottom-[17%]",
     left: "left-[-5%] lg:left-[2%]",
-    width: "w-[44%] md:w-[38%] lg:w-[36%] xl:w-[32%]",
+    width: "w-[44%] md:w-[38%] lg:w-[30%] ",
     aspectRatio: "aspect-4/3",
     zIndex: 4,
   },
   {
-    src: "/images/PlaceSection/place4.png", 
+    src: "/images/PlaceSection/place4.webp",
     alt: "Kale Gastrobar detail",
-    bottom: "bottom-[-3%] lg:bottom-[6%]",
+    bottom: "bottom-[-3%] lg:bottom-[-10%]",
     left: "left-1/2",
     width: "w-[28%] md:w-[24%] lg:w-[23%]",
     aspectRatio: "aspect-3/5",
@@ -70,10 +70,10 @@ const PLACE_IMAGE_CONFIGS: PlaceImageConfig[] = [
     zIndex: 3,
   },
   {
-    src: "/images/PlaceSection/place5.png",
+    src: "/images/PlaceSection/place5.webp",
     alt: "Kale Gastrobar exterior",
-    bottom: "bottom-[6%] lg:bottom-[16%]",
-    right: "right-[-7%] md:right-[-3%] lg:right-[2%]",
+    bottom: "bottom-[6%] lg:bottom-[13%]",
+    right: "right-[-7%] md:right-[-3%] lg:right-[1%]",
     width: "w-[34%] md:w-[30%] lg:w-[23%]",
     aspectRatio: "aspect-3/5",
     zIndex: 5,
@@ -90,17 +90,57 @@ export default function PlaceImagesSection() {
 
   const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
 
-  const y1 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y1 as [number, number]);
-  const y2 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y2 as [number, number]);
-  const y3 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y3 as [number, number]);
-  const y4 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y4 as [number, number]);
-  const y5 = useTransform(smoothProgress, [0, 1], TRANSFORM_RANGES.y5 as [number, number]);
+  const y1 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y1 as [number, number],
+  );
+  const y2 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y2 as [number, number],
+  );
+  const y3 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y3 as [number, number],
+  );
+  const y4 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y4 as [number, number],
+  );
+  const y5 = useTransform(
+    smoothProgress,
+    [0, 1],
+    TRANSFORM_RANGES.y5 as [number, number],
+  );
 
-  const y1M = useTransform(smoothProgress, [0, 1], MOBILE_TRANSFORM_RANGES.y1 as [number, number]);
-  const y2M = useTransform(smoothProgress, [0, 1], MOBILE_TRANSFORM_RANGES.y2 as [number, number]);
-  const y3M = useTransform(smoothProgress, [0, 1], MOBILE_TRANSFORM_RANGES.y3 as [number, number]);
-  const y4M = useTransform(smoothProgress, [0, 1], MOBILE_TRANSFORM_RANGES.y4 as [number, number]);
-  const y5M = useTransform(smoothProgress, [0, 1], MOBILE_TRANSFORM_RANGES.y5 as [number, number]);
+  const y1M = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y1 as [number, number],
+  );
+  const y2M = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y2 as [number, number],
+  );
+  const y3M = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y3 as [number, number],
+  );
+  const y4M = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y4 as [number, number],
+  );
+  const y5M = useTransform(
+    smoothProgress,
+    [0, 1],
+    MOBILE_TRANSFORM_RANGES.y5 as [number, number],
+  );
 
   const yTransforms = [y1, y2, y3, y4, y5];
   const yTransformsMobile = [y1M, y2M, y3M, y4M, y5M];
