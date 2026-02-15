@@ -13,7 +13,6 @@ const DEFAULT_VIDEO_SRCS = {
   desktop: "/video/introvideo_desktop.mp4",
 };
 
-/** Key images used across the site; preloaded so they're ready when the loader hides. */
 const ASSET_IMAGE_URLS = [
   "/logos/logo.png",
   "/logos/logo2.png",
@@ -49,7 +48,6 @@ interface LoadingScreenProps {
   videoSrcs?: { mobile: string; desktop: string };
 }
 
-/** Animated Complete Logo Component */
 function AnimatedLogo({ onComplete }: { onComplete?: () => void }) {
   const pathRef = useRef<SVGPathElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -59,13 +57,14 @@ function AnimatedLogo({ onComplete }: { onComplete?: () => void }) {
     const image = imageRef.current;
     if (!path || !image) return;
 
-    // Dynamically calculate the path length
     const pathLength = path.getTotalLength();
 
-    // Create GSAP timeline
+    const isMobile = window.innerWidth < 768;
+    const blurStart = isMobile ? 10 : 20; // Reduced blur on mobile
+    const blurEnd = 0;
+
     const tl = gsap.timeline({
       onComplete: () => {
-        // Call the onComplete callback when animation finishes
         if (onComplete) {
           onComplete();
         }
@@ -79,13 +78,14 @@ function AnimatedLogo({ onComplete }: { onComplete?: () => void }) {
     });
     gsap.set(image, {
       opacity: 0,
-      filter: "blur(20px)",
+      filter: `blur(${blurStart}px)`,
+      force3D: true,
     });
 
     // Stage 1: Draw the stroke
     tl.to(path, {
       strokeDashoffset: 0,
-      duration: 3,
+      duration: 2.8,
       ease: "power2.inOut",
     });
 
@@ -96,12 +96,13 @@ function AnimatedLogo({ onComplete }: { onComplete?: () => void }) {
       ease: "power2.inOut",
     });
 
-    // Stage 3: Fade in the image with blur reveal
+    // Stage 3: Fade in the image with blur reveal (optimized for mobile)
     tl.to(image, {
       opacity: 1,
-      filter: "blur(0px)",
+      filter: `blur(${blurEnd}px)`,
       duration: 2,
       ease: "power2.out",
+      force3D: true,
     });
 
     return () => {
@@ -132,8 +133,8 @@ function AnimatedLogo({ onComplete }: { onComplete?: () => void }) {
         ref={imageRef}
         src="/logos/logo-semi.png"
         alt="Kàlè Gastrobar Logo"
-        className="w-40 h-auto md:w-48 lg:w-56 object-contain drop-shadow-2xl select-none"
-        style={{ opacity: 0, filter: "blur(20px)" }}
+        className="w-40 h-auto md:w-48 lg:w-56 object-contain drop-shadow-2xl select-none will-change-[filter,opacity]"
+        style={{ opacity: 0, filter: "blur(10px)", transform: "translateZ(0)" }}
       />
     </div>
   );

@@ -22,7 +22,7 @@ export default function Logo({
   if (useImage) {
     return (
       <div className="inset-0 z-10 flex flex-col items-center justify-center pointer-events-none animate-fadeInScale">
-        {imageSrc !== "/logos/logo2.png" && imageSrc !== "/logos/logo.png" && (
+        {imageSrc !== "/logos/logo2.png" && imageSrc !== "/logos/logo.png"   && (
           <LogoSVG />
         )}
         <Image
