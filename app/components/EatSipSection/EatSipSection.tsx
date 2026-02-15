@@ -59,11 +59,13 @@ export default function EatSipSection() {
       <div className="relative flex-1 min-h-[50vh] md:min-h-screen overflow-hidden">
         <div className="absolute inset-0 bg-cream z-0" />
 
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center z-1 [mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
-          style={{
-            backgroundImage: `url(/images/IntroSection/intro1.webp)`,
-          }}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/video/eatvideo.mp4"
+          className="absolute inset-0 w-full h-full object-cover bg-center z-1 [mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
         />
 
         {/* Mobile overlay */}
