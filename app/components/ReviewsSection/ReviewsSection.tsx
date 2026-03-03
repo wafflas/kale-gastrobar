@@ -1,55 +1,7 @@
-"use client";
-
-import { useMemo } from "react";
-import { motion } from "framer-motion";
-import ReviewBox from "./components/ReviewBox";
 import HeroTypography from "../shared/HeroTypography";
-
-const REVIEWS = [
-  {
-    id: "review-1",
-    reviewSite: "Trip Advisor",
-    reviewText:
-      "Inassumong on the outside, GORGEOUS on the inside. I was dining alone and it was just stellar.",
-    authorName: "Marie R.",
-  },
-  {
-    id: "review-2",
-    reviewSite: "Google",
-    reviewText:
-      "Inassumong on the outside, GORGEOUS on the inside. I was dining alone and it was just stellar.",
-    authorName: "Marie R.",
-  },
-  {
-    id: "review-3",
-    reviewSite: "Yelp",
-    reviewText:
-      "The restaurant is very clean, food is amazing and servers very attentive. You will not regret eating here.",
-    authorName: "Elizabeth M.",
-  },
-  {
-    id: "review-4",
-    reviewSite: "Reddit",
-    reviewText:
-      "I had some of the best Indian food around… Tandoori Chicken, Rogan Josh and samosa chaat — everything was incredible.",
-    authorName: "Rahul S.",
-  },
-] as const;
-
-const REVIEW_LOOP_COUNT = 3;
+import ReviewsCarousel from "./components/ReviewsCarousel";
 
 export default function ReviewsSection() {
-  const loopedReviews = useMemo(
-    () =>
-      Array.from({ length: REVIEW_LOOP_COUNT }, (_, loopIndex) =>
-        REVIEWS.map((review) => ({
-          ...review,
-          id: `${review.id}-loop-${loopIndex}`,
-        }))
-      ).flat(),
-    []
-  );
-
   return (
     <section className="py-10 bg-cream overflow-hidden">
       <div className="mx-auto px-6 mb-5 md:mb-8">
@@ -59,31 +11,7 @@ export default function ReviewsSection() {
       </div>
 
       <div className="relative flex overflow-x-hidden">
-        <motion.div
-          className="flex gap-10 py-4"
-          animate={{
-            x: [0, "-33.33%"],
-          }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 30,
-              ease: "linear",
-            },
-          }}
-          style={{ width: "fit-content" }}
-        >
-          {loopedReviews.map((review) => (
-            <div key={review.id} className="shrink-0">
-              <ReviewBox
-                reviewSite={review.reviewSite}
-                reviewText={review.reviewText}
-                authorName={review.authorName}
-              />
-            </div>
-          ))}
-        </motion.div>
+        <ReviewsCarousel />
       </div>
 
       <div className="mt-16 flex flex-col items-center text-center px-6">

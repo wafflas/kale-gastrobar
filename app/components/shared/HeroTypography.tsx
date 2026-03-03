@@ -1,6 +1,6 @@
 interface HeroTypographyProps {
   children: React.ReactNode;
-  size?: 70 | 100 | 130 | 150 | 180;
+  size?: 20 | 70 | 100 | 130 | 150 | 180;
   className?: string;
   color?: string;
   stroke?: string;
@@ -18,6 +18,7 @@ export default function HeroTypography({
   strokeWidth = DEFAULT_STROKE_WIDTH,
 }: HeroTypographyProps) {
   const sizeStyles = {
+    20: "text-[15px] md:text-[30px]",
     70: "text-[30px] md:text-[70px]",
     100: "text-[50px] md:text-[100px]",
     130: "text-[60px] md:text-[130px]",

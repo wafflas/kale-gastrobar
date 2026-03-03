@@ -44,6 +44,7 @@ const MAX_WAIT_MS_MOBILE = 4000;
 
 interface LoadingScreenProps {
   onComplete: () => void;
+  onStartExit?: () => void;
   minDurationMs?: number;
   maxWaitMs?: number;
   videoSrcs?: { mobile: string; desktop: string };
@@ -127,6 +128,7 @@ function AnimatedLogo({ onComplete }: { onComplete?: () => void }) {
 
 export default function LoadingScreen({
   onComplete,
+  onStartExit,
   minDurationMs = MIN_DURATION_MS,
   maxWaitMs = MAX_WAIT_MS,
   videoSrcs = DEFAULT_VIDEO_SRCS,
@@ -156,6 +158,7 @@ export default function LoadingScreen({
       )
         return;
       completedRef.current = true;
+      onStartExit?.();
       setIsExiting(true);
     };
 

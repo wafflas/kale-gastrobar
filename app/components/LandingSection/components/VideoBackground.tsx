@@ -19,7 +19,10 @@ export default function VideoBackground({
   overlayOpacity = "opacity-33",
   shouldPlay = true,
 }: VideoBackgroundProps) {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`).matches;
+  });
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const videoSrc = useMemo(
@@ -41,9 +44,8 @@ export default function VideoBackground({
     const video = videoRef.current;
     if (!video || !shouldPlay) return;
 
-    const attemptPlay = async () => {
+    const play = async () => {
       try {
-        video.currentTime = 0;
         video.muted = true;
         video.playsInline = true;
         video.setAttribute("playsinline", "true");
@@ -53,10 +55,12 @@ export default function VideoBackground({
         console.warn("Video autoplay failed:", error);
       }
     };
-
-    const timer = setTimeout(attemptPlay, 100);
-
-    return () => clearTimeout(timer);
+    if (video.readyState >= 3) {
+      play();
+    } else {
+      video.addEventListener("canplay", play, { once: true });
+      return () => video.removeEventListener("canplay", play);
+    }
   }, [videoSrc, shouldPlay]);
 
   useEffect(() => {
@@ -80,28 +84,17 @@ export default function VideoBackground({
     return () => io.disconnect();
   }, [videoSrc, shouldPlay]);
 
-  if (isMobile === null) {
-    return (
-      <>
-        <div
-          className={`absolute top-0 left-0 w-full h-full ${overlayColor} ${overlayOpacity}`}
-        />
-      </>
-    );
-  }
-
   return (
     <>
       <div ref={containerRef} className="absolute inset-0">
         <video
           ref={videoRef}
-          autoPlay
           loop
           muted
           playsInline
           preload="auto"
           key={videoSrc}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={videoSrc} type="video/mp4" />
           Your browser does not support the video tag.

@@ -1,5 +1,3 @@
-"use client";
-
 import FortressSection from "./components/FortressSection";
 import PlaceImagesSection from "./components/PlaceImagesSection";
 

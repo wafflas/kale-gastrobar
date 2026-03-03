@@ -11,7 +11,7 @@ export default function LandingPage({
 }: LandingPageProps) {
   return (
     <section
-      className="relative h-screen w-full overflow-hidden bg-cream flex items-center justify-center"
+      className="relative h-screen w-full overflow-hidden bg-darkbrown flex items-center justify-center"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
       <Header />
