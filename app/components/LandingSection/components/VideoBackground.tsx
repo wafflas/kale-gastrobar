@@ -19,10 +19,7 @@ export default function VideoBackground({
   overlayOpacity = "opacity-33",
   shouldPlay = true,
 }: VideoBackgroundProps) {
-  const [isMobile, setIsMobile] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`).matches;
-  });
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const videoSrc = useMemo(
@@ -83,6 +80,16 @@ export default function VideoBackground({
     io.observe(container);
     return () => io.disconnect();
   }, [videoSrc, shouldPlay]);
+
+  if (isMobile === null) {
+    return (
+      <>
+        <div
+          className={`absolute top-0 left-0 w-full h-full ${overlayColor} ${overlayOpacity}`}
+        />
+      </>
+    );
+  }
 
   return (
     <>
