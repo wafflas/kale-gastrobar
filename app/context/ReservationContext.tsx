@@ -15,7 +15,7 @@ interface ReservationContextType {
 }
 
 const ReservationContext = createContext<ReservationContextType | undefined>(
-  undefined
+  undefined,
 );
 
 const RESERVATION_URL =
@@ -52,13 +52,10 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
 export function useReservation() {
   const context = useContext(ReservationContext);
   if (context === undefined) {
-    throw new Error(
-      "useReservation must be used within a ReservationProvider"
-    );
+    throw new Error("useReservation must be used within a ReservationProvider");
   }
   return context;
 }
-
 
 function ReservationModal({ onClose }: { onClose: () => void }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -77,7 +74,7 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
       />
 
       {/* Modal Container */}
-      <div className="relative z-10 w-full max-w-2xl h-[90vh] max-h-[700px] mx-4 bg-cream rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-fadeInScale">
+      <div className="relative z-10 w-full max-w-2xl h-[90vh] max-h-[700px] mx-4  rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-fadeInScale">
         <div className="flex items-center justify-between px-6 py-4 border-b border-darkbrown/20 bg-darkbrown">
           <h2
             id="reservation-modal-title"

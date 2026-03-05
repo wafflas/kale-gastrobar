@@ -11,7 +11,7 @@ export default function Footer() {
   const { openReservation } = useReservation();
 
   return (
-    <footer className="bg-darkbrown text-cream py-12 flex items-center justify-center w-full h-[90%] rounded-t-[70px] relative">
+    <footer className="bg-darkbrown text-cream py-12 flex items-center justify-center w-full h-full rounded-t-[70px] relative">
       <div className="w-full mx-auto px-1 h-full flex flex-col justify-center space-y-10">
         <div className="flex flex-col items-center justify-center space-y-8 ">
           <Logo useImage={true} size="md" />
