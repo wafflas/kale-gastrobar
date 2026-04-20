@@ -7,9 +7,6 @@ export default function EatSipSection() {
   const [hoveredSection, setHoveredSection] = useState<"eat" | "sip" | null>(
     null,
   );
-  const [revealedMobile, setRevealedMobile] = useState<"eat" | "sip" | null>(
-    null,
-  );
   const sectionRef = useRef<HTMLElement>(null);
   const { currentPos, updateTarget } = useMouseSmoothing(0.15);
 
@@ -34,14 +31,6 @@ export default function EatSipSection() {
     setHoveredSection(null);
   };
 
-  const handleTapEat = () => {
-    setRevealedMobile((prev) => (prev === "eat" ? null : "eat"));
-  };
-
-  const handleTapSip = () => {
-    setRevealedMobile((prev) => (prev === "sip" ? null : "sip"));
-  };
-
   useEffect(() => {
     if (sectionRef.current) {
       sectionRef.current.style.setProperty("--mouse-x", `${currentPos.x}px`);
@@ -52,7 +41,7 @@ export default function EatSipSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col md:flex-row gap-0 w-full h-auto md:h-screen mt-4"
+      className="relative hidden md:flex md:flex-row gap-0 w-full h-auto md:h-screen mt-4"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -68,24 +57,9 @@ export default function EatSipSection() {
           className="absolute inset-0 w-full h-full object-cover bg-center z-1 [mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
         />
 
-        {/* Mobile overlay */}
-        <div
-          className="absolute inset-0 bg-cream z-30 md:hidden transition-opacity duration-500"
-          style={{ opacity: revealedMobile === "eat" ? 0 : 1 }}
-        />
-
         {/* Text overlay */}
-        <div
-          className="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer select-none"
-          onClick={handleTapEat}
-        >
+        <div className="absolute inset-0 z-40 flex flex-col items-center justify-center select-none">
           <HeroTypography size={150}>Eat</HeroTypography>
-          <p
-            className="md:hidden mt-4 text-darkbrown text-sm font-ubuntu transition-opacity duration-500"
-            style={{ opacity: revealedMobile === "eat" ? 0 : 1 }}
-          >
-            Tap to reveal
-          </p>
         </div>
       </div>
 
@@ -104,24 +78,9 @@ export default function EatSipSection() {
           className="absolute inset-0 w-full h-full object-cover z-1 [mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)]"
         />
 
-        {/* Mobile overlay */}
-        <div
-          className="absolute inset-0 bg-cream z-30 md:hidden transition-opacity duration-500"
-          style={{ opacity: revealedMobile === "sip" ? 0 : 1 }}
-        />
-
         {/* Text overlay */}
-        <div
-          className="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer select-none"
-          onClick={handleTapSip}
-        >
+        <div className="absolute inset-0 z-40 flex flex-col items-center justify-center select-none">
           <HeroTypography size={150}>Sip</HeroTypography>
-          <p
-            className="md:hidden mt-4 text-darkbrown text-sm font-ubuntu transition-opacity duration-500"
-            style={{ opacity: revealedMobile === "sip" ? 0 : 1 }}
-          >
-            Tap to reveal
-          </p>
         </div>
       </div>
 

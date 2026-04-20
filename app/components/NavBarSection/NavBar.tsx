@@ -141,47 +141,48 @@ export default function NavBar() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center space-y-40 md:space-y-15 py-2">
-          <div className="flex justify-center items-center gap-6 font-ubuntu mt-6">
-            <button
-              onClick={() => setLanguage("en")}
-              className={`nav-reveal text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
-                language === "en" ? "opacity-100" : "opacity-50"
-              }`}
-              aria-label="Switch to English"
-            >
-              English
-            </button>
-            <button
-              onClick={() => setLanguage("el")}
-              className={`nav-reveal text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
-                language === "el" ? "opacity-100" : "opacity-50"
-              }`}
-              aria-label="Switch to Greek"
-            >
-              Ελληνικά
-            </button>
-          </div>
+        <div className="shrink-0 flex justify-center items-center gap-6 font-ubuntu pt-6">
+          <button
+            onClick={() => setLanguage("en")}
+            className={`nav-reveal text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
+              language === "en" ? "opacity-100" : "opacity-50"
+            }`}
+            aria-label="Switch to English"
+          >
+            English
+          </button>
+          <button
+            onClick={() => setLanguage("el")}
+            className={`nav-reveal text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
+              language === "el" ? "opacity-100" : "opacity-50"
+            }`}
+            aria-label="Switch to Greek"
+          >
+            Ελληνικά
+          </button>
+        </div>
 
-          <div className="flex flex-col items-center justify-center space-y-4 md:space-y-8 py-2">
+        <div className="flex flex-1 flex-col min-h-0">
+          <div className="flex-1 min-h-0" aria-hidden="true" />
+          <div className="group flex flex-col items-center justify-center space-y-4 md:space-y-8 py-2 shrink-0">
             <div className="flex flex-wrap justify-center gap-x-7 md:gap-x-24 gap-y-4 font-vollkorn text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
               <Link
                 href="/"
-                className="nav-reveal hover:opacity-70 transition-opacity"
+                className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "/")}
               >
                 Home
               </Link>
               <Link
                 href="/about"
-                className="nav-reveal hover:opacity-70 transition-opacity"
+                className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "/about")}
               >
                 About
               </Link>
               <Link
                 href="/menu"
-                className="nav-reveal hover:opacity-70 transition-opacity"
+                className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "/menu")}
               >
                 Menu
@@ -190,30 +191,31 @@ export default function NavBar() {
             <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-24 gap-y-4 font-vollkorn text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
               <Link
                 href="/place"
-                className="nav-reveal hover:opacity-70 transition-opacity"
+                className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "/place")}
               >
                 Place
               </Link>
               <Link
                 href="/cuisine"
-                className="nav-reveal hover:opacity-70 transition-opacity"
+                className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "/cuisine")}
               >
                 Cuisine
               </Link>
             </div>
           </div>
+          <div className="flex-1 min-h-0" aria-hidden="true" />
         </div>
 
-        <div className="flex flex-col items-center space-y-12 mt-auto">
+        <div className="shrink-0 flex flex-col items-center space-y-12">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10 text-sm md:text-lg font-ubuntu tracking-wide opacity-90">
             <Link
               href="tel:+302842020140"
               className="nav-reveal hover:opacity-70 transition-opacity"
               onClick={(e) => handleLinkClick(e, "tel:+302842020140")}
             >
-              +30 28420 20140 |
+              +30 28420 20140
             </Link>
             <span className="nav-reveal hidden md:block opacity-50">|</span>
             <span className="nav-reveal">Everyday | 20:00-24:00</span>
@@ -232,7 +234,7 @@ export default function NavBar() {
               <FaInstagram size={28} />
             </a>
             <a
-              href="https://www.tripadvisor.com"
+              href="https://www.tripadvisor.com/Restaurant_Review-g189418-d33035265-Reviews-Kale_Gastrobar-Ierapetra_Lasithi_Prefecture_Crete.html?m=69573"
               target="_blank"
               rel="noopener noreferrer"
               className="nav-reveal hover:scale-110 transition-transform opacity-90 hover:opacity-100"
@@ -241,7 +243,7 @@ export default function NavBar() {
               <SiTripadvisor size={30} />
             </a>
             <a
-              href="https://www.facebook.com"
+              href="https://www.facebook.com/profile.php?id=61573999105493"
               target="_blank"
               rel="noopener noreferrer"
               className="nav-reveal hover:scale-110 transition-transform opacity-90 hover:opacity-100"

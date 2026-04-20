@@ -51,7 +51,7 @@ const PLACE_IMAGE_CONFIGS: PlaceImageConfig[] = [
     zIndex: 2,
   },
   {
-    src: "/images/PlaceSection/place3.webp",
+    src: "/images/PlaceSection/place6.webp",
     alt: "Kale Gastrobar terrace",
     bottom: "bottom-[19%] lg:bottom-[17%]",
     left: "left-[-5%] lg:left-[2%]",
@@ -148,7 +148,7 @@ export default function PlaceImagesSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[80vh] lg:min-h-[160vh] w-full bg-cream overflow-hidden flex flex-col items-center justify-center py-8 px-4 md:py-16 md:px-6 lg:py-24 my-20"
+      className="relative min-h-[90vh] lg:min-h-[170vh] w-full bg-cream overflow-hidden flex flex-col items-center justify-center py-8 px-4 md:py-16 md:px-6 lg:py-24 my-20"
     >
       {PLACE_IMAGE_CONFIGS.map((imageConfig, index) => (
         <PlaceFloatingImage

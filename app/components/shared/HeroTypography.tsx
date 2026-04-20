@@ -7,7 +7,7 @@ interface HeroTypographyProps {
   strokeWidth?: string;
 }
 
-const DEFAULT_STROKE_WIDTH = "min(3px, 0.05em)";
+const DEFAULT_STROKE_WIDTH = "min(3px, 0.03em)";
 
 export default function HeroTypography({
   children,

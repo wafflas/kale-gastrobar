@@ -22,7 +22,7 @@ const VARIANT_STYLES = {
 const SIZE_STYLES = {
   sm: "text-xs md:text-sm rounded-full",
   md: "text-sm md:text-base rounded-full",
-  lg: "w-[95vw] lg:w-[70vw] text-lg rounded-full",
+  lg: "w-[95vw] lg:w-[55vw] text-lg rounded-full",
 } as const;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
