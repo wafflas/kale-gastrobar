@@ -12,7 +12,9 @@ export default function FortressScroll() {
     <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center">
       <div className="w-full max-w-[90vw] md:max-w-[85vw] px-6 md:px-12 lg:px-16">
         <div className="flex flex-col gap-1 md:gap-2 lg:gap-3">
-          <HeroTypography className={`${TEXT_CLASS} pl-0`}>Elevated</HeroTypography>
+          <HeroTypography className={`${TEXT_CLASS} pl-0`}>
+            Elevated
+          </HeroTypography>
           <HeroTypography className={`${TEXT_CLASS} pl-4 md:pl-8 lg:pl-12`}>
             evenings
           </HeroTypography>

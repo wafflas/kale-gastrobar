@@ -1,14 +1,12 @@
+"use client";
+
 import Header from "./components/Header";
 import Logo from "../shared/Logo";
 import VideoBackground from "./components/VideoBackground";
+import { useLoading } from "@/app/context/LoadingContext";
 
-interface LandingPageProps {
-  shouldPlayVideo?: boolean;
-}
-
-export default function LandingPage({
-  shouldPlayVideo = true,
-}: LandingPageProps) {
+export default function LandingPage() {
+  const { shouldPlayVideo } = useLoading();
   return (
     <section
       className="relative h-screen w-full overflow-hidden bg-darkbrown flex items-center justify-center"

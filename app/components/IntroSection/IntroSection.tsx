@@ -228,17 +228,18 @@ export default function IntroSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="font-vollkorn text-[34px] md:text-[80px] lg:text-[100px] text-darkbrown leading-[1.1] font-medium"
         >
-          A place to find <br className="hidden md:block" /> again.
+          Where every bite <br className="hidden md:block" /> tells a story.
         </motion.h2>
 
         <div className="space-y-3 md:space-y-8 px-2">
           <p className="font-ubuntu text-[16px] md:text-[30px] lg:text-[35px] text-darkbrown leading-tight font-light">
-            We are hosts out of conviction.
+            Bold flavours, unhurried moments.
           </p>
           <p className="font-ubuntu text-[13px] md:text-[18px] lg:text-[22px] text-darkbrown/80 leading-relaxed font-normal max-w-lg mx-auto">
-            People who believe in good food and what it can trigger. We serve
-            attentively, personally and with an open eye for the essentials:{" "}
-            <span className="font-bold text-darkbrown">you.</span>
+            We craft dishes that linger on the palate and conversations that
+            linger at the table. No rush, no rules, just honest cooking, good
+            wine, and the kind of evening you don&apos;t want to{" "}
+            <span className="font-bold text-darkbrown">end.</span>
           </p>
         </div>
 

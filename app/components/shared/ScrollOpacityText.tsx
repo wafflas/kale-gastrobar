@@ -13,6 +13,7 @@ interface ScrollOpacityTextProps {
   text: string; // The text to animate
   className?: string; // Container styles
   textClassName?: string; // Text element styles
+  containerHeight?: string; // Outer container height (e.g. "h-[3000px]")
   start?: string;
   end?: string;
   extendedHold?: boolean; // New prop to hold visibility after animation
@@ -22,6 +23,7 @@ export default function ScrollOpacityText({
   text,
   className = "",
   textClassName = "",
+  containerHeight,
   start = "top top",
   end = "+=1500%",
   extendedHold = false,
@@ -74,7 +76,7 @@ export default function ScrollOpacityText({
     return () => ctx.revert();
   }, [words, start, end, extendedHold]);
 
-  return (
+  const content = (
     <div
       ref={containerRef}
       className={`w-full flex items-center justify-center ${className}`}
@@ -98,6 +100,14 @@ export default function ScrollOpacityText({
           ))}
         </p>
       </div>
+    </div>
+  );
+
+  if (!containerHeight) return content;
+
+  return (
+    <div className={`w-full ${containerHeight}`} data-section="scroll-opacity-text">
+      {content}
     </div>
   );
 }
