@@ -1,3 +1,4 @@
+"use client";
 interface HeroTypographyProps {
   children: React.ReactNode;
   size?: 20 | 70 | 100 | 130 | 150 | 180;

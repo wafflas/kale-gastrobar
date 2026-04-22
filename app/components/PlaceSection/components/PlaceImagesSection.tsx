@@ -1,80 +1,75 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import HeroTypography from "../../shared/HeroTypography";
 import PlaceFloatingImage, {
   type PlaceImageConfig,
 } from "./PlaceFloatingImage";
 
 const SPRING_CONFIG = {
-  stiffness: 100,
-  damping: 30,
+  stiffness: 110,
+  damping: 28,
   restDelta: 0.001,
 } as const;
 
-const SCROLL_OFFSET = ["start end", "end start"];
+const SCROLL_OFFSET = ["start end", "end start"] as const;
 
-const TRANSFORM_RANGES = {
-  y1: [-28, 28] as const,
-  y2: [28, -28] as const,
-  y3: [36, -36] as const,
-  y4: [32, -32] as const,
-  y5: [-30, 30] as const,
-} as const;
-
-const MOBILE_TRANSFORM_RANGES = {
-  y1: [-14, 14] as const,
-  y2: [14, -14] as const,
-  y3: [18, -18] as const,
-  y4: [16, -16] as const,
-  y5: [-15, 15] as const,
-} as const;
+const TRANSFORM_RANGES: Record<
+  "y1" | "y2" | "y3" | "y4" | "y5",
+  [number, number]
+> = {
+  y1: [-22, 22],
+  y2: [22, -22],
+  y3: [26, -26],
+  y4: [20, -20],
+  y5: [-18, 18],
+};
 
 const PLACE_IMAGE_CONFIGS: PlaceImageConfig[] = [
   {
     src: "/images/PlaceSection/place1.webp",
     alt: "Kale Gastrobar interior",
-    top: "top-[1%] lg:top-[2%]",
-    left: "left-[-5%] lg:left-[8%]",
-    width: "w-[42%] md:w-[36%] lg:w-[30%] ",
+    bottom: "bottom-[60%]",
+    left: "left-[2%]",
+    width: "w-[40%]",
     aspectRatio: "aspect-4/5",
     zIndex: 1,
   },
   {
     src: "/images/PlaceSection/place2.webp",
     alt: "Kale Gastrobar dining",
-    top: "top-[2%] lg:top-[-4%]",
-    right: "right-[-6%] lg:right-[16%]",
-    width: "w-[36%] md:w-[30%] lg:w-[28%] ",
+    bottom: "bottom-[60%]",
+    right: "right-[10%]",
+    width: "w-[40%]",
     aspectRatio: "aspect-3/5",
     zIndex: 2,
   },
   {
     src: "/images/PlaceSection/place6.webp",
     alt: "Kale Gastrobar terrace",
-    bottom: "bottom-[19%] lg:bottom-[17%]",
-    left: "left-[-5%] lg:left-[2%]",
-    width: "w-[44%] md:w-[38%] lg:w-[30%] ",
+    top: "top-[50%]",
+    right: "right-[60%]",
+    width: "w-[55%]",
     aspectRatio: "aspect-4/3",
     zIndex: 4,
   },
   {
     src: "/images/PlaceSection/place4.webp",
     alt: "Kale Gastrobar detail",
-    bottom: "bottom-[-3%] lg:bottom-[-10%]",
-    left: "left-1/2",
-    width: "w-[28%] md:w-[24%] lg:w-[23%]",
+    top: "top-[60%]",
+    left: "left-[44%]",
+    width: "w-[30%]",
     aspectRatio: "aspect-3/5",
-    centerX: true,
+    centerX: false,
     zIndex: 3,
   },
   {
     src: "/images/PlaceSection/place5.webp",
     alt: "Kale Gastrobar exterior",
-    bottom: "bottom-[6%] lg:bottom-[13%]",
-    right: "right-[-7%] md:right-[-3%] lg:right-[1%]",
-    width: "w-[34%] md:w-[30%] lg:w-[23%]",
+    bottom: "bottom-[8%]",
+    left: "left-[78%]",
+    width: "w-[40%]",
     aspectRatio: "aspect-3/5",
     zIndex: 5,
   },
@@ -82,10 +77,11 @@ const PLACE_IMAGE_CONFIGS: PlaceImageConfig[] = [
 
 export default function PlaceImagesSection() {
   const containerRef = useRef<HTMLElement>(null);
+  const collageRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: SCROLL_OFFSET as ["start end", "end start"],
+    target: collageRef,
+    offset: SCROLL_OFFSET as unknown as ["start end", "end start"],
   });
 
   const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
@@ -93,89 +89,65 @@ export default function PlaceImagesSection() {
   const y1 = useTransform(
     smoothProgress,
     [0, 1],
-    TRANSFORM_RANGES.y1 as [number, number],
+    [TRANSFORM_RANGES.y1[0], TRANSFORM_RANGES.y1[1]],
   );
   const y2 = useTransform(
     smoothProgress,
     [0, 1],
-    TRANSFORM_RANGES.y2 as [number, number],
+    [TRANSFORM_RANGES.y2[0], TRANSFORM_RANGES.y2[1]],
   );
   const y3 = useTransform(
     smoothProgress,
     [0, 1],
-    TRANSFORM_RANGES.y3 as [number, number],
+    [TRANSFORM_RANGES.y3[0], TRANSFORM_RANGES.y3[1]],
   );
   const y4 = useTransform(
     smoothProgress,
     [0, 1],
-    TRANSFORM_RANGES.y4 as [number, number],
+    [TRANSFORM_RANGES.y4[0], TRANSFORM_RANGES.y4[1]],
   );
   const y5 = useTransform(
     smoothProgress,
     [0, 1],
-    TRANSFORM_RANGES.y5 as [number, number],
+    [TRANSFORM_RANGES.y5[0], TRANSFORM_RANGES.y5[1]],
   );
-
-  const y1M = useTransform(
-    smoothProgress,
-    [0, 1],
-    MOBILE_TRANSFORM_RANGES.y1 as [number, number],
-  );
-  const y2M = useTransform(
-    smoothProgress,
-    [0, 1],
-    MOBILE_TRANSFORM_RANGES.y2 as [number, number],
-  );
-  const y3M = useTransform(
-    smoothProgress,
-    [0, 1],
-    MOBILE_TRANSFORM_RANGES.y3 as [number, number],
-  );
-  const y4M = useTransform(
-    smoothProgress,
-    [0, 1],
-    MOBILE_TRANSFORM_RANGES.y4 as [number, number],
-  );
-  const y5M = useTransform(
-    smoothProgress,
-    [0, 1],
-    MOBILE_TRANSFORM_RANGES.y5 as [number, number],
-  );
-
   const yTransforms = [y1, y2, y3, y4, y5];
-  const yTransformsMobile = [y1M, y2M, y3M, y4M, y5M];
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[90vh] lg:min-h-[170vh] w-full bg-cream overflow-hidden flex flex-col items-center justify-center py-8 px-4 md:py-16 md:px-6 lg:py-24 my-20"
+      className="relative w-full bg-cream overflow-hidden flex items-center justify-center px-4 my-16 md:my-30 sm:px-6 min-h-[65vh]"
     >
-      {PLACE_IMAGE_CONFIGS.map((imageConfig, index) => (
-        <PlaceFloatingImage
-          key={imageConfig.src}
-          imageConfig={imageConfig}
-          yTransform={yTransforms[index]}
-          yTransformMobile={yTransformsMobile[index]}
-        />
-      ))}
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative z-20 flex flex-col items-center text-center pointer-events-none"
+      <div
+        ref={collageRef}
+        className="relative w-full max-w-[1300px] aspect-square origin-center scale-100"
       >
-        <HeroTypography
-          size={130}
-          color="var(--color-cream)"
-          stroke="var(--color-darkbrown)"
-          strokeWidth="min(3px, 0.05em)"
-          className="text-center tracking-wide"
+        {PLACE_IMAGE_CONFIGS.map((imageConfig, index) => (
+          <PlaceFloatingImage
+            key={imageConfig.src}
+            imageConfig={imageConfig}
+            yTransform={yTransforms[index]}
+          />
+        ))}
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center pointer-events-none"
         >
-          The place
-        </HeroTypography>
-      </motion.div>
+          <HeroTypography
+            size={130}
+            color="var(--color-cream)"
+            stroke="var(--color-darkbrown)"
+            strokeWidth="min(3px, 0.05em)"
+            className="text-center tracking-wide text-[50px] md:text-[130px]"
+          >
+            The place
+          </HeroTypography>
+        </motion.div>
+      </div>
     </section>
   );
 }

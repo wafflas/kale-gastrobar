@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -13,28 +13,23 @@ interface ScrollOpacityTextProps {
   text: string; // The text to animate
   className?: string; // Container styles
   textClassName?: string; // Text element styles
-  containerHeight?: string; // Outer container height (e.g. "h-[3000px]")
   start?: string;
   end?: string;
-  extendedHold?: boolean; // New prop to hold visibility after animation
+  extendedHold?: boolean;
 }
 
 export default function ScrollOpacityText({
   text,
   className = "",
   textClassName = "",
-  containerHeight,
-  start = "top top",
-  end = "+=1500%",
+  start = "top 75%",
+  end = "bottom 25%",
   extendedHold = false,
 }: ScrollOpacityTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
-  const [words, setWords] = useState<string[]>([]);
 
-  useEffect(() => {
-    setWords(text.split(" "));
-  }, [text]);
+  const words = useMemo(() => text.split(" "), [text]);
 
   useEffect(() => {
     if (!containerRef.current || words.length === 0) return;
@@ -49,7 +44,6 @@ export default function ScrollOpacityText({
             start: start,
             end: end,
             scrub: 0.75,
-            pin: true,
             markers: false,
           },
         });
@@ -67,19 +61,17 @@ export default function ScrollOpacityText({
           },
         );
 
-        if (extendedHold) {
-          tl.to({}, { duration: tl.duration() });
-        }
+        if (extendedHold) tl.to({}, { duration: tl.duration() });
       }
     }, containerRef);
 
     return () => ctx.revert();
   }, [words, start, end, extendedHold]);
 
-  const content = (
+  return (
     <div
       ref={containerRef}
-      className={`w-full flex items-center justify-center ${className}`}
+      className={`w-full flex items-center justify-center pb-24 ${className}`}
     >
       <div className="container max-w-4xl px-4">
         <p
@@ -100,14 +92,6 @@ export default function ScrollOpacityText({
           ))}
         </p>
       </div>
-    </div>
-  );
-
-  if (!containerHeight) return content;
-
-  return (
-    <div className={`w-full ${containerHeight}`} data-section="scroll-opacity-text">
-      {content}
     </div>
   );
 }

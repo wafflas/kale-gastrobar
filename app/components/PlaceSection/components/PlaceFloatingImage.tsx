@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, MotionValue } from "framer-motion";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 
 export interface PlaceImageConfig {
   src: string;
@@ -16,29 +16,19 @@ export interface PlaceImageConfig {
   className?: string;
   centerX?: boolean;
   zIndex?: number;
+  sizes?: string;
+  priority?: boolean;
 }
 
 interface PlaceFloatingImageProps {
   imageConfig: PlaceImageConfig;
-  yTransform: MotionValue<number>;
-  yTransformMobile: MotionValue<number>;
+  yTransform?: MotionValue<number>;
 }
 
 export default function PlaceFloatingImage({
   imageConfig,
   yTransform,
-  yTransformMobile,
 }: PlaceFloatingImageProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    setIsMobile(mq.matches);
-    const listener = () => setIsMobile(mq.matches);
-    mq.addEventListener("change", listener);
-    return () => mq.removeEventListener("change", listener);
-  }, []);
-
   const classes = useMemo(
     () =>
       [
@@ -57,24 +47,32 @@ export default function PlaceFloatingImage({
     [imageConfig],
   );
 
-  const y = isMobile ? yTransformMobile : yTransform;
-  const motionStyle = imageConfig.centerX
-    ? { x: "-50%" as const, y }
-    : { y };
   const zStyle =
     imageConfig.zIndex != null ? { zIndex: imageConfig.zIndex } : undefined;
-  const style = { ...motionStyle, ...zStyle };
+
+  const motionStyle =
+    imageConfig.centerX && yTransform
+      ? { x: "-50%" as const, y: yTransform }
+      : imageConfig.centerX
+        ? ({ transform: "translateX(-50%)" } as const)
+        : yTransform
+          ? { y: yTransform }
+          : undefined;
+
+  const style = motionStyle ? { ...motionStyle, ...zStyle } : zStyle;
 
   return (
-    <motion.div
-      style={style}
-      className={classes}
-    >
+    <motion.div style={style} className={classes}>
       <Image
         src={imageConfig.src}
         alt={imageConfig.alt}
         fill
         className="object-cover"
+        sizes={
+          imageConfig.sizes ??
+          "(max-width: 640px) 55vw, (max-width: 1024px) 32vw, 22vw"
+        }
+        priority={imageConfig.priority}
       />
     </motion.div>
   );

@@ -5,11 +5,11 @@ import DecorationBand from "./components/shared/DecorationBand";
 import IntroSection from "./components/IntroSection/IntroSection";
 import PlaceSection from "./components/PlaceSection/PlaceSection";
 import ScrollOpacityText from "./components/shared/ScrollOpacityText";
-import MenuSection from "./components/MenuSection/MenuSection";
 import EatSipSection from "./components/EatSipSection/EatSipSection";
-import CuisineSection from "./components/CuisineSection/CuisineSection";
+//import CuisineSection from "./components/CuisineSection/CuisineSection";
 import ReviewsSection from "./components/ReviewsSection/ReviewsSection";
 import Footer from "./components/FooterSection/Footer";
+//import MenuSection from "./components/MenuSection/MenuSection";
 
 export default function Home() {
   return (
@@ -22,16 +22,12 @@ export default function Home() {
           <PlaceSection />
           <ScrollOpacityText
             text="The food on the plate is the coming together of what is at its best in the present with the creative consequence of what was not used in the past."
-            start="top top"
-            end="+=3000"
-            extendedHold={true}
-            containerHeight="h-[3000px]"
-            className="w-full h-screen flex items-center justify-center"
+            start="top 80%"
+            end="bottom 20%"
           />
-          <MenuSection />
-          <DecorationBand />
+          {/* <MenuSection /> */}
           <EatSipSection />
-          <CuisineSection />
+          {/* { <CuisineSection /> */}
           <ReviewsSection />
           <Footer />
         </main>
