@@ -6,7 +6,7 @@ import { ReservationProvider } from "./context/ReservationContext";
 import NavBarWrapper from "./components/NavBarSection/NavBarWrapper";
 
 export const viewport: Viewport = {
-  viewportFit: "auto",
+  viewportFit: "cover",
 };
 
 const ubuntu = Ubuntu({
