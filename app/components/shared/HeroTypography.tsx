@@ -21,7 +21,7 @@ export default function HeroTypography({
   const sizeStyles = {
     20: "text-[15px] md:text-[30px]",
     70: "text-[30px] md:text-[70px]",
-    100: "text-[50px] md:text-[100px]",
+    100: "text-[40px] md:text-[100px]",
     130: "text-[60px] md:text-[130px]",
     150: "text-[80px] md:text-[150px]",
     180: "text-[100px] md:text-[180px]",

@@ -4,8 +4,8 @@ import ReviewsCarousel from "./components/ReviewsCarousel";
 export default function ReviewsSection() {
   return (
     <section className="flex flex-col my-16 md:my-30 bg-cream overflow-hidden">
-      <div className="mx-auto px-6 mb-5 md:mb-8">
-        <HeroTypography size={70} className="block leading-tight">
+      <div className="px-3 lg:px-6 mb-5 md:mb-8">
+        <HeroTypography size={100} className="block leading-tight">
           What our guests say...
         </HeroTypography>
       </div>
