@@ -63,17 +63,21 @@ export default function PlaceFloatingImage({
 
   return (
     <motion.div style={style} className={classes}>
-      <Image
-        src={imageConfig.src}
-        alt={imageConfig.alt}
-        fill
-        className="object-cover"
-        sizes={
-          imageConfig.sizes ??
-          "(max-width: 640px) 55vw, (max-width: 1024px) 32vw, 22vw"
-        }
-        priority={imageConfig.priority}
-      />
+      <div className="absolute inset-0 p-2 sm:p-3 lg:p-4">
+        <div className="relative h-full w-full overflow-hidden">
+          <Image
+            src={imageConfig.src}
+            alt={imageConfig.alt}
+            fill
+            className="object-cover"
+            sizes={
+              imageConfig.sizes ??
+              "(max-width: 640px) 55vw, (max-width: 1024px) 32vw, 22vw"
+            }
+            priority={imageConfig.priority}
+          />
+        </div>
+      </div>
     </motion.div>
   );
 }

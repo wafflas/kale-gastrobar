@@ -1,7 +1,7 @@
 import LenisProvider from "./components/providers/LenisProvider";
 import { LoadingProvider } from "./context/LoadingContext";
 import LandingPage from "./components/LandingSection/LandingPage";
-import DecorationBand from "./components/shared/DecorationBand";
+//import DecorationBand from "./components/shared/DecorationBand";
 import IntroSection from "./components/IntroSection/IntroSection";
 import PlaceSection from "./components/PlaceSection/PlaceSection";
 import ScrollOpacityText from "./components/shared/ScrollOpacityText";
@@ -17,7 +17,7 @@ export default function Home() {
       <LenisProvider>
         <main className="relative flex flex-col w-full min-h-screen bg-cream overflow-hidden">
           <LandingPage />
-          <DecorationBand />
+          {/* <DecorationBand /> */}
           <IntroSection />
           <PlaceSection />
           <ScrollOpacityText
