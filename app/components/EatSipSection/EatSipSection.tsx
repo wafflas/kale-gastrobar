@@ -41,11 +41,11 @@ export default function EatSipSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative hidden md:flex md:flex-row gap-0 w-full h-auto md:min-h-svh mt-4"
+      className="relative hidden md:flex md:flex-row gap-0 w-full h-auto md:h-screen mt-4"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="relative flex-1 min-h-[50svh] md:min-h-svh overflow-hidden">
+      <div className="relative flex-1 min-h-[50vh] md:min-h-screen overflow-hidden">
         <div className="absolute inset-0 bg-cream z-0" />
 
         <video
@@ -54,7 +54,7 @@ export default function EatSipSection() {
           muted
           playsInline
           src="/video/eatvideo.mp4"
-          className="absolute inset-0 w-full h-full object-cover bg-center z-1 mask-[linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:mask-[linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
+          className="absolute inset-0 w-full h-full object-cover bg-center z-1 [mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
         />
 
         {/* Text overlay */}
@@ -64,7 +64,7 @@ export default function EatSipSection() {
       </div>
 
       {/* SIP SECTION */}
-      <div className="relative flex-1 min-h-[50svh] md:min-h-svh overflow-hidden">
+      <div className="relative flex-1 min-h-[50vh] md:min-h-screen overflow-hidden">
         {/* Solid background layer */}
         <div className="absolute inset-0 bg-cream z-0" />
 
@@ -75,7 +75,7 @@ export default function EatSipSection() {
           muted
           playsInline
           src="/video/sipvideo.mp4"
-          className="absolute inset-0 w-full h-full object-cover z-1 mask-[linear-gradient(to_top,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] md:mask-[linear-gradient(to_left,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)]"
+          className="absolute inset-0 w-full h-full object-cover z-1 [mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)]"
         />
 
         {/* Text overlay */}

@@ -51,11 +51,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ubuntu.variable} ${vollkorn.variable} antialiased`}>
-        <div
-          className="fixed top-0 left-0 right-0 bg-cream z-40 pointer-events-none"
-          style={{ height: "var(--safari-top-band)" }}
-          aria-hidden="true"
-        />
         <ReservationProvider>
           <MenuProvider>
             <NavBarWrapper />

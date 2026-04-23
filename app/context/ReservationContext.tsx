@@ -74,7 +74,7 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
       />
 
       {/* Modal Container */}
-      <div className="relative z-10 w-full max-w-2xl h-[90svh] max-h-[700px] mx-4  rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-fadeInScale">
+      <div className="relative z-10 w-full max-w-2xl h-[90vh] max-h-[700px] mx-4  rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-fadeInScale">
         <div className="flex items-center justify-between px-6 py-4 border-b border-darkbrown/20 bg-darkbrown">
           <h2
             id="reservation-modal-title"

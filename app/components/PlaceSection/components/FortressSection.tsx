@@ -61,7 +61,7 @@ export default function FortressSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-svh w-full bg-cream overflow-hidden"
+      className="relative h-screen w-full bg-cream overflow-hidden"
     >
       <div ref={contentRef} className="absolute inset-0 will-change-transform">
         <Image

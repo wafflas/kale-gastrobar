@@ -21,7 +21,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-(--safari-top-band) left-0 w-full z-50 px-6 py-8 md:px-12 md:py-8 animate-fadeIn">
+    <header className="fixed top-0 left-0 w-full z-50 px-6 py-8 md:px-12 md:py-8 animate-fadeIn">
       <div className="flex items-center justify-between">
         <div
           className={`flex items-center gap-2 font-ubuntu text-cream text-shadow-lg transition-all duration-300 ${isScrolled ? "opacity-0 pointer-events-none" : "opacity-100"}`}

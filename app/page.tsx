@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <LoadingProvider>
       <LenisProvider>
-        <main className="relative flex flex-col w-full min-h-svh bg-cream overflow-hidden">
+        <main className="relative flex flex-col w-full min-h-screen bg-cream overflow-hidden">
           <LandingPage />
           <DecorationBand />
           <IntroSection />
