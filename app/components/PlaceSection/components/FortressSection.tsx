@@ -28,10 +28,13 @@ export default function FortressSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=1300",
+          end: () =>
+            `+=${Math.round(Math.max(window.innerHeight * 1.4, 1100))}`,
           pin: true,
           pinSpacing: true,
-          scrub: 1,
+          scrub: 0.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -61,7 +64,7 @@ export default function FortressSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen w-full bg-cream overflow-hidden"
+      className="relative min-h-svh w-full bg-cream overflow-hidden"
     >
       <div ref={contentRef} className="absolute inset-0 will-change-transform">
         <Image
