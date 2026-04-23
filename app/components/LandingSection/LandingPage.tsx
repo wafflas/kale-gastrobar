@@ -9,8 +9,7 @@ export default function LandingPage() {
   const { shouldPlayVideo } = useLoading();
   return (
     <section
-      className="relative h-screen w-full overflow-hidden bg-darkbrown flex items-center justify-center"
-      style={{ paddingTop: "env(safe-area-inset-top)" }}
+      className="relative min-h-svh w-full overflow-hidden bg-darkbrown flex items-center justify-center"
     >
       <Header />
       <VideoBackground

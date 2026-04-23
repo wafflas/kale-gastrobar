@@ -16,6 +16,20 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
+  background-color: var(--color-cream);
+}
+
+/* iOS Safari UI: keep a consistent cream band behind the browser chrome */
+:root {
+  --safari-top-band: 0px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    :root {
+      --safari-top-band: calc(env(safe-area-inset-top) + 56px);
+    }
+  }
 }
 
 /* Fix mobile viewport height for full-screen video */
