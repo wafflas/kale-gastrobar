@@ -13,9 +13,10 @@ if (typeof window !== "undefined") {
 export default function FortressSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !contentRef.current) return;
+    if (!sectionRef.current || !contentRef.current || !mediaRef.current) return;
 
     const ctx = gsap.context(() => {
       const lines =
@@ -23,6 +24,7 @@ export default function FortressSection() {
       if (!lines?.length) return;
 
       gsap.set(contentRef.current, { y: "20%" });
+      gsap.set(mediaRef.current, { scale: 1.02, transformOrigin: "50% 50%" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -43,6 +45,15 @@ export default function FortressSection() {
         duration: 0.5,
         ease: "power3.out",
       });
+
+      tl.to(
+        mediaRef.current,
+        {
+          scale: 1.12,
+          ease: "none",
+        },
+        0,
+      );
       tl.fromTo(
         lines,
         { opacity: 0, x: -56, filter: "blur(20px)" },
@@ -57,7 +68,6 @@ export default function FortressSection() {
         "-=0.25",
       );
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
@@ -67,18 +77,20 @@ export default function FortressSection() {
       className="relative min-h-svh w-full bg-cream overflow-hidden"
     >
       <div ref={contentRef} className="absolute inset-0 will-change-transform">
-        <Image
-          src="/images/PlaceSection/fortress2.webp"
-          alt="Kale Gastrobar by the fortress"
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-          priority
-        />
-        <div
-          className="absolute inset-0 bg-darkbrown/40 pointer-events-none z-1"
-          aria-hidden
-        />
+        <div ref={mediaRef} className="absolute inset-0 will-change-transform">
+          <Image
+            src="/images/PlaceSection/fortress2.webp"
+            alt="Kale Gastrobar by the fortress"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div
+            className="absolute inset-0 bg-darkbrown/40 pointer-events-none z-1"
+            aria-hidden
+          />
+        </div>
         <div className="absolute inset-0 pointer-events-none flex items-center z-2">
           <FortressScroll />
         </div>

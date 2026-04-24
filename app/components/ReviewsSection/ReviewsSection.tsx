@@ -1,12 +1,63 @@
+ "use client";
+
+import { useEffect, useRef } from "react";
 import HeroTypography from "../shared/HeroTypography";
 import ReviewsCarousel from "./components/ReviewsCarousel";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function ReviewsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const words =
+        sectionRef.current?.querySelectorAll<HTMLElement>("[data-review-word]");
+      if (!words?.length) return;
+
+      gsap.set(words, { opacity: 0, x: -22, filter: "blur(10px)" });
+
+      gsap.to(words, {
+        opacity: 1,
+        x: 0,
+        filter: "blur(0px)",
+        ease: "power2.out",
+        duration: 0.7,
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          once: true,
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="flex flex-col my-16 md:my-30 bg-cream overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="flex flex-col my-16 md:my-30 bg-cream overflow-hidden"
+    >
       <div className="px-3 lg:px-6 mb-5 md:mb-8">
         <HeroTypography size={100} className="block leading-tight">
-          What our guests say...
+          {"What our guests say...".split(" ").map((word, idx) => (
+            <span
+              key={`${word}-${idx}`}
+              data-review-word
+              className="inline-block will-change-transform"
+            >
+              {word}
+              {idx < 3 ? "\u00A0" : ""}
+            </span>
+          ))}
         </HeroTypography>
       </div>
 

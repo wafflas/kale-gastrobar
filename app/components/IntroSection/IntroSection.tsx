@@ -15,8 +15,8 @@ if (typeof window !== "undefined") {
 export default function IntroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
-  const cardLeftRef = useRef<HTMLDivElement>(null);
-  const cardRightRef = useRef<HTMLDivElement>(null);
+  const cardTopLeftRef = useRef<HTMLDivElement>(null);
+  const cardBottomRightRef = useRef<HTMLDivElement>(null);
   const cardTopRightRef = useRef<HTMLDivElement>(null);
   const cardBottomLeftRef = useRef<HTMLDivElement>(null);
   const { openReservation } = useReservation();
@@ -25,8 +25,8 @@ export default function IntroSection() {
     if (
       !sectionRef.current ||
       !stickyRef.current ||
-      !cardLeftRef.current ||
-      !cardRightRef.current ||
+      !cardTopLeftRef.current ||
+      !cardBottomRightRef.current ||
       !cardTopRightRef.current ||
       !cardBottomLeftRef.current
     )
@@ -40,8 +40,8 @@ export default function IntroSection() {
       gsap.set(items, { opacity: 0, y: 18, filter: "blur(10px)" });
       gsap.set(
         [
-          cardLeftRef.current,
-          cardRightRef.current,
+          cardTopLeftRef.current,
+          cardBottomRightRef.current,
           cardTopRightRef.current,
           cardBottomLeftRef.current,
         ],
@@ -53,8 +53,8 @@ export default function IntroSection() {
         },
       );
       const floatingCards = [
-        cardLeftRef.current,
-        cardRightRef.current,
+        cardTopLeftRef.current,
+        cardBottomRightRef.current,
         cardTopRightRef.current,
         cardBottomLeftRef.current,
       ];
@@ -72,14 +72,14 @@ export default function IntroSection() {
           start: "top 72%",
           once: true,
         },
-        defaults: { duration: 0.65, ease: "power2.out" },
+        defaults: { duration: 0.25, ease: "power2.out" },
       });
 
       tl.to(items, {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
-        stagger: 0.12,
+        stagger: 0.06,
         clearProps: "filter",
       });
 
@@ -87,8 +87,8 @@ export default function IntroSection() {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
-        stagger: 0.08,
-        duration: 0.7,
+        stagger: 0.04,
+        duration: 0.5,
         ease: "power2.out",
         clearProps: "filter",
       });
@@ -104,8 +104,8 @@ export default function IntroSection() {
 
       scrollTl
         .fromTo(
-          cardLeftRef.current,
-          { xPercent: -8, yPercent: -8, rotate: -8, scale: 0.98 },
+          cardTopLeftRef.current,
+          { xPercent: 8, yPercent: -8, rotate: -8, scale: 0.98 },
           {
             xPercent: -18,
             yPercent: -22,
@@ -116,7 +116,7 @@ export default function IntroSection() {
           0,
         )
         .fromTo(
-          cardRightRef.current,
+          cardBottomRightRef.current,
           { xPercent: 10, yPercent: 12, rotate: 8, scale: 0.98 },
           { xPercent: 22, yPercent: 26, rotate: 14, scale: 1.03, ease: "none" },
           0,
@@ -144,15 +144,14 @@ export default function IntroSection() {
             ease: "none",
           },
           0,
-        )
-        .to(floatingCards, { opacity: 0.2, ease: "none" }, 0.9);
+        );
 
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
         end: "bottom bottom",
         pin: stickyRef.current,
-        pinSpacing: false,
+        pinSpacing: true,
       });
     }, sectionRef);
 
@@ -162,16 +161,16 @@ export default function IntroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-cream overflow-hidden my-10 h-[220svh]"
+      className="relative w-full bg-cream my-10 h-[220svh] "
     >
       <div ref={stickyRef} className="sticky top-0 h-svh w-full">
-        <div className="relative h-full w-full px-4 sm:px-6">
+        <div className="relative h-full w-full px-4 sm:px-6 ">
           <div
             className="absolute inset-0 pointer-events-none"
             aria-hidden="true"
           >
             <div
-              ref={cardLeftRef}
+              ref={cardTopLeftRef}
               className="absolute left-[2%] top-[16%] w-[26vw] max-w-[150px] sm:left-[4%] sm:top-[20%] sm:w-[22vw] sm:max-w-[200px] lg:left-[6%] lg:top-[18%] lg:w-[16vw] lg:max-w-[240px]"
             >
               <div className="relative aspect-4/5 overflow-hidden rounded-2xl shadow-[0_30px_70px_rgba(43,24,16,0.18)] ring-1 ring-darkbrown/10 bg-cream">
@@ -186,10 +185,10 @@ export default function IntroSection() {
             </div>
 
             <div
-              ref={cardRightRef}
+              ref={cardBottomRightRef}
               className="absolute right-[2%] top-[66%] w-[26vw] max-w-[160px] sm:right-[4%] sm:top-[58%] sm:w-[22vw] sm:max-w-[210px] lg:right-[6%] lg:top-[56%] lg:w-[16vw] lg:max-w-[250px]"
             >
-              <div className="relative aspect-4/5 overflow-hidden rounded-2xl shadow-[0_30px_70px_rgba(43,24,16,0.18)] ring-1 ring-darkbrown/10 bg-cream">
+              <div className="relative aspect-4/5 overflow-hidden rounded-2xl  ring-1 ring-darkbrown/10 bg-cream">
                 <Image
                   src="/images/IntroSection/intro2.webp"
                   alt=""

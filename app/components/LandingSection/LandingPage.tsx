@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Logo from "../shared/Logo";
 import VideoBackground from "./components/VideoBackground";
 import { useLoading } from "@/app/context/LoadingContext";
+import ScrollDownIndicator from "../shared/ScrollDownIndicator";
 
 export default function LandingPage() {
   const { shouldPlayVideo } = useLoading();
@@ -21,6 +22,7 @@ export default function LandingPage() {
         overlayOpacity="opacity-33"
       />
       <Logo useImage={true} size="md" />
+      <ScrollDownIndicator />
     </section>
   );
 }
