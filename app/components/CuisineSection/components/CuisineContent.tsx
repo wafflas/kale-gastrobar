@@ -11,7 +11,7 @@ export default function CuisineContent() {
   return (
     <div className="flex flex-col justify-center items-center">
       <HeroTypography
-        size={80} // reduced from 100
+        size={150} // reduced from 100
         color="var(--color-cream)"
         stroke="var(--color-darkbrown)"
         className="pb-2 text-[50px] md:text-[80px]"
