@@ -13,8 +13,8 @@ interface VideoBackgroundProps {
 const MOBILE_BREAKPOINT = 768;
 
 export default function VideoBackground({
-  mobileVideoSrc = "/video/introvideo_mobile.mp4",
-  desktopVideoSrc = "/video/introvideo_desktop.mp4",
+  mobileVideoSrc = "/video/introvideo_mobile.webm",
+  desktopVideoSrc = "/video/introvideo_desktop.webm",
   overlayColor = "bg-darkbrown",
   overlayOpacity = "opacity-33",
   shouldPlay = true,
@@ -103,7 +103,7 @@ export default function VideoBackground({
           key={videoSrc}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover"
         >
-          <source src={videoSrc} type="video/mp4" />
+          <source src={videoSrc} type="video/webm" />
           Your browser does not support the video tag.
         </video>
       </div>

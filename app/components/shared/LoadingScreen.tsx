@@ -10,8 +10,8 @@ const MAX_WAIT_MS = 6000;
 const FADE_OUT_MS = 600;
 
 const DEFAULT_VIDEO_SRCS = {
-  mobile: "/video/introvideo_mobile.mp4",
-  desktop: "/video/introvideo_desktop.mp4",
+  mobile: "/video/introvideo_mobile.webm",
+  desktop: "/video/introvideo_desktop.webm",
 };
 
 const ASSET_IMAGE_URLS = [

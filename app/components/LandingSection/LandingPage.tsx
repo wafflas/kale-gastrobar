@@ -17,8 +17,8 @@ export default function LandingPage() {
       <Header />
       <VideoBackground
         shouldPlay={shouldPlayVideo}
-        mobileVideoSrc="/video/introvideo_mobile.mp4"
-        desktopVideoSrc="/video/introvideo_desktop.mp4"
+        mobileVideoSrc="/video/introvideo_mobile.webm"
+        desktopVideoSrc="/video/introvideo_desktop.webm"
         overlayColor="bg-darkbrown"
         overlayOpacity="opacity-33"
       />

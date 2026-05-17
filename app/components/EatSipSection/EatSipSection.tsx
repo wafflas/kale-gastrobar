@@ -53,7 +53,7 @@ export default function EatSipSection() {
           loop
           muted
           playsInline
-          src="/video/eatvideo.mp4"
+          src="/video/eatvideo.webm"
           className="absolute inset-0 w-full h-full object-cover bg-center z-1 [mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_right,black_0%,black_85%,transparent_100%)]"
         />
 
@@ -74,7 +74,7 @@ export default function EatSipSection() {
           loop
           muted
           playsInline
-          src="/video/sipvideo.mp4"
+          src="/video/sipvideo.webm"
           className="absolute inset-0 w-full h-full object-cover z-1 [mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_0%,black_85%,transparent_100%)] md:[mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)] md:[-webkit-mask-image:linear-gradient(to_left,black_0%,black_85%,transparent_100%)]"
         />
 

@@ -20,7 +20,7 @@ export default function CuisineContent() {
       </HeroTypography>
       <div className="space-y-4 md:space-y-6 px-2 flex flex-col justify-center items-center">
         <HeroTypography
-          size={18} // reduced from 20
+          size={150} // reduced from 20
           color="var(--color-darkbrown)"
           stroke="var(--color-darkbrown)"
         >
