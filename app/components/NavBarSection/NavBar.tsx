@@ -66,7 +66,20 @@ export default function NavBar() {
   const handleLinkClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       e.preventDefault();
-      handleClose(() => router.push(href));
+      handleClose(() => {
+        // Wait for the MenuContext to update document.body.style.overflow
+        setTimeout(() => {
+          if (href.startsWith("#")) {
+            const el = document.querySelector(href);
+            if (el) {
+              // Smooth scroll to the section
+              el.scrollIntoView({ behavior: "smooth" });
+            }
+          } else {
+            router.push(href);
+          }
+        }, 100);
+      });
     },
     [handleClose, router],
   );
@@ -167,39 +180,39 @@ export default function NavBar() {
           <div className="group flex flex-col items-center justify-center space-y-4 md:space-y-8 py-2 shrink-0">
             <div className="flex flex-wrap justify-center gap-x-7 md:gap-x-24 gap-y-4 font-vollkorn text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
               <Link
-                href="/"
+                href="#home"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
-                onClick={(e) => handleLinkClick(e, "/")}
+                onClick={(e) => handleLinkClick(e, "#home")}
               >
                 Home
               </Link>
               <Link
-                href="/about"
+                href="#about"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
-                onClick={(e) => handleLinkClick(e, "/about")}
+                onClick={(e) => handleLinkClick(e, "#about")}
               >
                 About
               </Link>
               <Link
-                href="/menu"
+                href="#menu"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
-                onClick={(e) => handleLinkClick(e, "/menu")}
+                onClick={(e) => handleLinkClick(e, "#menu")}
               >
                 Menu
               </Link>
             </div>
             <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-24 gap-y-4 font-vollkorn text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
               <Link
-                href="/place"
+                href="#place"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
-                onClick={(e) => handleLinkClick(e, "/place")}
+                onClick={(e) => handleLinkClick(e, "#place")}
               >
                 Place
               </Link>
               <Link
-                href="/cuisine"
+                href="#cuisine"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
-                onClick={(e) => handleLinkClick(e, "/cuisine")}
+                onClick={(e) => handleLinkClick(e, "#cuisine")}
               >
                 Cuisine
               </Link>

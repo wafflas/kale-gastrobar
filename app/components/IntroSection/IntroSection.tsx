@@ -160,6 +160,7 @@ export default function IntroSection() {
 
   return (
     <section
+      id="about"
       ref={sectionRef}
       className="relative w-full bg-cream my-10 h-[220svh] "
     >
@@ -171,7 +172,7 @@ export default function IntroSection() {
           >
             <div
               ref={cardTopLeftRef}
-              className="absolute left-[2%] top-[16%] w-[26vw] max-w-[150px] sm:left-[4%] sm:top-[20%] sm:w-[22vw] sm:max-w-[200px] lg:left-[6%] lg:top-[18%] lg:w-[16vw] lg:max-w-[240px]"
+              className="absolute left-[8%] top-[16%] w-[26vw] max-w-[150px] sm:left-[8%] sm:top-[20%] sm:w-[22vw] sm:max-w-[200px] lg:left-[10%] lg:top-[18%] lg:w-[16vw] lg:max-w-[240px]"
             >
               <div className="relative aspect-4/5 overflow-hidden rounded-2xl shadow-[0_30px_70px_rgba(43,24,16,0.18)] ring-1 ring-darkbrown/10 bg-cream">
                 <Image

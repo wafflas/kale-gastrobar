@@ -1,107 +1,90 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BsArrowRight } from "react-icons/bs";
+import { useMemo } from "react";
+import { EmblaOptionsType } from "embla-carousel";
+import { useReservation } from "../../context/ReservationContext";
 import Button from "../shared/Button";
 import HeroTypography from "../shared/HeroTypography";
-import StackingCards from "./components/StackingCards";
-import { useReservation } from "../../context/ReservationContext";
+import EmblaCarousel, { MenuGalleryItem } from "./components/EmblaCarousel";
+import { ArrowRight } from "lucide-react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+const CAROUSEL_OPTIONS: EmblaOptionsType = {
+  loop: true,
+  align: "center",
+  dragFree: false,
+};
 
 function MenuSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const { openReservation } = useReservation();
 
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const mm = gsap.matchMedia();
-
-    mm.add("(min-width: 1024px)", () => {
-      // Desktop
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=1600",
-        pin: true,
-        pinSpacing: true,
-        scrub: 1,
-      });
-    });
-
-    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-      // iPad / Tablet
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top -40%",
-        end: "+=1600",
-        pin: true,
-        pinSpacing: true,
-        scrub: 1,
-      });
-    });
-
-    mm.add("(max-width: 767px)", () => {
-      // Mobile
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "center center",
-        end: "+=1600",
-        pin: true,
-        pinSpacing: true,
-        scrub: 1,
-      });
-    });
-
-    return () => mm.revert();
-  }, []);
+  const galleryItems = useMemo(
+    (): MenuGalleryItem[] => [
+      {
+        src: "/images/MenuSection/menu1.webp",
+        alt: "Creamy risotto with crispy shallots and roasted tomato",
+        title: "Truffle Risotto",
+      },
+      {
+        src: "/images/MenuSection/menu2.webp",
+        alt: "Glazed chicken breast with jus and roasted garnish",
+        title: "Glazed Chicken",
+      },
+      {
+        src: "/images/MenuSection/menu3.webp",
+        alt: "Pappardelle with slow-cooked ragù and stracciatella",
+        title: "Pappardelle Ragù",
+      },
+      {
+        src: "/images/MenuSection/menu4.webp",
+        alt: "Shrimp ceviche with burrata and crostini",
+        title: "Shrimp Ceviche",
+      },
+      {
+        src: "/images/MenuSection/menu5.webp",
+        alt: "Prawn fregola with herbs and cocktail",
+        title: "Prawn Fregola",
+      },
+    ],
+    [],
+  );
 
   return (
     <section
-      ref={sectionRef}
-      className="relative w-full min-h-[110vh] lg:h-screen bg-darkbrown overflow-hidden px-10 lg:px-40 py-10 lg:py-20 "
+      id="menu"
+      className="relative w-full bg-darkbrown overflow-hidden px-4 sm:px-6 lg:px-10 py-14 sm:py-18 lg:py-24"
     >
-      <div className="flex flex-col lg:flex-row w-full items-start gap-10">
-        <div className="flex flex-col items-start justify-center w-full lg:w-1/2 h-full space-y-10 md:space-y-20 pt-0 md:pt-20">
-          <HeroTypography
-            className="text-white text-start"
-            size={100}
-            color="var(--color-darkbrown)"
-            stroke="var(--color-cream)"
-          >
+      <div className="mx-auto w-full max-w-[1540px]">
+        <header className="max-w-5xl mx-auto text-center">
+          <HeroTypography size={100} className="text-cream">
             Our Menu
           </HeroTypography>
-          <p className="text-cream text-start font-ubuntu text-xl md:text-2xl max-w-3xl leading-relaxed">
-            Reserve now on Kale gastrobar, known for sharing plates, craft
-            cocktails, thoughtfully curated wine list and impeccable service! We
-            are located in the heart of the city, just a stone's throw away from
-            the famous street of the same name.
+          <p className="mt-4 font-ubuntu text-[clamp(13px,1.2vw,15px)] leading-relaxed text-cream/70">
+            At Kalè Gastrobar, every plate is a celebration of bold flavors and
+            seasonal ingredients. Our menu fuses Mediterranean roots with modern
+            culinary craft designed to be shared, savored, and remembered.
           </p>
-          <div className="flex flex-col lg:flex-row w-full gap-6 px-0 justify-center lg:justify-start">
+        </header>
+
+        <div className="mt-12 sm:mt-14 lg:mt-16">
+          <EmblaCarousel slides={galleryItems} options={CAROUSEL_OPTIONS} />
+
+          <div className="mt-8 flex flex-col gap-4 md:flex-row items-center justify-center">
+            <Button
+              variant="outline"
+              size="md"
+              className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em] flex justify-center items-center gap-2"
+            >
+              SEE MENU <ArrowRight size={13} />
+            </Button>
             <Button
               variant="secondary"
               size="md"
-              className="flex space-x-2 justify-center items-center"
+              className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em]"
               onClick={openReservation}
             >
               RESERVE NOW
             </Button>
-            <Button
-              variant="outline"
-              size="md"
-              className="flex space-x-2 justify-center items-center "
-            >
-              VIEW MENU <BsArrowRight className="text-xl" />
-            </Button>
           </div>
-        </div>
-        <div className="w-full mt-16 lg:w-1/2">
-          <StackingCards />
         </div>
       </div>
     </section>

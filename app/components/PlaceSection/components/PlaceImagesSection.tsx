@@ -115,6 +115,7 @@ export default function PlaceImagesSection() {
 
   return (
     <section
+      id="place"
       ref={containerRef}
       className="relative w-full bg-cream overflow-hidden flex items-center justify-center px-4 my-16 md:my-30 sm:px-6 min-h-[65vh]"
     >
