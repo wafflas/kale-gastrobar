@@ -1,11 +1,10 @@
-"use client";
-
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import HeroTypography from "../../shared/HeroTypography";
 import PlaceFloatingImage, {
   type PlaceImageConfig,
 } from "./PlaceFloatingImage";
+import { useLanguage } from "../../../context/LanguageContext";
 
 const SPRING_CONFIG = {
   stiffness: 110,
@@ -78,6 +77,7 @@ const PLACE_IMAGE_CONFIGS: PlaceImageConfig[] = [
 export default function PlaceImagesSection() {
   const containerRef = useRef<HTMLElement>(null);
   const collageRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   const { scrollYProgress } = useScroll({
     target: collageRef,
@@ -145,10 +145,11 @@ export default function PlaceImagesSection() {
             strokeWidth="min(3px, 0.05em)"
             className="text-center tracking-wide text-[50px] md:text-[130px]"
           >
-            The place
+            {t("place.the_place")}
           </HeroTypography>
         </motion.div>
       </div>
     </section>
   );
 }
+

@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FortressScroll from "./FortressScroll";
+import { useLanguage } from "../../../context/LanguageContext";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +15,7 @@ export default function FortressSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
+  const { language } = useLanguage();
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current || !mediaRef.current) return;
@@ -69,7 +71,8 @@ export default function FortressSection() {
       );
     }, sectionRef);
     return () => ctx.revert();
-  }, []);
+  }, [language]);
+
 
   return (
     <section

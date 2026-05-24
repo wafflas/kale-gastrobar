@@ -5,6 +5,7 @@ import Logo from "../shared/Logo";
 import Button from "../shared/Button";
 import { useEffect, useRef } from "react";
 import { useReservation } from "../../context/ReservationContext";
+import { useLanguage } from "../../context/LanguageContext";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -20,6 +21,7 @@ export default function IntroSection() {
   const cardTopRightRef = useRef<HTMLDivElement>(null);
   const cardBottomLeftRef = useRef<HTMLDivElement>(null);
   const { openReservation } = useReservation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (
@@ -105,10 +107,10 @@ export default function IntroSection() {
       scrollTl
         .fromTo(
           cardTopLeftRef.current,
-          { xPercent: 8, yPercent: -8, rotate: -8, scale: 0.98 },
+          { xPercent: 2, yPercent: -14, rotate: -8, scale: 0.98 },
           {
-            xPercent: -18,
-            yPercent: -22,
+            xPercent: -26,
+            yPercent: -32,
             rotate: -14,
             scale: 1.02,
             ease: "none",
@@ -135,10 +137,10 @@ export default function IntroSection() {
         )
         .fromTo(
           cardBottomLeftRef.current,
-          { xPercent: -2, yPercent: 10, rotate: -6, scale: 0.96 },
+          { xPercent: -6, yPercent: 14, rotate: -6, scale: 0.96 },
           {
-            xPercent: -12,
-            yPercent: 28,
+            xPercent: -18,
+            yPercent: 36,
             rotate: -12,
             scale: 1.01,
             ease: "none",
@@ -172,7 +174,7 @@ export default function IntroSection() {
           >
             <div
               ref={cardTopLeftRef}
-              className="absolute left-[8%] top-[16%] w-[26vw] max-w-[150px] sm:left-[8%] sm:top-[20%] sm:w-[22vw] sm:max-w-[200px] lg:left-[10%] lg:top-[18%] lg:w-[16vw] lg:max-w-[240px]"
+              className="absolute left-[6%] top-[13%] w-[26vw] max-w-[150px] sm:left-[6%] sm:top-[15%] sm:w-[22vw] sm:max-w-[200px] lg:left-[8%] lg:top-[13%] lg:w-[16vw] lg:max-w-[240px]"
             >
               <div className="relative aspect-4/5 overflow-hidden rounded-2xl shadow-[0_30px_70px_rgba(43,24,16,0.18)] ring-1 ring-darkbrown/10 bg-cream">
                 <Image
@@ -217,7 +219,7 @@ export default function IntroSection() {
 
             <div
               ref={cardBottomLeftRef}
-              className="absolute left-[2%] bottom-[14%] w-[20vw] max-w-[112px] sm:left-[8%] sm:bottom-[18%] sm:w-[20vw] sm:max-w-[210px] lg:left-[10%] lg:bottom-[14%] lg:w-[14vw] lg:max-w-[240px]"
+              className="absolute left-[1%] bottom-[11%] w-[20vw] max-w-[112px] sm:left-[6%] sm:bottom-[14%] sm:w-[20vw] sm:max-w-[210px] lg:left-[7%] lg:bottom-[10%] lg:w-[14vw] lg:max-w-[240px]"
             >
               <div className="relative aspect-4/5 overflow-hidden rounded-2xl shadow-[0_30px_70px_rgba(43,24,16,0.16)] ring-1 ring-darkbrown/10 bg-cream">
                 <Image
@@ -240,14 +242,14 @@ export default function IntroSection() {
               data-intro-reveal
               className="font-vollkorn text-[clamp(34px,6vw,104px)] sm:text-[clamp(40px,5vw,110px)] text-darkbrown leading-[1.03] font-semibold"
             >
-              Where every bite <br className="hidden md:block" /> tells a story.
+              {t("intro.title")}
             </h2>
 
             <p
               data-intro-reveal
               className="mt-4 sm:mt-6 font-ubuntu text-[clamp(18px,2.2vw,30px)] text-darkbrown/80 leading-tight font-normal"
             >
-              Bold flavours, unhurried moments.
+              {t("intro.subtitle")}
             </p>
 
             <div
@@ -264,10 +266,8 @@ export default function IntroSection() {
               data-intro-reveal
               className="font-ubuntu text-[clamp(14px,1.45vw,20px)] text-darkbrown/70 leading-relaxed font-normal max-w-160 mx-auto"
             >
-              We craft dishes that linger on the palate and conversations that
-              linger at the table. No rush, no rules, just honest cooking, good
-              wine, and the kind of evening you don&apos;t want to{" "}
-              <span className="font-bold text-darkbrown">end.</span>
+              {t("intro.description_1")}
+              <span className="font-bold text-darkbrown">{t("intro.description_end")}</span>
             </p>
 
             <div data-intro-reveal className="pt-6 sm:pt-7">
@@ -277,7 +277,7 @@ export default function IntroSection() {
                 className="bg-darkbrown! text-cream! rounded-full px-[clamp(28px,4vw,44px)] py-[clamp(10px,1.4vw,14px)] text-[clamp(12px,1.1vw,16px)]"
                 onClick={openReservation}
               >
-                RESERVE NOW
+                {t("intro.reserve_now")}
               </Button>
             </div>
           </div>
@@ -286,3 +286,4 @@ export default function IntroSection() {
     </section>
   );
 }
+

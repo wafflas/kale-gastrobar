@@ -11,6 +11,7 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { SiTripadvisor } from "react-icons/si";
 import { useMenu } from "../../context/MenuContext";
 import { useReservation } from "../../context/ReservationContext";
+import { useLanguage } from "../../context/LanguageContext";
 import gsap from "gsap";
 
 const OPEN_DURATION = 0.5;
@@ -23,7 +24,7 @@ export default function NavBar() {
   const slideRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isClosingRef = useRef(false);
-  const [language, setLanguage] = useState<"el" | "en">("en");
+  const { language, setLanguage, t } = useLanguage();
   const { closeMenu } = useMenu();
   const { openReservation } = useReservation();
   const router = useRouter();
@@ -74,6 +75,9 @@ export default function NavBar() {
             if (el) {
               // Smooth scroll to the section
               el.scrollIntoView({ behavior: "smooth" });
+            } else {
+              // Element not found (we are on another page), redirect to home with anchor
+              router.push("/" + href);
             }
           } else {
             router.push(href);
@@ -149,7 +153,7 @@ export default function NavBar() {
               className="nav-reveal"
               onClick={() => handleClose(openReservation)}
             >
-              RESERVE
+              {t("nav.reserve")}
             </Button>
           </div>
         </div>
@@ -184,21 +188,21 @@ export default function NavBar() {
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "#home")}
               >
-                Home
+                {t("nav.home")}
               </Link>
               <Link
                 href="#about"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "#about")}
               >
-                About
+                {t("nav.about")}
               </Link>
               <Link
                 href="#menu"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "#menu")}
               >
-                Menu
+                {t("nav.menu")}
               </Link>
             </div>
             <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-24 gap-y-4 font-vollkorn text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
@@ -207,14 +211,14 @@ export default function NavBar() {
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
                 onClick={(e) => handleLinkClick(e, "#place")}
               >
-                Place
+                {t("nav.place")}
               </Link>
               <Link
-                href="#cuisine"
+                href="#hosts"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
-                onClick={(e) => handleLinkClick(e, "#cuisine")}
+                onClick={(e) => handleLinkClick(e, "#hosts")}
               >
-                Cuisine
+                {t("nav.hosts")}
               </Link>
             </div>
           </div>
@@ -231,9 +235,9 @@ export default function NavBar() {
               +30 28420 20140
             </Link>
             <span className="nav-reveal hidden md:block opacity-50">|</span>
-            <span className="nav-reveal">Everyday | 20:00-24:00</span>
+            <span className="nav-reveal">{t("footer.everyday")}</span>
             <span className="nav-reveal hidden md:block opacity-50">|</span>
-            <span className="nav-reveal">Tamiolaki 2 | Ierapetra, Crete</span>
+            <span className="nav-reveal">{t("footer.address")}</span>
           </div>
 
           <div className="flex items-center gap-10">
@@ -270,3 +274,4 @@ export default function NavBar() {
     </div>
   );
 }
+

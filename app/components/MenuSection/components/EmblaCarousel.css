@@ -28,6 +28,12 @@
   overflow: hidden;
 }
 
+@media (min-width: 768px) {
+  .menu-embla__viewport {
+    overflow: visible;
+  }
+}
+
 .menu-embla__container {
   display: flex;
   touch-action: pan-y pinch-zoom;
@@ -121,4 +127,53 @@
 .menu-embla__dot--selected {
   background-color: rgba(254, 249, 229, 0.85);
   transform: scale(1.3);
+}
+
+/* ── Navigation Buttons ── */
+.menu-embla__button {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .menu-embla__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(254, 249, 229, 0.12);
+    background-color: rgba(93, 62, 50, 0.35); /* warm dark brown with transparency */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .menu-embla__button:hover:not(:disabled) {
+    background-color: rgba(93, 62, 50, 0.75);
+    border-color: rgba(254, 249, 229, 0.35);
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  .menu-embla__button:active:not(:disabled) {
+    transform: translateY(-50%) scale(0.94);
+  }
+
+  .menu-embla__button:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+  }
+
+  .menu-embla__button--prev {
+    left: clamp(-30px, -2vw, -12px);
+  }
+
+  .menu-embla__button--next {
+    right: clamp(-30px, -2vw, -12px);
+  }
 }

@@ -1,12 +1,12 @@
-"use client";
-
 import { useMemo } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import { useReservation } from "../../context/ReservationContext";
+import { useLanguage } from "../../context/LanguageContext";
 import Button from "../shared/Button";
 import HeroTypography from "../shared/HeroTypography";
 import EmblaCarousel, { MenuGalleryItem } from "./components/EmblaCarousel";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const CAROUSEL_OPTIONS: EmblaOptionsType = {
   loop: true,
@@ -16,36 +16,37 @@ const CAROUSEL_OPTIONS: EmblaOptionsType = {
 
 function MenuSection() {
   const { openReservation } = useReservation();
+  const { language, t } = useLanguage();
 
   const galleryItems = useMemo(
     (): MenuGalleryItem[] => [
       {
         src: "/images/MenuSection/menu1.webp",
-        alt: "Creamy risotto with crispy shallots and roasted tomato",
-        title: "Truffle Risotto",
+        alt: t("menu.items.truffle_risotto.description"),
+        title: t("menu.items.truffle_risotto.title"),
       },
       {
         src: "/images/MenuSection/menu2.webp",
-        alt: "Glazed chicken breast with jus and roasted garnish",
-        title: "Glazed Chicken",
+        alt: t("menu.items.glazed_chicken.description"),
+        title: t("menu.items.glazed_chicken.title"),
       },
       {
         src: "/images/MenuSection/menu3.webp",
-        alt: "Pappardelle with slow-cooked ragù and stracciatella",
-        title: "Pappardelle Ragù",
+        alt: t("menu.items.pappardelle_ragu.description"),
+        title: t("menu.items.pappardelle_ragu.title"),
       },
       {
         src: "/images/MenuSection/menu4.webp",
-        alt: "Shrimp ceviche with burrata and crostini",
-        title: "Shrimp Ceviche",
+        alt: t("menu.items.shrimp_ceviche.description"),
+        title: t("menu.items.shrimp_ceviche.title"),
       },
       {
         src: "/images/MenuSection/menu5.webp",
-        alt: "Prawn fregola with herbs and cocktail",
-        title: "Prawn Fregola",
+        alt: t("menu.items.prawn_fregola.description"),
+        title: t("menu.items.prawn_fregola.title"),
       },
     ],
-    [],
+    [language, t],
   );
 
   return (
@@ -56,33 +57,33 @@ function MenuSection() {
       <div className="mx-auto w-full max-w-[1540px]">
         <header className="max-w-5xl mx-auto text-center">
           <HeroTypography size={100} className="text-cream">
-            Our Menu
+            {t("menu.title")}
           </HeroTypography>
           <p className="mt-4 font-ubuntu text-[clamp(13px,1.2vw,15px)] leading-relaxed text-cream/70">
-            At Kalè Gastrobar, every plate is a celebration of bold flavors and
-            seasonal ingredients. Our menu fuses Mediterranean roots with modern
-            culinary craft designed to be shared, savored, and remembered.
+            {t("menu.description")}
           </p>
         </header>
 
         <div className="mt-12 sm:mt-14 lg:mt-16">
           <EmblaCarousel slides={galleryItems} options={CAROUSEL_OPTIONS} />
 
-          <div className="mt-8 flex flex-col gap-4 md:flex-row items-center justify-center">
-            <Button
-              variant="outline"
-              size="md"
-              className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em] flex justify-center items-center gap-2"
-            >
-              SEE MENU <ArrowRight size={13} />
-            </Button>
+          <div className="mt-12 sm:mt-16 lg:mt-20 flex flex-col gap-4 sm:flex-row items-center justify-center">
+            <Link href="/menu" className="w-full sm:w-60">
+              <Button
+                variant="outline"
+                size="md"
+                className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em] flex justify-center items-center gap-2 w-full"
+              >
+                {t("menu.see_menu")} <ArrowRight size={13} />
+              </Button>
+            </Link>
             <Button
               variant="secondary"
               size="md"
-              className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em]"
+              className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em] w-full sm:w-60"
               onClick={openReservation}
             >
-              RESERVE NOW
+              {t("menu.reserve_now")}
             </Button>
           </div>
         </div>
@@ -92,3 +93,4 @@ function MenuSection() {
 }
 
 export default MenuSection;
+

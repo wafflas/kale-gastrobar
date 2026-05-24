@@ -1,21 +1,27 @@
+"use client";
+
 import { FaInstagram, FaFacebook } from "react-icons/fa";
+
 import { SiTripadvisor } from "react-icons/si";
+import { useLanguage } from "../../../context/LanguageContext";
 
 export default function InfoTable() {
+  const { t } = useLanguage();
+
   return (
     <div className="w-full border-t border-b border-cream/50">
       <div className="grid grid-cols-2 md:grid-cols-4 text-center font-ubuntu">
         {/* Hours */}
         <div className="py-3 flex items-center justify-center px-1 md:px-3 border-r border-b md:border-b-0 border-cream/50">
           <span className="text-xs lg:text-base tracking-tight md:tracking-wider whitespace-nowrap">
-            Everyday | 20:00-24:00
+            {t("footer.everyday")}
           </span>
         </div>
 
         {/* Address */}
         <div className="py-3 flex items-center justify-center px-1 md:px-3 border-b md:border-b-0 md:border-r border-cream/50">
           <span className="text-xs lg:text-base tracking-tight md:tracking-wider whitespace-nowrap">
-            Tamiolaki 2 | Ierapetra, Crete
+            {t("footer.address")}
           </span>
         </div>
 
@@ -63,3 +69,4 @@ export default function InfoTable() {
     </div>
   );
 }
+

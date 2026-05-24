@@ -1,12 +1,15 @@
 "use client";
+
 import {
   createContext,
+
   useContext,
   useState,
   ReactNode,
   useCallback,
   useEffect,
 } from "react";
+import { useLanguage } from "./LanguageContext";
 
 interface ReservationContextType {
   isOpen: boolean;
@@ -17,9 +20,6 @@ interface ReservationContextType {
 const ReservationContext = createContext<ReservationContextType | undefined>(
   undefined,
 );
-
-const RESERVATION_URL =
-  "https://www.i-host.gr/Reservations/New?restaurant=2410&channel=instagram&lang=eng";
 
 export function ReservationProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +59,11 @@ export function useReservation() {
 
 function ReservationModal({ onClose }: { onClose: () => void }) {
   const [isLoading, setIsLoading] = useState(true);
+  const { language, t } = useLanguage();
+
+  const reservationUrl = `https://www.i-host.gr/Reservations/New?restaurant=2410&channel=instagram&lang=${
+    language === "el" ? "gr" : "eng"
+  }`;
 
   return (
     <div
@@ -80,7 +85,7 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
             id="reservation-modal-title"
             className="text-xl font-vollkorn text-cream font-medium"
           >
-            Reserve a Table
+            {t("reservation.title")}
           </h2>
           <button
             onClick={onClose}
@@ -109,14 +114,14 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
             <div className="flex flex-col items-center gap-4">
               <div className="w-10 h-10 border-4 border-darkbrown/20 border-t-darkbrown rounded-full animate-spin" />
               <p className="text-darkbrown/60 font-ubuntu">
-                Loading reservation system...
+                {t("reservation.loading")}
               </p>
             </div>
           </div>
         )}
 
         <iframe
-          src={RESERVATION_URL}
+          src={reservationUrl}
           title="Kalè Gastrobar Reservation"
           className="flex-1 w-full border-0"
           onLoad={() => setIsLoading(false)}
@@ -126,3 +131,4 @@ function ReservationModal({ onClose }: { onClose: () => void }) {
     </div>
   );
 }
+

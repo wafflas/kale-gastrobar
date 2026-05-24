@@ -3,6 +3,7 @@ import { Ubuntu, Vollkorn } from "next/font/google";
 import "./globals.css";
 import { MenuProvider } from "./context/MenuContext";
 import { ReservationProvider } from "./context/ReservationContext";
+import { LanguageProvider } from "./context/LanguageContext";
 import NavBarWrapper from "./components/NavBarSection/NavBarWrapper";
 
 export const viewport: Viewport = {
@@ -51,13 +52,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ubuntu.variable} ${vollkorn.variable} antialiased`}>
-        <ReservationProvider>
-          <MenuProvider>
-            <NavBarWrapper />
-            {children}
-          </MenuProvider>
-        </ReservationProvider>
+        <LanguageProvider>
+          <ReservationProvider>
+            <MenuProvider>
+              <NavBarWrapper />
+              {children}
+            </MenuProvider>
+          </ReservationProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
 }
+

@@ -1,7 +1,7 @@
-"use client";
 import { useRef, useState, useEffect } from "react";
 import HeroTypography from "../shared/HeroTypography";
 import { useMouseSmoothing } from "./hooks/useMouseSmoothing";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function EatSipSection() {
   const [hoveredSection, setHoveredSection] = useState<"eat" | "sip" | null>(
@@ -9,6 +9,7 @@ export default function EatSipSection() {
   );
   const sectionRef = useRef<HTMLElement>(null);
   const { currentPos, updateTarget } = useMouseSmoothing(0.15);
+  const { t } = useLanguage();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!sectionRef.current) return;
@@ -59,7 +60,7 @@ export default function EatSipSection() {
 
         {/* Text overlay */}
         <div className="absolute inset-0 z-40 flex flex-col items-center justify-center select-none">
-          <HeroTypography size={150}>Eat</HeroTypography>
+          <HeroTypography size={150}>{t("eat_sip.eat")}</HeroTypography>
         </div>
       </div>
 
@@ -80,7 +81,7 @@ export default function EatSipSection() {
 
         {/* Text overlay */}
         <div className="absolute inset-0 z-40 flex flex-col items-center justify-center select-none">
-          <HeroTypography size={150}>Sip</HeroTypography>
+          <HeroTypography size={150}>{t("eat_sip.sip")}</HeroTypography>
         </div>
       </div>
 
@@ -96,3 +97,4 @@ export default function EatSipSection() {
     </section>
   );
 }
+

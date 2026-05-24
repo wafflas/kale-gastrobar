@@ -9,6 +9,7 @@ import {
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import "./EmblaCarousel.css";
 
@@ -82,6 +83,30 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({ slides, options }) => {
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
 
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+
+  const onPrevButtonClick = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const onNextButtonClick = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelectPrevNext = useCallback((emblaApi: EmblaCarouselType) => {
+    setPrevBtnDisabled(!emblaApi.canScrollPrev());
+    setNextBtnDisabled(!emblaApi.canScrollNext());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelectPrevNext(emblaApi);
+    emblaApi.on("select", onSelectPrevNext).on("reInit", onSelectPrevNext);
+  }, [emblaApi, onSelectPrevNext]);
+
   /* ── grab the inner nodes we'll tween ── */
   const setTweenNodes = useCallback((emblaApi: EmblaCarouselType): void => {
     tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
@@ -133,10 +158,10 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({ slides, options }) => {
           /* scale: centre slide = 1, others shrink */
           const scale = numberWithinRange(tweenValue, 0, 1).toString();
 
-          /* opacity: centre slide = 1, others dim toward 0.25 */
+          /* opacity: centre slide = 1, others dim toward 0.15 */
           const opacity = numberWithinRange(
-            0.25 + tweenValue * 0.75,
-            0.25,
+            0.15 + Math.pow(Math.max(0, tweenValue), 2) * 0.85,
+            0.15,
             1,
           ).toString();
 
@@ -193,8 +218,28 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({ slides, options }) => {
       </div>
 
       {/* edge-fade overlays */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-[linear-gradient(90deg,rgba(93,62,50,1)_0%,rgba(93,62,50,0)_100%)]" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-[linear-gradient(270deg,rgba(93,62,50,1)_0%,rgba(93,62,50,0)_100%)]" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-[linear-gradient(90deg,rgba(93,62,50,1)_0%,rgba(93,62,50,0)_100%)] md:hidden" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-[linear-gradient(270deg,rgba(93,62,50,1)_0%,rgba(93,62,50,0)_100%)] md:hidden" />
+
+      {/* navigation buttons */}
+      <button
+        type="button"
+        onClick={onPrevButtonClick}
+        disabled={prevBtnDisabled}
+        className="menu-embla__button menu-embla__button--prev"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft size={22} className="text-cream" />
+      </button>
+      <button
+        type="button"
+        onClick={onNextButtonClick}
+        disabled={nextBtnDisabled}
+        className="menu-embla__button menu-embla__button--next"
+        aria-label="Next slide"
+      >
+        <ChevronRight size={22} className="text-cream" />
+      </button>
 
       {/* dot indicators */}
       <div className="menu-embla__dots">

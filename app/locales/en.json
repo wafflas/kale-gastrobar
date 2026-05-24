@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "title": "Kalè Gastrobar | Fine Dining in Ierapetra",
+    "description": "Experience fine dining at Kalè Gastrobar in Ierapetra, Crete. Mediterranean flavors fused with modern culinary craft."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "menu": "Menu",
+    "place": "Place",
+    "hosts": "The Hosts",
+    "reserve": "RESERVE"
+  },
+  "intro": {
+    "title": "Where every bite tells a story.",
+    "subtitle": "Bold flavours, unhurried moments.",
+    "description_1": "We craft dishes that linger on the palate and conversations that linger at the table. No rush, no rules, just honest cooking, good wine, and the kind of evening you don't want to ",
+    "description_end": "end.",
+    "reserve_now": "RESERVE NOW",
+    "quote": "The food on the plate is the coming together of what is at its best in the present with the creative consequence of what was not used in the past."
+  },
+  "place": {
+    "elevated_evenings": "Elevated evenings by the fortress walls",
+    "the_place": "The place"
+  },
+  "menu": {
+    "title": "Our Menu",
+    "description": "At Kalè Gastrobar, every plate is a celebration of bold flavors and seasonal ingredients. Our menu fuses Mediterranean roots with modern culinary craft designed to be shared, savored, and remembered.",
+    "see_menu": "SEE MENU",
+    "reserve_now": "RESERVE NOW",
+    "coming_soon": "Coming Soon",
+    "symphony": "A Culinary Symphony in the Making",
+    "reserve_table": "RESERVE A TABLE",
+    "return_home": "RETURN HOME",
+    "the_menu": "The Menu",
+    "items": {
+      "truffle_risotto": {
+        "title": "Truffle Risotto",
+        "description": "Creamy risotto with crispy shallots and roasted tomato"
+      },
+      "glazed_chicken": {
+        "title": "Glazed Chicken",
+        "description": "Glazed chicken breast with jus and roasted garnish"
+      },
+      "pappardelle_ragu": {
+        "title": "Pappardelle Ragù",
+        "description": "Pappardelle with slow-cooked ragù and stracciatella"
+      },
+      "shrimp_ceviche": {
+        "title": "Shrimp Ceviche",
+        "description": "Shrimp ceviche with burrata and crostini"
+      },
+      "prawn_fregola": {
+        "title": "Prawn Fregola",
+        "description": "Prawn fregola with herbs and cocktail"
+      }
+    }
+  },
+  "eat_sip": {
+    "eat": "Eat",
+    "sip": "Sip"
+  },
+  "hosts": {
+    "title": "The Hosts",
+    "description": "We are a family of passionate creators, cooks, and hosts, unified by our love for honest gastronomy and unhurried hospitality. Behind the counter at Kalè, our kitchen is a collaborative stage where culinary expertise meets warm, shared moments. Every dish we plate is a reflection of our collective dedication to craftsmanship.",
+    "reserve_now": "RESERVE NOW",
+    "waiting": "We are waiting for you..."
+  },
+  "reviews": {
+    "title": "What our guests say...",
+    "cta_text": "Have you already visited our restaurant and left with great memories?",
+    "cta_button": "Be sure to leave us a review!",
+    "site_ta": "Trip Advisor",
+    "site_google": "Google",
+    "site_yelp": "Yelp",
+    "site_reddit": "Reddit",
+    "author_sonia": "Sonia Pignat",
+    "review_sonia": "We discovered this restaurant while out for a walk. All the dishes were perfectly balanced, thanks to the chefs. The waiters gave excellent advice and impeccable service.",
+    "author_eleni": "Eleni Dimitrakaki",
+    "review_eleni": "Very calm and welcoming area!!! Great dishes with variety of wines and cocktails. Reasonable prices. An excellent place to be",
+    "author_nomi": "Nomi Genzel",
+    "review_nomi": "A place with a nice atmosphere and accommodating staff. It was quiet when we came and the waiters were very helpful and made sure to find a vegan option for us. The Aegean Spritz cocktail was amazing!",
+    "author_tonii": "Tonii Bolbea",
+    "review_tonii": "The feeling that your culinary taste has been restored. Fresh, healthy, perfect ingredients, amazing flavors together with a wonderful ambiance. Chill songs and also the cocktails are completely introducing you into the experience and a cool vibe. Good job! Thank you for the opportunity to be there and explore The tastes.",
+    "author_milly": "Milly Angove",
+    "review_milly": "Fantastic food, great spot for sunset. Thoroughly enjoyed my visit",
+    "author_anne_maree": "Anne-Maree McRae",
+    "review_anne_maree": "Fabulous place. Went there two nights in a row. Great service and food. Thank you"
+  },
+  "footer": {
+    "tagline": "Great stories begin at our table.",
+    "reserve": "RESERVE",
+    "all_rights": "© {year} Kalè Gastrobar. All rights reserved.",
+    "everyday": "Everyday | 20:00-24:00",
+    "address": "Tamiolaki 2 | Ierapetra, Crete"
+  },
+  "reservation": {
+    "title": "Reserve a Table",
+    "loading": "Loading reservation system..."
+  }
+}
