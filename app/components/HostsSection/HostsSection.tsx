@@ -31,8 +31,8 @@ export default function HostsSection() {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: centerEl,
-          start: "top 85%",
+          trigger: sectionRef.current,
+          start: "top 40%",
           once: true,
           toggleActions: "play none none none",
         },

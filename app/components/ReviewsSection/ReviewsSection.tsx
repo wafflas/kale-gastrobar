@@ -1,7 +1,4 @@
-"use client";
-
 import { useEffect, useRef } from "react";
-
 import HeroTypography from "../shared/HeroTypography";
 import ReviewsCarousel from "./components/ReviewsCarousel";
 import { useLanguage } from "../../context/LanguageContext";
@@ -14,7 +11,7 @@ if (typeof window !== "undefined") {
 
 export default function ReviewsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -42,8 +39,7 @@ export default function ReviewsSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [language]);
-
+  }, []);
 
   const titleWords = t("reviews.title").split(" ");
 
@@ -53,7 +49,7 @@ export default function ReviewsSection() {
       className="flex flex-col my-16 md:my-30 bg-cream overflow-hidden"
     >
       <div className="px-3 lg:px-6 mb-5 md:mb-8">
-        <HeroTypography size={100} className="block leading-tight">
+        <HeroTypography size={70} className="block leading-tight">
           {titleWords.map((word, idx) => (
             <span
               key={`${word}-${idx}`}
@@ -87,4 +83,3 @@ export default function ReviewsSection() {
     </section>
   );
 }
-

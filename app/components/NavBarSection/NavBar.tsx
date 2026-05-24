@@ -182,7 +182,7 @@ export default function NavBar() {
         <div className="flex flex-1 flex-col min-h-0">
           <div className="flex-1 min-h-0" aria-hidden="true" />
           <div className="group flex flex-col items-center justify-center space-y-4 md:space-y-8 py-2 shrink-0">
-            <div className="flex flex-wrap justify-center gap-x-7 md:gap-x-24 gap-y-4 font-vollkorn text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
+            <div className="flex flex-wrap justify-center gap-x-7 md:gap-x-24 gap-y-4 font-vollkorn text-[24px] sm:text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
               <Link
                 href="#home"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"
@@ -205,7 +205,7 @@ export default function NavBar() {
                 {t("nav.menu")}
               </Link>
             </div>
-            <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-24 gap-y-4 font-vollkorn text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
+            <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-24 gap-y-4 font-vollkorn text-[24px] sm:text-[30px] md:text-[60px] lg:text-[90px] leading-tight">
               <Link
                 href="#place"
                 className="nav-reveal transition-opacity group-hover:opacity-50 hover:opacity-100"

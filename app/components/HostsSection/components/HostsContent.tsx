@@ -11,10 +11,10 @@ export default function HostsContent() {
   return (
     <div className="flex flex-col justify-center items-center w-full px-4 sm:px-6">
       <HeroTypography
-        size={100}
+        size={110}
         color="var(--color-cream)"
         stroke="var(--color-darkbrown)"
-        className="pb-4 text-[clamp(32px,8vw,68px)] md:text-[clamp(68px,8vw,110px)] text-center leading-tight tracking-tight"
+        className="pb-4 text-center leading-tight tracking-tight"
       >
         {t("hosts.title")}
       </HeroTypography>

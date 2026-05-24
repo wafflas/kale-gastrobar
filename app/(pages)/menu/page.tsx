@@ -22,7 +22,7 @@ export default function MenuPage() {
           {t("menu.the_menu")}
         </p>
 
-        <h1 className="font-vollkorn text-[clamp(48px,7.5vw,96px)] leading-tight text-darkbrown font-medium tracking-tight mb-4 animate-fadeInScale">
+        <h1 className="font-vollkorn text-[clamp(35px,7.5vw,96px)] leading-tight text-darkbrown font-medium tracking-tight mb-4 animate-fadeInScale">
           {t("menu.coming_soon")}
         </h1>
 
@@ -58,4 +58,3 @@ export default function MenuPage() {
     </div>
   );
 }
-

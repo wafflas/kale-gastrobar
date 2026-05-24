@@ -1,7 +1,7 @@
 "use client";
 interface HeroTypographyProps {
   children: React.ReactNode;
-  size?: 20 | 70 | 100 | 130 | 150 | 180;
+  size?: 20 | 70 | 100 | 110 | 130 | 150 | 180;
   className?: string;
   color?: string;
   stroke?: string;
@@ -22,6 +22,7 @@ export default function HeroTypography({
     20: "text-[15px] md:text-[30px]",
     70: "text-[30px] md:text-[70px]",
     100: "text-[35px] md:text-[100px]",
+    110: "text-[40px] md:text-[110px]",
     130: "text-[60px] md:text-[130px]",
     150: "text-[80px] md:text-[150px]",
     180: "text-[100px] md:text-[180px]",
