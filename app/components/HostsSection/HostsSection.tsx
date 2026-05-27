@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 
 import HostsContent from "./components/HostsContent";
 import HostsGrid from "./components/HostsGrid";
+import GastrobarMap from "./components/GastrobarMap";
 import Button from "../shared/Button";
 import Logo from "../shared/Logo";
 import HeroTypography from "../shared/HeroTypography";
@@ -123,9 +124,14 @@ export default function HostsSection() {
               {t("hosts.waiting")}
             </p>
 
-            <p className="font-vollkorn text-darkbrown/70 text-xs sm:text-sm italic tracking-wide max-w-xs mb-8 z-10">
+            <p className="font-vollkorn text-darkbrown/70 text-xs sm:text-sm italic tracking-wide max-w-md mb-8 z-10">
               {t("hosts.tagline")}
             </p>
+
+            {/* Premium Brownish Iframe Map */}
+            <div className="w-full max-w-xl mb-8 z-10">
+              <GastrobarMap />
+            </div>
 
             <Button
               variant="primary"

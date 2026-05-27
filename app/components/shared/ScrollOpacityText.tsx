@@ -23,8 +23,8 @@ export default function ScrollOpacityText({
   text,
   className = "",
   textClassName = "",
-  start = "top 75%",
-  end = "bottom 25%",
+  start = "top 70%",
+  end = "bottom 55%",
   extendedHold = false,
 }: ScrollOpacityTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);

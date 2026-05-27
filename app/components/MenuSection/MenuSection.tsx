@@ -72,7 +72,7 @@ function MenuSection() {
               <Button
                 variant="outline"
                 size="md"
-                className="w-[200px] rounded-full py-2 text-[12px] tracking-[0.18em] flex justify-center items-center gap-2"
+                className="w-[200px] md:w-[300px] rounded-full py-2 text-[12px] tracking-[0.18em] flex justify-center items-center gap-2"
               >
                 {t("menu.see_menu")} <ArrowRight size={13} />
               </Button>
@@ -80,7 +80,7 @@ function MenuSection() {
             <Button
               variant="secondary"
               size="md"
-              className="w-[200px] rounded-full py-2 text-[12px] tracking-[0.18em]"
+              className="w-[200px] md:w-[300px] rounded-full py-2 text-[12px] tracking-[0.18em]"
               onClick={openReservation}
             >
               {t("menu.reserve_now")}

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @theme inline {
   --color-cream: #fef9e5;
   --color-darkbrown: #5d3e32;
@@ -65,3 +66,17 @@ video {
 .text-shadow-lg {
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
+
+/* Brownish Google Maps iframe styles */
+.brownish-map-iframe {
+  filter: grayscale(0.92) sepia(0.55) hue-rotate(-15deg) saturate(0.6) contrast(0.82) brightness(0.98);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.92;
+}
+
+.brownish-map-iframe:hover {
+  filter: grayscale(0.6) sepia(0.4) hue-rotate(-10deg) saturate(0.8) contrast(0.9) brightness(0.99);
+  opacity: 1;
+}
+
+

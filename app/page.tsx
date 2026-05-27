@@ -61,8 +61,6 @@ export default function Home() {
           <PlaceSection />
           <ScrollOpacityText
             text={t("intro.quote")}
-            start="top 80%"
-            end="bottom 20%"
           />
           <MenuSection />
           <DecorationBand />
