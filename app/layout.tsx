@@ -23,6 +23,12 @@ const vollkorn = Vollkorn({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ||
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000"),
+  ),
   title: "Kalè Gastrobar",
   description: "Experience fine dining at Kalè Gastrobar",
   manifest: "/site.webmanifest",
@@ -41,6 +47,25 @@ export const metadata: Metadata = {
       },
     ],
     apple: "/favicon_ioKale/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "Kalè Gastrobar",
+    description: "Experience fine dining at Kalè Gastrobar",
+    images: [
+      {
+        url: "/logos/opengraph.png",
+        width: 1200,
+        height: 630,
+        alt: "Kalè Gastrobar",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kalè Gastrobar",
+    description: "Experience fine dining at Kalè Gastrobar",
+    images: ["/logos/opengraph.png"],
   },
 };
 
@@ -64,4 +89,3 @@ export default function RootLayout({
     </html>
   );
 }
-
