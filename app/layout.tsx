@@ -22,13 +22,16 @@ const vollkorn = Vollkorn({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
+const getBaseUrl = () => {
+  const url =
     process.env.NEXT_PUBLIC_APP_URL ||
-      (process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : "http://localhost:3000"),
-  ),
+    process.env.VERCEL_URL ||
+    "http://localhost:3000";
+  return url.startsWith("http") ? url : `https://${url}`;
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(getBaseUrl()),
   title: "Kalè Gastrobar",
   description: "Experience fine dining at Kalè Gastrobar",
   manifest: "/site.webmanifest",
