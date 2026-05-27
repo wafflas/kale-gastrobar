@@ -14,6 +14,7 @@ export default function HostsGrid() {
           alt="Kalè Hosts"
           fill
           className="object-cover"
+          priority
         />
       </div>
 

@@ -68,11 +68,11 @@ function MenuSection() {
           <EmblaCarousel slides={galleryItems} options={CAROUSEL_OPTIONS} />
 
           <div className="mt-12 sm:mt-16 lg:mt-20 flex flex-col gap-4 sm:flex-row items-center justify-center">
-            <Link href="/menu" className="w-full sm:w-60">
+            <Link href="/menu">
               <Button
                 variant="outline"
                 size="md"
-                className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em] flex justify-center items-center gap-2 w-full"
+                className="w-[200px] rounded-full py-2 text-[12px] tracking-[0.18em] flex justify-center items-center gap-2"
               >
                 {t("menu.see_menu")} <ArrowRight size={13} />
               </Button>
@@ -80,7 +80,7 @@ function MenuSection() {
             <Button
               variant="secondary"
               size="md"
-              className="rounded-full px-10 py-2 text-[12px] tracking-[0.18em] w-full sm:w-60"
+              className="w-[200px] rounded-full py-2 text-[12px] tracking-[0.18em]"
               onClick={openReservation}
             >
               {t("menu.reserve_now")}
@@ -93,4 +93,3 @@ function MenuSection() {
 }
 
 export default MenuSection;
-

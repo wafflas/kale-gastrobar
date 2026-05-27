@@ -5,6 +5,8 @@ import React, { useRef } from "react";
 import HostsContent from "./components/HostsContent";
 import HostsGrid from "./components/HostsGrid";
 import Button from "../shared/Button";
+import Logo from "../shared/Logo";
+import HeroTypography from "../shared/HeroTypography";
 import { useReservation } from "../../context/ReservationContext";
 import { useLanguage } from "../../context/LanguageContext";
 import { gsap } from "gsap";
@@ -24,36 +26,60 @@ export default function HostsSection() {
     () => {
       if (!sectionRef.current) return;
 
-      const centerEl = sectionRef.current.querySelector(".center-image");
-      const sideImages = sectionRef.current.querySelectorAll(".side-image");
-
-      if (!centerEl || sideImages.length === 0) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 40%",
-          once: true,
-          toggleActions: "play none none none",
-        },
-      })
-      .fromTo(
-        centerEl,
-        { y: 30, scale: 0.97, opacity: 0 },
-        { y: 0, scale: 1, opacity: 1, duration: 1.4, ease: "power3.out" }
-      )
-      .fromTo(
-        sideImages,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, stagger: 0.18, ease: "power3.out" },
-        "-=1.0"
-      );
+      let tl: gsap.core.Timeline | null = null;
 
       const timer = setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 150);
+        if (!sectionRef.current) return;
 
-      return () => clearTimeout(timer);
+        const centerEl = sectionRef.current.querySelector(".center-image");
+        const sideImages = sectionRef.current.querySelectorAll(".side-image");
+
+        if (!centerEl || sideImages.length === 0) return;
+
+        // Set initial states to prevent GSAP fromTo immediateRender bugs
+        gsap.set(centerEl, { y: 30, scale: 0.97, opacity: 0 });
+        gsap.set(sideImages, { y: 20, opacity: 0 });
+
+        tl = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              once: true,
+              toggleActions: "play none none none",
+            },
+          })
+          .to(centerEl, {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1.4,
+            ease: "power3.out",
+          })
+          .to(
+            sideImages,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.18,
+              ease: "power3.out",
+            },
+            "-=1.0",
+          );
+
+        ScrollTrigger.refresh();
+      }, 200);
+
+      return () => {
+        clearTimeout(timer);
+        if (tl) {
+          tl.kill();
+          if (tl.scrollTrigger) {
+            tl.scrollTrigger.kill();
+          }
+        }
+      };
     },
     { scope: sectionRef },
   );
@@ -69,22 +95,49 @@ export default function HostsSection() {
         <div className="w-full flex justify-center mt-4 md:mt-8">
           <HostsGrid />
         </div>
-        <div className="flex flex-col items-center justify-center gap-y-6 pt-12 md:pt-20 z-20">
-          <p className="font-vollkorn text-darkbrown/90 text-[clamp(30px,4.5vw,54px)] italic font-semibold leading-none text-center tracking-wide pb-4">
-            {t("hosts.waiting")}
-          </p>
-          <Button
-            variant="primary"
-            size="sm"
-            className="rounded-full px-6 md:px-8 shadow-md animate-fade-in"
-            onClick={openReservation}
-          >
-            {t("hosts.reserve_now")}
-          </Button>
+        <div className="w-full max-w-3xl mx-auto pt-10 md:pt-16 px-4 z-20">
+          <div className="relative overflow-hidden rounded-3xl border border-darkbrown/15 bg-gradient-to-br from-cream/60 via-cream/45 to-cream/20 backdrop-blur-xl p-8 sm:p-10 md:p-12 flex flex-col items-center justify-center text-center shadow-[0_20px_50px_rgba(93,62,50,0.08)] transition-all duration-500 hover:shadow-[0_25px_60px_rgba(93,62,50,0.12)]">
+            <div className="absolute inset-2.5 rounded-[20px] border border-darkbrown/5 pointer-events-none" />
+            <div className="absolute inset-3 rounded-[18px] border border-dashed border-darkbrown/10 pointer-events-none" />
+
+            <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-darkbrown/20 pointer-events-none" />
+            <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-darkbrown/20 pointer-events-none" />
+            <div className="absolute bottom-4 left-4 w-8 h-8 border-b border-l border-darkbrown/20 pointer-events-none" />
+            <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-darkbrown/20 pointer-events-none" />
+
+            <div className="mb-2 z-10 transform scale-75 opacity-90">
+              <Logo useImage={true} imageSrc="/logos/logo2.png" size="xs" />
+            </div>
+
+            <span className="font-ubuntu text-[10px] tracking-[0.22em] text-darkbrown/50 uppercase mb-2 z-10">
+              {t("nav.reserve")}
+            </span>
+
+            <div className="flex items-center justify-center gap-x-3 mb-4 opacity-50 z-10">
+              <div className="h-px w-6 bg-darkbrown/20" />
+              <div className="w-1 h-1 rotate-45 bg-darkbrown" />
+              <div className="h-px w-6 bg-darkbrown/20" />
+            </div>
+
+            <p className="font-vollkorn text-darkbrown/90 text-[clamp(24px,4vw,44px)] italic font-semibold leading-tight text-center tracking-wide mb-3 z-10">
+              {t("hosts.waiting")}
+            </p>
+
+            <p className="font-vollkorn text-darkbrown/70 text-xs sm:text-sm italic tracking-wide max-w-xs mb-8 z-10">
+              {t("hosts.tagline")}
+            </p>
+
+            <Button
+              variant="primary"
+              size="sm"
+              className="rounded-full px-8 py-3.5 shadow-[0_4px_20px_rgba(93,62,50,0.12)] hover:shadow-[0_6px_25px_rgba(93,62,50,0.22)] transform hover:-translate-y-0.5 hover:scale-[1.03] transition-all duration-300 z-10 tracking-[0.16em]"
+              onClick={openReservation}
+            >
+              {t("hosts.reserve_now")}
+            </Button>
+          </div>
         </div>
       </div>
     </section>
   );
 }
-
-

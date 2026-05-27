@@ -31,16 +31,6 @@ export default function Header() {
           className={`flex items-center gap-2 font-ubuntu transition-all duration-300 ${isDarkBg ? "text-cream text-shadow-lg" : "text-darkbrown"} ${isScrolled ? "opacity-0 pointer-events-none" : "opacity-100"}`}
         >
           <button
-            onClick={() => setLanguage("el")}
-            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
-              language === "el" ? "opacity-100" : "opacity-50"
-            }`}
-            aria-label="Switch to Greek"
-          >
-            ΕΛ
-          </button>
-          <span className={`opacity-50 ${isDarkBg ? "text-cream" : "text-darkbrown"}`}>|</span>
-          <button
             onClick={() => setLanguage("en")}
             className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
               language === "en" ? "opacity-100" : "opacity-50"
@@ -48,6 +38,20 @@ export default function Header() {
             aria-label="Switch to English"
           >
             ENG
+          </button>
+          <span
+            className={`opacity-50 ${isDarkBg ? "text-cream" : "text-darkbrown"}`}
+          >
+            |
+          </span>
+          <button
+            onClick={() => setLanguage("el")}
+            className={`text-sm md:text-base font-medium transition-all duration-300 hover:opacity-100 hover:scale-110 cursor-pointer ${
+              language === "el" ? "opacity-100" : "opacity-50"
+            }`}
+            aria-label="Switch to Greek"
+          >
+            ΕΛ
           </button>
         </div>
 
@@ -100,4 +104,3 @@ export default function Header() {
     </header>
   );
 }
-

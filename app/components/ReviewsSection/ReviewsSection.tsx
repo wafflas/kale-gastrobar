@@ -46,6 +46,7 @@ export default function ReviewsSection() {
   return (
     <section
       ref={sectionRef}
+      id="reviews"
       className="flex flex-col my-16 md:my-30 bg-cream overflow-hidden"
     >
       <div className="px-3 lg:px-6 mb-5 md:mb-8">

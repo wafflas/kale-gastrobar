@@ -2,7 +2,7 @@ import HorizontalDecoration from "./HorizontalDecoration";
 
 export default function DecorationBand() {
   return (
-    <div className="mt-5">
+    <div className="m-5">
       <HorizontalDecoration
         text="The feeling of being in the right place. • The feeling of being in the right place. "
         direction="left"
