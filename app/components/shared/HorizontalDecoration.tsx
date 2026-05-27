@@ -1,12 +1,12 @@
 "use client";
 
-import { useMemo } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useMemo, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import HeroTypography from "./HeroTypography";
 
 interface HorizontalDecorationProps {
   text: string;
-  size?: 70 | 100 | 150 | 180;
+  size?: 20 | 70 | 100 | 110 | 130 | 150 | 180;
   direction?: "left" | "right";
   speed?: number;
 }
@@ -17,20 +17,39 @@ export default function HorizontalDecoration({
   text,
   size = 100,
   direction = "left",
-  speed = 3000,
+  speed = 450, // Calibrated slow parallax displacement for ultra-premium feel
 }: HorizontalDecorationProps) {
-  const { scrollYProgress } = useScroll();
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // Track scroll PROGRESS specifically when this decoration band is entering/leaving the viewport
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Apply a fluid, premium spring ease to scroll progress for liquid inertia glide
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,   // Low stiffness for cushiony inertia
+    damping: 26,     // High damping to eliminate bounce
+    restDelta: 0.001,
+  });
+
+  // Map scroll progress to a delicate horizontal parallax offset
   const xRange = useMemo(
     () => (direction === "left" ? [0, -speed] : [-speed, 0]),
     [direction, speed],
   );
-  const x = useTransform(scrollYProgress, [0, 1], xRange);
+  
+  const x = useTransform(smoothProgress, [0, 1], xRange);
 
   const decorationItems = useMemo(
     () =>
       Array.from({ length: REPEAT_COUNT }, (_, i) => (
-        <HeroTypography key={`decoration-${i}`} size={size}>
+        <HeroTypography 
+          key={`decoration-${i}`} 
+          size={size}
+          className="will-change-transform opacity-95 transition-opacity duration-300 hover:opacity-100"
+        >
           {text}
         </HeroTypography>
       )),
@@ -38,8 +57,8 @@ export default function HorizontalDecoration({
   );
 
   return (
-    <div className="w-full whitespace-nowrap">
-      <motion.div style={{ x }} className="flex gap-10 w-fit">
+    <div ref={containerRef} className="w-full whitespace-nowrap overflow-hidden select-none">
+      <motion.div style={{ x }} className="flex gap-10 w-fit will-change-transform">
         {decorationItems}
       </motion.div>
     </div>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -31,14 +32,20 @@ export default function ScrollOpacityText({
 
   const words = useMemo(() => text.split(" "), [text]);
 
-  useEffect(() => {
-    if (!containerRef.current || words.length === 0) return;
+  useGSAP(
+    () => {
+      if (!containerRef.current || words.length === 0) return;
 
-    const ctx = gsap.context(() => {
-      const charElements = textRef.current?.querySelectorAll(".char");
+      let tl: gsap.core.Timeline | null = null;
 
-      if (charElements && charElements.length > 0) {
-        const tl = gsap.timeline({
+      const timer = setTimeout(() => {
+        if (!containerRef.current) return;
+
+        const charElements = textRef.current?.querySelectorAll(".char");
+
+        if (!charElements || charElements.length === 0) return;
+
+        tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: start,
@@ -61,12 +68,25 @@ export default function ScrollOpacityText({
           },
         );
 
-        if (extendedHold) tl.to({}, { duration: tl.duration() });
-      }
-    }, containerRef);
+        if (extendedHold) {
+          tl.to({}, { duration: tl.duration() });
+        }
 
-    return () => ctx.revert();
-  }, [words, start, end, extendedHold]);
+        ScrollTrigger.refresh();
+      }, 200);
+
+      return () => {
+        clearTimeout(timer);
+        if (tl) {
+          tl.kill();
+          if (tl.scrollTrigger) {
+            tl.scrollTrigger.kill();
+          }
+        }
+      };
+    },
+    { dependencies: [words, start, end, extendedHold], scope: containerRef },
+  );
 
   return (
     <div
