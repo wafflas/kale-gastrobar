@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kalè Gastrobar",
     description: "Experience fine dining at Kalè Gastrobar",
-    images: ["/logos/opengraph.png"],
+    images: ["/opengraph.png"],
   },
 };
 
