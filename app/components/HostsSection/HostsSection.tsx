@@ -119,7 +119,7 @@ export default function HostsSection() {
               <div className="h-px w-6 bg-darkbrown/20" />
             </div>
 
-            <p className="font-vollkorn text-darkbrown/90 text-[clamp(24px,4vw,44px)] italic font-semibold leading-tight text-center tracking-wide mb-3 z-10">
+            <p className="font-vollkorn text-darkbrown/90 text-[clamp(20px,4vw,44px)] italic font-semibold leading-tight text-center tracking-wide mb-3 z-10">
               {t("hosts.waiting")}
             </p>
 
