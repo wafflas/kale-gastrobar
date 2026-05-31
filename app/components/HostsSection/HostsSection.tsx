@@ -20,31 +20,31 @@ if (typeof window !== "undefined") {
 
 export default function HostsSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const { openReservation } = useReservation();
   const { t } = useLanguage();
 
   useGSAP(
     () => {
-      if (!sectionRef.current) return;
+      if (!sectionRef.current || !gridRef.current) return;
 
       let tl: gsap.core.Timeline | null = null;
 
       const timer = setTimeout(() => {
-        if (!sectionRef.current) return;
+        if (!sectionRef.current || !gridRef.current) return;
 
         const centerEl = sectionRef.current.querySelector(".center-image");
         const sideImages = sectionRef.current.querySelectorAll(".side-image");
 
         if (!centerEl || sideImages.length === 0) return;
 
-        // Set initial states to prevent GSAP fromTo immediateRender bugs
         gsap.set(centerEl, { y: 30, scale: 0.97, opacity: 0 });
         gsap.set(sideImages, { y: 20, opacity: 0 });
 
         tl = gsap
           .timeline({
             scrollTrigger: {
-              trigger: sectionRef.current,
+              trigger: gridRef.current,
               start: "top 80%",
               once: true,
               toggleActions: "play none none none",
@@ -76,9 +76,7 @@ export default function HostsSection() {
         clearTimeout(timer);
         if (tl) {
           tl.kill();
-          if (tl.scrollTrigger) {
-            tl.scrollTrigger.kill();
-          }
+          tl.scrollTrigger?.kill();
         }
       };
     },
@@ -89,22 +87,40 @@ export default function HostsSection() {
     <section
       ref={sectionRef}
       id="hosts"
-      className="relative w-full min-h-svh flex flex-col items-center justify-center px-4 sm:px-8 md:px-12 overflow-hidden bg-cream py-16 md:py-24 lg:py-32"
+      className="relative w-full min-h-svh flex flex-col items-center justify-center px-2 sm:px-8 md:px-12 overflow-hidden bg-cream py-16 md:py-24 lg:py-32"
     >
       <div className="w-full flex flex-col items-center z-10 space-y-6 md:space-y-10 lg:space-y-12">
         <HostsContent />
         <div className="w-full flex justify-center mt-4 md:mt-8">
-          <HostsGrid />
+          <HostsGrid ref={gridRef} />
         </div>
-        <div className="w-full max-w-3xl mx-auto pt-10 md:pt-16 px-4 z-20">
-          <div className="relative overflow-hidden rounded-3xl border border-darkbrown/15 bg-gradient-to-br from-cream/60 via-cream/45 to-cream/20 backdrop-blur-xl p-8 sm:p-10 md:p-12 flex flex-col items-center justify-center text-center shadow-[0_20px_50px_rgba(93,62,50,0.08)] transition-all duration-500 hover:shadow-[0_25px_60px_rgba(93,62,50,0.12)]">
-            <div className="absolute inset-2.5 rounded-[20px] border border-darkbrown/5 pointer-events-none" />
-            <div className="absolute inset-3 rounded-[18px] border border-dashed border-darkbrown/10 pointer-events-none" />
+        <div className="w-full max-w-3xl mx-auto pt-8 md:pt-16 px-0 sm:px-4 z-20">
+          <div className="relative overflow-hidden rounded-3xl border border-darkbrown/15 bg-gradient-to-br from-cream/60 via-cream/45 to-cream/20 backdrop-blur-xl px-5 py-7 sm:p-10 md:p-12 flex flex-col items-center justify-center text-center shadow-[0_20px_50px_rgba(93,62,50,0.08)] transition-all duration-500 hover:shadow-[0_25px_60px_rgba(93,62,50,0.12)]">
+            <div
+              className="absolute inset-4 sm:inset-3 rounded-[18px] sm:rounded-[20px] border border-darkbrown/5 pointer-events-none"
+              aria-hidden
+            />
+            <div
+              className="absolute inset-5 sm:inset-4 rounded-[16px] sm:rounded-[18px] border border-dashed border-darkbrown/10 pointer-events-none"
+              aria-hidden
+            />
 
-            <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-darkbrown/20 pointer-events-none" />
-            <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-darkbrown/20 pointer-events-none" />
-            <div className="absolute bottom-4 left-4 w-8 h-8 border-b border-l border-darkbrown/20 pointer-events-none" />
-            <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-darkbrown/20 pointer-events-none" />
+            <div
+              className="absolute top-5 left-5 sm:top-4 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 border-t border-l border-darkbrown/20 pointer-events-none"
+              aria-hidden
+            />
+            <div
+              className="absolute top-5 right-5 sm:top-4 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 border-t border-r border-darkbrown/20 pointer-events-none"
+              aria-hidden
+            />
+            <div
+              className="absolute bottom-5 left-5 sm:bottom-4 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 border-b border-l border-darkbrown/20 pointer-events-none"
+              aria-hidden
+            />
+            <div
+              className="absolute bottom-5 right-5 sm:bottom-4 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 border-b border-r border-darkbrown/20 pointer-events-none"
+              aria-hidden
+            />
 
             <div className="mb-2 z-10 transform scale-75 opacity-90">
               <Logo useImage={true} imageSrc="/logos/logo2.png" size="xs" />
@@ -124,12 +140,12 @@ export default function HostsSection() {
               {t("hosts.waiting")}
             </p>
 
-            <p className="font-vollkorn text-darkbrown/70 text-xs sm:text-sm italic tracking-wide max-w-md mb-8 z-10">
+            <p className="font-vollkorn text-darkbrown/70 text-xs sm:text-sm italic tracking-wide max-w-md mb-5 sm:mb-8 z-10">
               {t("hosts.tagline")}
             </p>
 
             {/* Premium Brownish Iframe Map */}
-            <div className="w-full max-w-xl mb-8 z-10">
+            <div className="w-full max-w-xl mb-5 sm:mb-8 z-10">
               <GastrobarMap />
             </div>
 

@@ -1,9 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { forwardRef } from "react";
 import Image from "next/image";
 
-export default function HostsGrid() {
+const HostsGrid = forwardRef<HTMLDivElement>(function HostsGrid(_, ref) {
   return (
     <div
+      ref={ref}
       // We restrict width to max 95vh so the aspect-square doesn't exceed screen height, but allow it to stretch wide on desktop
       className="relative w-full max-w-[1700px] aspect-square md:aspect-[1.6] mx-auto"
     >
@@ -14,7 +17,6 @@ export default function HostsGrid() {
           alt="Kalè Hosts"
           fill
           className="object-cover"
-          priority
         />
       </div>
 
@@ -59,4 +61,6 @@ export default function HostsGrid() {
       </div>
     </div>
   );
-}
+});
+
+export default HostsGrid;

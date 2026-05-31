@@ -91,7 +91,7 @@ export default function ScrollOpacityText({
   return (
     <div
       ref={containerRef}
-      className={`w-full flex items-center justify-center pb-24 ${className}`}
+      className={`w-full flex items-center justify-center px-4 py-34 ${className}`}
     >
       <div className="container max-w-4xl px-4">
         <p

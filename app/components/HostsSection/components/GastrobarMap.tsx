@@ -69,7 +69,7 @@ export default function GastrobarMap() {
       {osmUrl && (
         <iframe
           src={osmUrl}
-          className="w-full h-full border-0 brownish-map-iframe scale-[1.02]"
+          className="earthy-map-iframe w-full h-full border-0 scale-[1.02]"
           allowFullScreen={false}
           loading="lazy"
           title="Kalè Gastrobar Location Map"
