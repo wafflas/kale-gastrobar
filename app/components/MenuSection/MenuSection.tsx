@@ -52,7 +52,7 @@ function MenuSection() {
   return (
     <section
       id="menu"
-      className="relative w-full bg-darkbrown overflow-hidden px-4 sm:px-6 lg:px-10 py-14 sm:py-18 lg:py-24"
+      className="relative z-10 w-full bg-darkbrown overflow-hidden px-4 sm:px-6 lg:px-10 py-14 sm:py-18 lg:py-24 rounded-t-[56px] sm:rounded-t-[72px] lg:rounded-t-[88px]"
     >
       <div className="mx-auto w-full max-w-[1540px]">
         <header className="max-w-5xl mx-auto text-center">

@@ -57,7 +57,7 @@ export default function GastrobarMap() {
   }, []);
 
   return (
-    <div className="relative w-full h-[220px] sm:h-[260px] md:h-[300px] rounded-2xl overflow-hidden border border-darkbrown/15 shadow-[inset_0_4px_12px_rgba(93,62,50,0.05)] transition-all duration-300 bg-cream/50">
+    <div className="relative w-full h-[220px] sm:h-[260px] md:h-[300px] lg:h-[320px] rounded-2xl overflow-hidden border border-darkbrown/15 shadow-[inset_0_4px_12px_rgba(93,62,50,0.05)] transition-all duration-300 bg-cream/50">
       {isLoading && (
         <div className="absolute inset-0 bg-cream/70 backdrop-blur-sm flex flex-col items-center justify-center z-30">
           <div className="w-8 h-8 rounded-full border-2 border-darkbrown/25 border-t-darkbrown animate-spin mb-3" />
@@ -69,7 +69,7 @@ export default function GastrobarMap() {
       {osmUrl && (
         <iframe
           src={osmUrl}
-          className="earthy-map-iframe w-full h-full border-0 scale-[1.02]"
+          className="earthy-map-iframe absolute inset-0 w-full h-full border-0"
           allowFullScreen={false}
           loading="lazy"
           title="Kalè Gastrobar Location Map"

@@ -25,12 +25,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (savedLang && (savedLang === "en" || savedLang === "el")) {
       setLanguageState(savedLang);
       document.documentElement.lang = savedLang;
-    } else if (typeof navigator !== "undefined") {
-      const browserLang = navigator.language.split("-")[0];
-      if (browserLang === "el") {
-        setLanguageState("el");
-        document.documentElement.lang = "el";
-      }
+    } else {
+      document.documentElement.lang = "en";
     }
     setIsMounted(true);
   }, []);

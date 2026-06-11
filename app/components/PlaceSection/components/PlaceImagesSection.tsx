@@ -117,7 +117,7 @@ export default function PlaceImagesSection() {
     <section
       id="place"
       ref={containerRef}
-      className="relative w-full bg-cream overflow-hidden flex items-center justify-center px-4 my-16 md:my-30 sm:px-6 min-h-[65vh]"
+      className="relative w-full bg-cream overflow-hidden flex items-center justify-center px-4 mt-16 md:my-30 sm:px-6 min-h-[65vh]"
     >
       <div
         ref={collageRef}
@@ -152,4 +152,3 @@ export default function PlaceImagesSection() {
     </section>
   );
 }
-

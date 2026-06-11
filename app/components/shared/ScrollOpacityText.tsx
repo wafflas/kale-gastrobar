@@ -96,7 +96,7 @@ export default function ScrollOpacityText({
       <div className="container max-w-4xl px-4">
         <p
           ref={textRef}
-          className={`text-3xl lg:text-[80px] text-darkbrown text-center text-ubuntu ${textClassName}`}
+          className={`text-3xl lg:text-[70px] text-darkbrown text-center text-ubuntu ${textClassName}`}
         >
           {words.map((word, wordIndex) => (
             <span key={wordIndex} className="inline-block whitespace-nowrap">
