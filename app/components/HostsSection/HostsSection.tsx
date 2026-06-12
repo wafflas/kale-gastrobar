@@ -95,7 +95,7 @@ export default function HostsSection() {
           <HostsGrid ref={gridRef} />
         </div>
         <div className="w-full max-w-3xl md:max-w-5xl lg:max-w-6xl mx-auto pt-8 md:pt-16 px-0 sm:px-4 z-20">
-          <div className="relative overflow-hidden rounded-3xl border border-darkbrown/15 bg-gradient-to-br from-cream/60 via-cream/45 to-cream/20 backdrop-blur-xl px-5 py-7 sm:p-10 md:p-12 flex flex-col items-center justify-center text-center md:flex-row md:items-center md:justify-between md:gap-8 lg:gap-12 shadow-[0_20px_50px_rgba(93,62,50,0.08)] transition-all duration-500 hover:shadow-[0_25px_60px_rgba(93,62,50,0.12)]">
+          <div className="relative overflow-hidden rounded-3xl border border-darkbrown/15 bg-gradient-to-br from-cream/60 via-cream/45 to-cream/20 backdrop-blur-xl px-5 py-8 sm:p-10 md:p-12 flex flex-col items-center justify-center text-center gap-7 sm:gap-8 md:flex-row md:items-center md:justify-between md:gap-8 lg:gap-12 shadow-[0_20px_50px_rgba(93,62,50,0.08)] transition-all duration-500 hover:shadow-[0_25px_60px_rgba(93,62,50,0.12)]">
             <div
               className="absolute inset-5 sm:inset-4 rounded-[16px] sm:rounded-[18px] border border-dashed border-darkbrown/10 pointer-events-none"
               aria-hidden
@@ -136,14 +136,14 @@ export default function HostsSection() {
                 {t("hosts.waiting")}
               </p>
 
-              <p className="font-vollkorn text-darkbrown/70 text-xs sm:text-sm italic tracking-wide max-w-md mb-5 sm:mb-8 md:mb-6 text-center">
+              <p className="font-vollkorn text-darkbrown/70 text-xs sm:text-sm italic tracking-wide max-w-md text-center">
                 {t("hosts.tagline")}
               </p>
 
               <Button
                 variant="primary"
                 size="sm"
-                className="rounded-full px-8 py-3.5 shadow-[0_4px_20px_rgba(93,62,50,0.12)] hover:shadow-[0_6px_25px_rgba(93,62,50,0.22)] transform hover:-translate-y-0.5 hover:scale-[1.03] transition-all duration-300 tracking-[0.16em] md:mb-0"
+                className="hidden md:inline-flex rounded-full px-8 py-3.5 shadow-[0_4px_20px_rgba(93,62,50,0.12)] hover:shadow-[0_6px_25px_rgba(93,62,50,0.22)] transform hover:-translate-y-0.5 hover:scale-[1.03] transition-all duration-300 tracking-[0.16em] mt-6"
                 onClick={openReservation}
               >
                 {t("hosts.reserve_now")}
@@ -153,6 +153,15 @@ export default function HostsSection() {
             <div className="w-full max-w-xl md:flex-1 md:max-w-none md:min-w-0 md:flex md:items-center z-10">
               <GastrobarMap />
             </div>
+
+            <Button
+              variant="primary"
+              size="sm"
+              className="md:hidden rounded-full px-8 py-3.5 shadow-[0_4px_20px_rgba(93,62,50,0.12)] hover:shadow-[0_6px_25px_rgba(93,62,50,0.22)] transform hover:-translate-y-0.5 hover:scale-[1.03] transition-all duration-300 tracking-[0.16em]"
+              onClick={openReservation}
+            >
+              {t("hosts.reserve_now")}
+            </Button>
           </div>
         </div>
       </div>
