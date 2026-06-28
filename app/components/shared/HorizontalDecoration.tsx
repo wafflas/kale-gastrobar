@@ -17,20 +17,18 @@ export default function HorizontalDecoration({
   text,
   size = 100,
   direction = "left",
-  speed = 450, // Calibrated slow parallax displacement for ultra-premium feel
+  speed = 280,
 }: HorizontalDecorationProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll PROGRESS specifically when this decoration band is entering/leaving the viewport
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Apply a fluid, premium spring ease to scroll progress for liquid inertia glide
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,   // Low stiffness for cushiony inertia
-    damping: 26,     // High damping to eliminate bounce
+    stiffness: 40,
+    damping: 34,
     restDelta: 0.001,
   });
 
@@ -39,14 +37,14 @@ export default function HorizontalDecoration({
     () => (direction === "left" ? [0, -speed] : [-speed, 0]),
     [direction, speed],
   );
-  
+
   const x = useTransform(smoothProgress, [0, 1], xRange);
 
   const decorationItems = useMemo(
     () =>
       Array.from({ length: REPEAT_COUNT }, (_, i) => (
-        <HeroTypography 
-          key={`decoration-${i}`} 
+        <HeroTypography
+          key={`decoration-${i}`}
           size={size}
           className="will-change-transform opacity-95 transition-opacity duration-300 hover:opacity-100"
         >
@@ -57,8 +55,14 @@ export default function HorizontalDecoration({
   );
 
   return (
-    <div ref={containerRef} className="w-full whitespace-nowrap overflow-hidden select-none">
-      <motion.div style={{ x }} className="flex gap-10 w-fit will-change-transform">
+    <div
+      ref={containerRef}
+      className="w-full whitespace-nowrap overflow-hidden select-none"
+    >
+      <motion.div
+        style={{ x }}
+        className="flex gap-10 w-fit will-change-transform"
+      >
         {decorationItems}
       </motion.div>
     </div>
