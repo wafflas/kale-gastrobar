@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Logo from "../shared/Logo";
 import Button from "../shared/Button";
-import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { SiTripadvisor } from "react-icons/si";
