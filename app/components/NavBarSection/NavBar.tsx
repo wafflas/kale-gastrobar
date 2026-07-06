@@ -136,7 +136,10 @@ export default function NavBar() {
       >
         <div className="flex items-center justify-between w-full px-2 md:px-12">
           <div className="flex-1 flex justify-start nav-reveal">
-            <Logo useImage={true} imageSrc="/logos/logo.png" size="xs" />
+            <a href="/">
+              <span className="sr-only">Home</span>
+              <Logo useImage={true} imageSrc="/logos/logo.png" size="xs" />
+            </a>
           </div>
 
           <div className="flex-1 flex justify-end items-center gap-1">
@@ -274,4 +277,3 @@ export default function NavBar() {
     </div>
   );
 }
-

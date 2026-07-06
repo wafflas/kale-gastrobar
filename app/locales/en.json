@@ -65,7 +65,8 @@
     "description": "A family of passionate creators, cooks, and hosts, unified by our love for honest gastronomy and unhurried hospitality. Behind the counter at Kalè, we craft honest food and warm, shared moments.",
     "reserve_now": "RESERVE NOW",
     "waiting": "We are waiting for you...",
-    "tagline": "Kalè Gastrobar - Ierapetra"
+    "tagline": "Kalè Gastrobar - Ierapetra",
+    "map_loading": "Loading map..."
   },
   "reviews": {
     "title": "What our guests say...",

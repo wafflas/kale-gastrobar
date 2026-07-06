@@ -5,9 +5,20 @@ import { MenuProvider } from "./context/MenuContext";
 import { ReservationProvider } from "./context/ReservationContext";
 import { LanguageProvider } from "./context/LanguageContext";
 import NavBarWrapper from "./components/NavBarSection/NavBarWrapper";
+import {
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  OG_IMAGE,
+  getSiteUrl,
+  getRestaurantJsonLd,
+} from "./lib/site";
 
 export const viewport: Viewport = {
   viewportFit: "cover",
+  themeColor: "#2B1810",
+  colorScheme: "light",
 };
 
 const ubuntu = Ubuntu({
@@ -22,19 +33,33 @@ const vollkorn = Vollkorn({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const getBaseUrl = () => {
-  const url =
-    process.env.NEXT_PUBLIC_APP_URL ||
-    process.env.VERCEL_URL ||
-    "http://localhost:3000";
-  return url.startsWith("http") ? url : `https://${url}`;
-};
-
 export const metadata: Metadata = {
-  metadataBase: new URL(getBaseUrl()),
-  title: "Kalè Gastrobar",
-  description: "Experience fine dining at Kalè Gastrobar",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: SITE_KEYWORDS,
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "restaurant",
   manifest: "/site.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/favicon_ioKale/favicon.ico", sizes: "any" },
@@ -52,23 +77,23 @@ export const metadata: Metadata = {
     apple: "/favicon_ioKale/apple-touch-icon.png",
   },
   openGraph: {
-    title: "Kalè Gastrobar",
-    description: "Experience fine dining at Kalè Gastrobar",
-    images: [
-      {
-        url: "/logos/opengraph.png",
-        width: 1200,
-        height: 630,
-        alt: "Kalè Gastrobar",
-      },
-    ],
     type: "website",
+    locale: "en_US",
+    alternateLocale: ["el_GR"],
+    url: "/",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kalè Gastrobar",
-    description: "Experience fine dining at Kalè Gastrobar",
-    images: ["/opengraph.png"],
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: {
+      url: OG_IMAGE.url,
+      alt: OG_IMAGE.alt,
+    },
   },
 };
 
@@ -77,9 +102,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const restaurantJsonLd = getRestaurantJsonLd();
+
   return (
     <html lang="en">
       <body className={`${ubuntu.variable} ${vollkorn.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(restaurantJsonLd),
+          }}
+        />
         <LanguageProvider>
           <ReservationProvider>
             <MenuProvider>
